@@ -1412,5 +1412,15 @@
     }
   ],
   "recovered_files": [],
-  "status": "PASS"
+  "status": "PASS",
+  "split_model_archive": {
+    "parts": [
+      "msms-shortlist-dreams-morgan-model.tar.gz.part01",
+      "msms-shortlist-dreams-morgan-model.tar.gz.part02",
+      "msms-shortlist-dreams-morgan-model.tar.gz.part03"
+    ],
+    "combined_bytes": 45138751,
+    "combined_sha256": "646bbe4fbb14bda60e3544d4a963c9319b6564663c9b0752cd5e92b879eeffc9",
+    "matches_original_manifest": true
+  }
 }
