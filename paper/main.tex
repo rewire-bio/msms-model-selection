@@ -102,8 +102,8 @@ signal that the answer is missing. A post hoc audit suggests that about half of 
 21\% of test spectra whose precursor values look recomputed from the annotated structure. Retrained with released
 code and scored by its strict rule, DreaMS + Morgan reached 32.6\% Recall@1, just below the published two-SD band; Emb-Cos fell
 below the band at all three cut-offs and DeepSets far above it. One seed is not a refutation of the published results.
-All values are existing results from one split seed and one training seed per model; independent reproduction is
-pending.
+The comparison uses one split seed and one training seed per model. A cached-score correction updates exploratory
+fusion without changing the primary comparison; independent training reproduction remains pending.
 \end{abstract}
 
 \tableofcontents
@@ -723,10 +723,12 @@ presented''~\citep{charbonnet2022}. Every nominee should be confirmed against an
 \section{Data, code and licence availability}\label{sec:availability}
 The study repository (\texttt{rewire-bio/msms-model-selection}) contains this manuscript and its build (\texttt{make
 paper-imported}); the original article (\texttt{article/original.md} and the byte-identical
-\texttt{article/published-original.md}, also embedded in this PDF as Supplement~S1); the companion code (\texttt{companion/},
-also as \texttt{downloads/msms-shortlist-companion-code.tar.gz}, 0.18\,MB); the trained DreaMS + Morgan model and threshold
-(45\,MB, split for a 25\,MiB file limit; see below); and the results archive (\texttt{downloads/msms-shortlist-results.tar.gz}, about 7\,MB) with
-analysis outputs, per-spectrum predictions and run receipts. The DreaMS TorchScript weights (468\,MB, MIT
+\texttt{article/published-original.md}, also embedded in this PDF as Supplement~S1); the maintained companion code (\texttt{companion/}); its historical snapshot
+(\path{downloads/msms-shortlist-companion-code.tar.gz}, 0.18\,MB, without the later fixes); the trained DreaMS + Morgan model and threshold
+(45\,MB, split for a 25\,MiB file limit; see below); and the historical results archive (\path{downloads/msms-shortlist-results.tar.gz}, about 7\,MB) with
+original analysis outputs, per-spectrum predictions and run receipts. Corrected outputs and their checksums are indexed
+by \m{evidence/corrected-analysis/current.json}. The 401.7\,MB of cached inputs used for correction are hash-identified
+but not distributed in Git; repeating the correction requires those preserved files. The DreaMS TorchScript weights (468\,MB, MIT
 licence~\citep{dreams_card}) are not bundled and are downloaded from Hugging Face \m{roman-bushuiev/DreaMS} at revision
 \m{c81a62766b10}.
 

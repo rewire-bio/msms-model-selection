@@ -1,11 +1,11 @@
 {
   "status": "passed",
-  "started_at_utc": "2026-10-06T18:05:45.969897+00:00",
-  "git_revision": "70b53a7e07f2cd60125d1433d455af28999c735a",
+  "started_at_utc": "2026-10-06T18:10:49.079785+00:00",
+  "git_revision": "d7a28788ed2b39a18bdaa8d563aa98ffe5514d04",
   "git_dirty": false,
   "config_sha256": "56aceab7b3c7319289a0ed34597abd71af7a40c36256f1bc9679aca97cbfb440",
   "manifest_sha256": "d68e73ad40badf44c2abee1be73628e5f46c3071760635c62f2e904e4ebbe0b2",
-  "protocol_sha256": "245665f8ece9238a324a50c755a8c5257d4850b5aed0b88e5c05f9785563b79d",
+  "protocol_sha256": "afea697d79db82e2b06c5d4a985e85ab69ebe04ad01cd2734b7848d874a38d8a",
   "python": "3.11.13",
   "dependencies": {
     "numpy": "1.25.0",
@@ -30,7 +30,7 @@
         "--out-dir",
         "$WORK_DIR/fusion"
       ],
-      "seconds": 13.096759796142578,
+      "seconds": 11.751836061477661,
       "returncode": 0
     },
     {
@@ -44,7 +44,7 @@
         "--out",
         "$WORK_DIR/ranks-fusion-val.csv.gz"
       ],
-      "seconds": 2.2426950931549072,
+      "seconds": 2.0103919506073,
       "returncode": 0
     },
     {
@@ -58,7 +58,7 @@
         "--out",
         "$WORK_DIR/ranks-fusion-test.csv.gz"
       ],
-      "seconds": 2.3332841396331787,
+      "seconds": 1.9884469509124756,
       "returncode": 0
     },
     {
@@ -84,12 +84,12 @@
         "--out",
         "$OUTPUT/analysis"
       ],
-      "seconds": 6.149967908859253,
+      "seconds": 3.847229242324829,
       "returncode": 0
     }
   ],
   "source_sha256": {
-    "scripts/reanalyse.py": "3af5752034ddd2b3577f0edb019c24ee18fc015ed4f4afbfa2a25cdb90d69ecc",
+    "scripts/reanalyse.py": "6bbab75f5c9c6175225c72e7efeab360b9de1031e140c8f5273609d8296473d4",
     "companion/scripts/fuse_scores.py": "476608a1be1c41b5c7ac11eeba23ee9aaa6e1f85148608ebb9304a2ec6599a3d",
     "companion/scripts/rank_stats.py": "643f3c88f60648b655828b38a778443111ede2c2e26dd2005b78880f9f1b7279",
     "companion/scripts/analyse.py": "b80b35fdf0408537c9923eb0fee904b2786770bccaeeec6597485cd1930a9c01",
@@ -111,7 +111,7 @@
       "changed_rows": 4
     }
   },
-  "wall_seconds": 24.446415901184082,
+  "wall_seconds": 20.166486978530884,
   "artifacts": {
     "analysis/abstention.csv": "c3f3d195623c51c31c5ed19e5c6843f8a1b26589212cbdedc0529e0a075c0dd8",
     "analysis/contrasts.csv": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
@@ -122,8 +122,8 @@
     "comparison-abstention.csv": "5a165f8a420ffae81e6ce7d7e0fbbb2e0fb2314319ac9e2d30f1b43b7fa8c8da",
     "comparison-contrasts.csv": "0b14b32778d90ce67bb8df5a2e9f8c67199c29f4bfb69ce4415ab90a07732d4d",
     "comparison-metrics.csv": "9a5b363ebdb632557984dff24e4936855c3d8cfd5153fcd993647d7765e8e387",
-    "execution.log": "426b2ca1eb09cfb73617ca6651b28003c346615147b54587699d7cff44d99773",
+    "execution.log": "fc9787d4672b412659af332e1d322fb7eafecbf968fae2e3b764559b1ec72f63",
     "fusion-weight.json": "cdc2386f6c10f9c3f677386119e7b10ab261494f54b15c0cea28d69cd32b4ef6",
-    "results.json": "f4bca327a2028a8785b1077747ca67b2b1ef641523ff15ffd50a47266fafa6c7"
+    "results.json": "5c7651d64222d03139e18bb201610b630509ad9b1c3fc3a5400264188992f718"
   }
 }

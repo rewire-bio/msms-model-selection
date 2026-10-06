@@ -56,7 +56,8 @@ def main():
             rel = item.relative_to(output)
             (target/rel).parent.mkdir(parents=True,exist_ok=True)
             shutil.copy2(item,target/rel)
-    index['artifacts'] = {str(p.relative_to(paper)):digest(p) for p in sorted(target.rglob('*')) if p.is_file()}
+    index['artifacts'] = {name:checksum for name,checksum in index['artifacts'].items() if not name.startswith(index['run']+'/')}
+    index['artifacts'].update({str(p.relative_to(paper)):digest(p) for p in sorted(target.rglob('*')) if p.is_file()})
     (paper/'evidence/corrected-analysis/current.json').write_text(json.dumps(index,indent=2)+'\n')
     # Reuse only the pinned local executable/tool cache; scientific data and
     # outputs were independently reconstructed above.

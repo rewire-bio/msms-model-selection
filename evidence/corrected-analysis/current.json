@@ -3,7 +3,7 @@
   "status": "passed",
   "scope": "cached-score correction; no retraining or independent training reproduction",
   "run": "evidence/corrected-analysis/20261006",
-  "run_id": "aed83c1f079c445c9afcc07654268302",
+  "run_id": "2fc267cbade54b009d6a8b24d70724b3",
   "artifacts": {
     "evidence/corrected-analysis/20261006/analysis/abstention.csv": "c3f3d195623c51c31c5ed19e5c6843f8a1b26589212cbdedc0529e0a075c0dd8",
     "evidence/corrected-analysis/20261006/analysis/contrasts.csv": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
@@ -14,9 +14,11 @@
     "evidence/corrected-analysis/20261006/comparison-abstention.csv": "5a165f8a420ffae81e6ce7d7e0fbbb2e0fb2314319ac9e2d30f1b43b7fa8c8da",
     "evidence/corrected-analysis/20261006/comparison-contrasts.csv": "0b14b32778d90ce67bb8df5a2e9f8c67199c29f4bfb69ce4415ab90a07732d4d",
     "evidence/corrected-analysis/20261006/comparison-metrics.csv": "9a5b363ebdb632557984dff24e4936855c3d8cfd5153fcd993647d7765e8e387",
-    "evidence/corrected-analysis/20261006/execution.log": "426b2ca1eb09cfb73617ca6651b28003c346615147b54587699d7cff44d99773",
+    "evidence/corrected-analysis/20261006/execution.log": "fc9787d4672b412659af332e1d322fb7eafecbf968fae2e3b764559b1ec72f63",
     "evidence/corrected-analysis/20261006/fusion-weight.json": "cdc2386f6c10f9c3f677386119e7b10ab261494f54b15c0cea28d69cd32b4ef6",
-    "evidence/corrected-analysis/20261006/results.json": "f4bca327a2028a8785b1077747ca67b2b1ef641523ff15ffd50a47266fafa6c7",
-    "evidence/corrected-analysis/20261006/run-receipt.json": "c25cc2d468a628d54b003ad9091f1511105f94d2cc4360ec60f04893c216c01a"
+    "evidence/corrected-analysis/20261006/results.json": "5c7651d64222d03139e18bb201610b630509ad9b1c3fc3a5400264188992f718",
+    "evidence/corrected-analysis/20261006/run-receipt.json": "5c0ab90cca0990e196aed8eaa516126238e2223995339c116202ae3e498b4533",
+    "paper/figures/corrected/02-pool-size-stress.png": "fa3837600c4ebfa4f54d7a6d786c587b22b7a343223006c24a3e07c6a1252679",
+    "paper/figures/corrected/04-decline-to-nominate.png": "29dd93309e66e0c0fa5e05fdbcbf8e6c328d90c557fed96104212d9bd51e0e0d"
   }
 }

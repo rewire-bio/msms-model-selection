@@ -1,4 +1,81 @@
 {
   "schema_version": 1,
-  "claims": []
+  "claims": [
+    {
+      "id": "fusion-weight",
+      "text": "Validation selected mass weight in corrected fusion",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+      "result_pointer": "fusion_weight",
+      "value": 0.55
+    },
+    {
+      "id": "main-fusion",
+      "text": "Corrected official-deduplicated expected fusion Recall@5 (%)",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+      "result_pointer": "fusion_expected_recall5_percent.official_dedup.estimate",
+      "value": 64.8330320940655
+    },
+    {
+      "id": "expanded-fusion",
+      "text": "Corrected expanded-pool expected fusion Recall@5 (%)",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+      "result_pointer": "fusion_expected_recall5_percent.expanded1024.estimate",
+      "value": 42.65515831495206
+    },
+    {
+      "id": "fusion-coverage",
+      "text": "Corrected fusion test coverage at validation false-nomination threshold (fraction)",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+      "result_pointer": "fusion_top1_tau_fn10.coverage_present_estimate",
+      "value": 0.17364763335837716
+    },
+    {
+      "id": "fusion-nominated-recall",
+      "text": "Corrected fusion test Recall@5 among nominated (fraction)",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+      "result_pointer": "fusion_top1_tau_fn10.recall5_among_nominated_estimate",
+      "value": 0.8837209302325582
+    },
+    {
+      "id": "fusion-false",
+      "text": "Corrected fusion absent-test false-nomination rate (fraction)",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+      "result_pointer": "fusion_top1_tau_fn10.false_nomination_absent_estimate",
+      "value": 0.10443275732531931
+    },
+    {
+      "id": "nonfusion-invariant",
+      "text": "All nonfusion metrics, contrasts and abstention unchanged within frozen tolerance",
+      "kind": "measurement",
+      "status": "supported",
+      "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+      "result_pointer": "nonfusion_invariance_passed",
+      "value": true
+    },
+    {
+      "id": "scope",
+      "text": "The cached-score correction preserves the main comparison while changing exploratory fusion pool and abstention measurements.",
+      "kind": "interpretation",
+      "status": "supported",
+      "based_on": [
+        "main-fusion",
+        "expanded-fusion",
+        "fusion-coverage",
+        "nonfusion-invariant"
+      ],
+      "limitations": "One historical split/training seed; cached input authenticity not independently established; no retraining, pool regeneration, natural-absence validation or deployment guarantee. Historical literature and supplementary claims are mapped in evidence/paper-migration/claims-ledger.json."
+    }
+  ]
 }

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "kind": "historical and corrected cached-score manuscript build; compiling is not scientific verification",
-  "built_at_utc": "2026-10-06T18:09:49+00:00",
+  "built_at_utc": "2026-10-06T18:12:16+00:00",
   "tools": {
     "pdflatex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
     "bibtex": "BibTeX 0.99e (TeX Live 2026)",
@@ -59,8 +59,8 @@
   },
   "outputs": {
     "paper/build/main.pdf": {
-      "sha256": "51cfdb4c037e60b4e0a95753b66fb20bad2b4cc065b904bf80a7673dd3b02287",
-      "bytes": 1700639,
+      "sha256": "11c8ac0be311e017054cefb96092abb11493696e6ac95749ac27b2b777bf6cf4",
+      "bytes": 1700984,
       "pages": 27
     }
   },

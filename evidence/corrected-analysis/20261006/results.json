@@ -16,5 +16,44 @@
   },
   "nonfusion_invariance_passed": true,
   "fusion_official_dedup_unchanged": true,
-  "fusion_weight": 0.55
+  "fusion_weight": 0.55,
+  "fusion_top1_tau_fn10": {
+    "tau": 3.1240744590759277,
+    "coverage_present_estimate": 0.17364763335837716,
+    "coverage_present_ci_low": 0.14096086740813082,
+    "coverage_present_ci_high": 0.21059989168056825,
+    "recall5_among_nominated_estimate": 0.8837209302325582,
+    "recall5_among_nominated_ci_low": 0.8102447037888062,
+    "recall5_among_nominated_ci_high": 0.940671851574213,
+    "false_nomination_absent_estimate": 0.10443275732531931,
+    "false_nomination_absent_ci_low": 0.08058961224195486,
+    "false_nomination_absent_ci_high": 0.13107171684398913
+  },
+  "fusion_expected_recall5_percent": {
+    "official_raw": {
+      "estimate": 61.17241633376683,
+      "ci_low": 55.7529863637419,
+      "ci_high": 66.43455225923601
+    },
+    "official_dedup": {
+      "estimate": 64.8330320940655,
+      "ci_low": 59.63263927314786,
+      "ci_high": 69.87954027373702
+    },
+    "sub16": {
+      "estimate": 97.30354012378805,
+      "ci_low": 95.79185259301812,
+      "ci_high": 98.46754152624055
+    },
+    "sub64": {
+      "estimate": 86.04405977527799,
+      "ci_low": 82.80725565473365,
+      "ci_high": 88.90871989854917
+    },
+    "expanded1024": {
+      "estimate": 42.65515831495206,
+      "ci_low": 37.56021401785417,
+      "ci_high": 47.755667215242596
+    }
+  }
 }
