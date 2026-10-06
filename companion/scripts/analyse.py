@@ -37,6 +37,21 @@ def load(spec: list[str]) -> dict[str, pd.DataFrame]:
     return out
 
 
+def pool_reference(methods: dict, rows: np.ndarray) -> pd.DataFrame:
+    """Recover pool metadata independently of method order or scoring failures."""
+    columns = ['row', 'target_id', 'pool', 'n_pool', 'n_pool_weighted']
+    combined = pd.concat([frame[columns] for frame in methods.values()], ignore_index=True)
+    combined = combined[combined.row.isin(rows)]
+    keys = ['row', 'pool']
+    unique = combined.drop_duplicates()
+    if unique.duplicated(keys).any():
+        raise ValueError('Methods disagree on candidate-pool metadata')
+    for pool in unique.pool.unique():
+        if set(unique.loc[unique.pool == pool, 'row']) != set(rows):
+            raise ValueError(f'Incomplete pool metadata for {pool}; cannot construct a random baseline')
+    return unique.sort_values(keys).reset_index(drop=True)
+
+
 def random_rows(ref: pd.DataFrame) -> pd.DataFrame:
     """Random ordering: every decoy tied with the target gives the exact expectation."""
     df = ref[["row", "target_id", "pool", "n_pool", "n_pool_weighted"]].copy()
@@ -233,7 +248,7 @@ def main():
     groups_test = meta["unique_smiles_idx"].to_numpy()[rows_test]
 
     test, val = load(args.test), load(args.val)
-    ref = next(iter(test.values()))
+    ref = pool_reference(test, rows_test)
     test["random"] = random_rows(ref)
     table, boots = metrics_table(test, rows_test, groups_test)
     table.to_csv(args.out / "metrics.csv", index=False)

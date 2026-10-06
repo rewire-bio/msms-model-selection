@@ -27,6 +27,22 @@ class RecallFailures(unittest.TestCase):
         self.assertTrue((metrics.estimate==25).all())
         self.assertTrue((metrics.n_missing_or_failed==3).all())
 
+    def test_pool_reference_independent_of_failed_first_method(self):
+        frame=pd.DataFrame([dict(row=i,target_id=i,pool='official_dedup',n_pool=10,n_pool_weighted=10.) for i in range(3)])
+        empty=frame.iloc[:0]
+        a=analyse.pool_reference({'failed':empty,'ok':frame},np.arange(3))
+        b=analyse.pool_reference({'ok':frame,'failed':empty},np.arange(3))
+        pd.testing.assert_frame_equal(a,b)
+        np.testing.assert_array_equal(analyse.random_rows(a).t, np.full(3,9))
+
+    def test_pool_reference_rejects_conflicts_and_missing_metadata(self):
+        frame=pd.DataFrame([dict(row=i,target_id=i,pool='official_dedup',n_pool=10,n_pool_weighted=10.) for i in range(3)])
+        with self.assertRaisesRegex(ValueError,'disagree'):
+            analyse.pool_reference({'a':frame,'b':frame.assign(n_pool=20)},np.arange(3))
+        with self.assertRaisesRegex(ValueError,'Incomplete pool'):
+            analyse.pool_reference({'a':frame.iloc[:2]},np.arange(3))
+
+
 class MGFParsing(unittest.TestCase):
     def parse(self,text):
         with tempfile.TemporaryDirectory() as temp:
