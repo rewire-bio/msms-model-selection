@@ -1,0 +1,20 @@
+{
+  "scope": "cached-score correction only; no retraining",
+  "comparisons": {
+    "metrics": {
+      "rows": 180,
+      "changed_rows": 22
+    },
+    "contrasts": {
+      "rows": 90,
+      "changed_rows": 0
+    },
+    "abstention": {
+      "rows": 20,
+      "changed_rows": 4
+    }
+  },
+  "nonfusion_invariance_passed": true,
+  "fusion_official_dedup_unchanged": true,
+  "fusion_weight": 0.55
+}

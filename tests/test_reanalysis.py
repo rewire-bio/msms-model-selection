@@ -23,6 +23,10 @@ class ReanalysisTests(unittest.TestCase):
         self.assertTrue(result.loc['a','unchanged'])
         self.assertFalse(result.loc['b','unchanged'])
         self.assertEqual(result.loc['b','estimate_delta'],1.)
+    def test_missing_numeric_column_rejected(self):
+        old=pd.DataFrame({'id':['a'],'estimate':[1.]})
+        with self.assertRaises(ValueError):m.compare_frames(old,old[['id']],['id'],1e-8)
+
     def test_missing_and_duplicate_keys_rejected(self):
         old=pd.DataFrame({'id':['a','b'],'estimate':[1.,2.]})
         with self.assertRaises(ValueError):m.compare_frames(old,old.iloc[:1],['id'],1e-8)

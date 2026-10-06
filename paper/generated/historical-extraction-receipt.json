@@ -1,0 +1,45 @@
+{
+  "also_read": {
+    "companion/results/fusion-weight.json": "49e472a3f5f11472b931dca6186e4a54ade742f74e679b4dc75409703dede4d4"
+  },
+  "archive": "downloads/msms-shortlist-results.tar.gz",
+  "archive_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6",
+  "cross_check_against_article_values": "Tables 3-7, pool-size, tie-rule and abstention values, contrasts (incl. expanded-pool C2), threshold, fusion weight, training time; numeric at printed precision",
+  "cross_check_mismatches": [],
+  "generated": [
+    "macros.tex",
+    "pool_medians.tex",
+    "tab_abstention.tex",
+    "tab_abstention_all.tex",
+    "tab_contrasts.tex",
+    "tab_contrasts_all.tex",
+    "tab_fusion.tex",
+    "tab_main.tex",
+    "tab_mces1.tex",
+    "tab_pools.tex",
+    "tab_poolsizes.tex",
+    "tab_precursor.tex",
+    "tab_repro.tex",
+    "tab_rules.tex",
+    "tab_strata_instrument.tex",
+    "tab_strata_precursor.tex"
+  ],
+  "kind": "formatting/extraction only; no recomputation",
+  "members_read_in_memory": {
+    "msms-shortlist-results/analysis-mces1/metrics.csv": "9d83e8c91fbf4fbe95130122c5b47e5dc88bd63d9840a30a336e4964b630f8e5",
+    "msms-shortlist-results/analysis-mces1/pool-sizes.csv": "a5247dcd64ac2a48dbc6374b0d00d599dc7be4f3664c78cb69775a08c1a8523c",
+    "msms-shortlist-results/analysis/abstention.csv": "e24df6aedab568b8a31f42169855df63fd598215ee104854de05bb0e0839e1f0",
+    "msms-shortlist-results/analysis/contrasts.csv": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
+    "msms-shortlist-results/analysis/metrics.csv": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
+    "msms-shortlist-results/analysis/pool-sizes.csv": "7ba18122e5a2a77e296f0d037f3bc82ede24286ff0c7924b40862e935d5533b5",
+    "msms-shortlist-results/analysis/random-repeats.json": "d6e58d93e93c3c4f8043ea6507ed93652cb27edbb3f4f345cb85955c543c6156",
+    "msms-shortlist-results/analysis/strata-post-hoc.csv": "e6614435454b845d949285a43372ba52875eda57f3e567fa613287d1ad42f113",
+    "msms-shortlist-results/receipts/A02-precursor-error-audit-20261004T224918Z/summary.json": "c000e91ed48aad811a0f425ec1ec9a6733d60fae44549bb95d54210751a2ebcd",
+    "msms-shortlist-results/receipts/T01-msalign-dreams-morgan-formula1-20261004T220904Z/train-receipt.json": "e9ab16c86acf67861942e3f46021130219afc2fa9a28df89a74b53ee02fde027",
+    "msms-shortlist-results/receipts/T02-embcos-formula1-20261005T055415Z/released-result.json": "0bfceaea9609ed5f9fe935e45b4f85e1d87ad17996016aa9e3fc43b8fda6b8eb",
+    "msms-shortlist-results/receipts/T03-deepsets-formula1-20261005T085424Z/released-result.json": "2d5a2fc0873fcd65f0231dd54b513a409bde2699d71a7646800bdcfcac663966",
+    "msms-shortlist-results/receipts/V01-dreams-torchscript-equivalence-20261004T221550Z/result.json": "970fcaaa519f2fd349f51d2f25054e425f060756ba30c4f0c5813841c754b763",
+    "msms-shortlist-results/receipts/X02-cli-demo-20261005T060708Z/consistency-check.txt": "29f63aa69abfe585455278c22c9ccba07746ff00dcd2a480e22f7da9f24a204f"
+  },
+  "schema_version": 1
+}

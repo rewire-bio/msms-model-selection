@@ -25,3 +25,7 @@ paper paper-imported:
 .PHONY: corrected-analysis
 corrected-analysis:
 	$(PYTHON) scripts/reanalyse.py --config configs/corrected-analysis.json --output results/corrected-analysis
+
+.PHONY: reproduce-corrected
+reproduce-corrected:
+	$(PYTHON) scripts/reproduce_corrected.py

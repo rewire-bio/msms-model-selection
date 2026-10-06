@@ -123,6 +123,30 @@ def main(output: Path | None = None) -> None:
               "status": "historical_imported: every value comes from the 2026-10-03/05 runs (results archive and companion files), the "
                         "published papers or the cited literature; nothing was recomputed or reproduced during migration",
               "claims": [{"id": i, "claim": c, "manuscript": loc, "evidence_class": cls, "evidence": ev} for i, c, loc, cls, ev in CLAIMS]}
+    import corrected_evidence
+    if corrected_evidence.INDEX.exists():
+        info, run = corrected_evidence.load()
+        replacement = {
+            f"{TARNAME}!{PREFIX}analysis/{name}": str((run / 'analysis' / name).relative_to(ROOT))
+            for name in ('metrics.csv', 'contrasts.csv', 'abstention.csv', 'risk-coverage-curves.json')
+        }
+        replacement.update({
+            'companion/results/fusion-weight.json': str((run / 'fusion-weight.json').relative_to(ROOT)),
+            'article/assets/02-pool-size-stress.png': 'paper/figures/corrected/02-pool-size-stress.png',
+            'article/assets/04-decline-to-nominate.png': 'paper/figures/corrected/04-decline-to-nominate.png',
+        })
+        for claim in ledger['claims']:
+            for item in claim['evidence']:
+                if item['artifact'] in replacement:
+                    item['artifact'] = replacement[item['artifact']]
+                    item['sha256'] = file_sha(item['artifact'])
+                    item.pop('container_sha256', None)
+                    item['provenance'] = 'corrected cached-score analysis; see evidence/corrected-analysis/current.json'
+        ledger['status'] = 'Cached-score correction of fusion; unchanged historical supplementary evidence. No independent training reproduction.'
+        ledger['corrected_evidence'] = info
+        ledger['claims'].append({'id':'CORRECTION', 'claim':'Per-pool fusion correction; nonfusion results, official-dedup fusion metrics, selected weight and validation grid unchanged.',
+            'manuscript':'status, sec:abst-methods, sec:repro-status', 'evidence_class':'retrospective cached-score correction',
+            'evidence':[repo(str((run / name).relative_to(ROOT)), 'whole file') for name in ('results.json','run-receipt.json','comparison-metrics.csv','comparison-abstention.csv')]})
     (output or ROOT / "evidence/paper-migration/claims-ledger.json").write_text(json.dumps(ledger, indent=2) + "\n")
     print(f"claims ledger: {len(CLAIMS)} claims")
 

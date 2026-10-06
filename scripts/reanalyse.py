@@ -160,6 +160,11 @@ def main():
         (out/'fusion-weight.json').write_text((work/'fusion/fusion-weight.json').read_text())
         receipt.update(status='passed',comparisons=comparisons)
         result = {'scope':'cached-score correction only; no retraining', 'comparisons':comparisons, 'nonfusion_invariance_passed':True, 'fusion_official_dedup_unchanged':receipt['fusion_official_dedup_unchanged'], 'fusion_weight':json.loads((out/'fusion-weight.json').read_text())['chosen_w_mass']}
+        abstention = pd.read_csv(out/'analysis/abstention.csv', float_precision='round_trip')
+        fusion_top1 = abstention[(abstention.method=='fusion') & (abstention.confidence=='top1') & (abstention.threshold=='tau_fn10')].iloc[0]
+        result['fusion_top1_tau_fn10'] = {name:float(fusion_top1[name]) for name in ('tau','coverage_present_estimate','coverage_present_ci_low','coverage_present_ci_high','recall5_among_nominated_estimate','recall5_among_nominated_ci_low','recall5_among_nominated_ci_high','false_nomination_absent_estimate','false_nomination_absent_ci_low','false_nomination_absent_ci_high')}
+        metrics = pd.read_csv(out/'analysis/metrics.csv', float_precision='round_trip')
+        result['fusion_expected_recall5_percent'] = {row['pool']:{key:float(row[key]) for key in ('estimate','ci_low','ci_high')} for _,row in metrics[(metrics.method=='fusion') & (metrics.rule=='expected') & (metrics.k==5)].iterrows()}
         (out/'results.json').write_text(json.dumps(result,indent=2,allow_nan=False)+'\n')
     except Exception as exc:
         receipt.update(status='failed',error=portable(str(exc)))

@@ -45,10 +45,10 @@
   "reproduction": {
     "command": [
       "make",
-      "reproduce"
+      "reproduce-corrected"
     ],
-    "results_file": "results/full/results.json",
-    "paper_file": "paper/build/main.pdf",
+    "results_file": "results/reproduction/results.json",
+    "paper_file": "results/reproduction-paper.pdf",
     "abs_tolerance": 1e-08,
     "rel_tolerance": 0
   },

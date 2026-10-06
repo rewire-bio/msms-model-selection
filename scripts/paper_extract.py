@@ -86,7 +86,7 @@ def sg(x: float, nd: int = 1) -> str:
     return "$" + s + "$"
 
 
-def main() -> None:
+def main(corrected: bool = False) -> None:
     try:
         evidence_integrity.verify_or_fail("paper_extract")
     except evidence_integrity.IntegrityError as exc:
@@ -111,6 +111,16 @@ def main() -> None:
     def rows(name: str) -> list[dict]:
         return list(csv.DictReader(io.StringIO(read(name).decode())))
 
+    correction = None
+    if corrected:
+        import corrected_evidence
+        correction, corrected_run = corrected_evidence.load()
+        historical_rows = rows
+        def rows(name):
+            if name in {"analysis/metrics.csv", "analysis/contrasts.csv", "analysis/abstention.csv"}:
+                return list(csv.DictReader((corrected_run / name).open()))
+            return historical_rows(name)
+
     MET = rows("analysis/metrics.csv")
     CON = rows("analysis/contrasts.csv")
     ABS = rows("analysis/abstention.csv")
@@ -126,10 +136,15 @@ def main() -> None:
     V01 = json.loads(read("receipts/V01-dreams-torchscript-equivalence-20261004T221550Z/result.json"))
     X02 = read("receipts/X02-cli-demo-20261005T060708Z/consistency-check.txt").decode()
     FW = json.loads((ROOT / "companion/results/fusion-weight.json").read_text())
+    if corrected:
+        FW = json.loads((corrected_run / "fusion-weight.json").read_text())
     mism: list[str] = []
 
     def check(label, value, printed):
-        if printed is None:
+        # Historical values are checked in the mandatory first pass. The second
+        # pass renders independently digest-verified corrected outputs; comparing
+        # corrected fusion to the superseded article would reject the correction.
+        if corrected or printed is None:
             return
         if value is None or not close(float(value), printed):
             mism.append(f"{label}: archive {value!r} vs article {printed!r}")
@@ -341,7 +356,7 @@ def main() -> None:
     # ---- Macros
     hours = T01["wall_seconds"] / 3600
     check("train hours", hours, ARTICLE["train_hours"])
-    mac = {"DedupMedian": f"{med['official_dedup']:.0f}", "ExpandedMedian": f"{med['expanded1024']:.0f}",
+    mac = {"FusionExpandedRecall": f"{float(m('expanded1024', 'expected', 'fusion', 5)['estimate']):.1f}", "DedupMedian": f"{med['official_dedup']:.0f}", "ExpandedMedian": f"{med['expanded1024']:.0f}",
            "TrainHours": f"{hours:.2f}", "DeepSetsHours": f"{T03['elapsed_seconds'] / 3600:.2f}",
            "Threshold": f"{float(a('msalign', 'top1', 'tau_fn10')['tau']):.4f}", "FusionW": f"{FW['chosen_w_mass']:.2f}",
            "VCosMin": f"{V01['cosine_min']:.8f}", "VSpectra": str(V01["n"]),
@@ -357,6 +372,11 @@ def main() -> None:
                "also_read": {"companion/results/fusion-weight.json": sha256((ROOT / "companion/results/fusion-weight.json").read_bytes())},
                "cross_check_against_article_values": "Tables 3-7, pool-size, tie-rule and abstention values, contrasts (incl. expanded-pool C2), threshold, fusion weight, training time; numeric at printed precision",
                "cross_check_mismatches": mism, "generated": sorted(p.name for p in GEN.glob("*.tex"))}
+    if corrected:
+        receipt["kind"] = "corrected cached-score tables plus unchanged historical supplementary evidence"
+        receipt["corrected_evidence"] = correction
+        receipt["historical_validation"] = json.loads((GEN / "historical-extraction-receipt.json").read_text())
+        receipt["cross_check_against_article_values"] = "Historical first pass only; corrected tables bound to execution hashes and invariance report"
     (GEN / "extraction-receipt.json").write_text(json.dumps(receipt, indent=2, sort_keys=True) + "\n")
     if mism:
         print("\n".join(mism))
@@ -366,3 +386,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+    import corrected_evidence
+    if corrected_evidence.INDEX.exists():
+        (GEN / "historical-extraction-receipt.json").write_text((GEN / "extraction-receipt.json").read_text())
+        main(corrected=True)
