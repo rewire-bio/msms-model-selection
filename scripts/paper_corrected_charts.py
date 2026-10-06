@@ -8,8 +8,6 @@ import corrected_evidence
 ROOT = Path(__file__).resolve().parents[1]
 
 def main():
-    if not corrected_evidence.INDEX.exists():
-        return
     _, run = corrected_evidence.load()
     sys.path.insert(0, str(ROOT / 'companion/scripts'))
     from make_charts import chart_pool_size, chart_abstention
