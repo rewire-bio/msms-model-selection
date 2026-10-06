@@ -1422,5 +1422,24 @@
     "combined_bytes": 45138751,
     "combined_sha256": "646bbe4fbb14bda60e3544d4a963c9319b6564663c9b0752cd5e92b879eeffc9",
     "matches_original_manifest": true
+  },
+  "git_tracking_audit": {
+    "checked_at_utc": "2026-10-06T11:19:32.745246+00:00",
+    "source_files": 79,
+    "restored_previously_ignored_files": [
+      "companion/results/T01-train-receipt.json",
+      "companion/results/T02-released-result.json",
+      "companion/results/T03-released-result.json",
+      "companion/results/abstention.csv",
+      "companion/results/contrasts.csv",
+      "companion/results/fusion-weight.json",
+      "companion/results/mces1-cheap-baselines-metrics.csv",
+      "companion/results/metrics.csv",
+      "companion/results/pool-sizes.csv",
+      "companion/results/random-repeats.json",
+      "companion/results/risk-coverage-curves.json",
+      "companion/results/strata-post-hoc.csv"
+    ],
+    "all_original_files_tracked": true
   }
 }

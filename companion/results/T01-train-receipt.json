@@ -1,0 +1,56 @@
+{
+  "script": "train_msalign_variant.py",
+  "config_name": "massspecgym_formula",
+  "overrides": {
+    "representations.spectrum": "dreams",
+    "representations.molecule": "morgan_2_4096",
+    "training.n_max_steps": 30000,
+    "training.accelerator": "mps",
+    "seed": 42
+  },
+  "effective_config": {
+    "seed": 42,
+    "representations": {
+      "spectrum": "dreams",
+      "molecule": "morgan_2_4096"
+    },
+    "model": {
+      "d_shared": 512,
+      "d_hidden": 2048,
+      "d_metadata": 64,
+      "n_hidden_layers_ms_pre": 0,
+      "n_hidden_layers_ms_post": 2,
+      "n_hidden_layers_mol": 3,
+      "dropout": 0.3,
+      "temperature_init": 0.07,
+      "use_collision_energy": true,
+      "use_adduct": true
+    },
+    "training": {
+      "k_candidates": 128,
+      "batch_size": 128,
+      "learning_rate": 0.0001,
+      "weight_decay": 1e-06,
+      "n_warmup_steps": 2000,
+      "n_max_steps": 30000,
+      "accelerator": "mps",
+      "gradient_clip_val": 5.0,
+      "log_every_n_steps": 10
+    },
+    "spectrum_bins": {
+      "max_mz": 1005.0,
+      "bin_width": 0.1
+    },
+    "data_root": "data"
+  },
+  "split": "formula_seed1",
+  "torch": "2.2.1",
+  "python": "3.11.13",
+  "machine": "arm64",
+  "mps_available": true,
+  "threads": 4,
+  "started_unix": 1791151745.322146,
+  "wall_seconds": 27889.953852792,
+  "best_checkpoint": "/Users/timrichardson/Documents/projects/personal/blog/rewire.it/workbench/outputs/blog-post-msms-model-selection-20261003-230223/runs/T01-msalign-dreams-morgan-formula1-20261004T220904Z/checkpoints/dreams_morgan_formula_seed1.ckpt",
+  "finished_unix": 1791179635.1587892
+}

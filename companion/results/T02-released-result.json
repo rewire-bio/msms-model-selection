@@ -1,0 +1,19 @@
+{
+  "status": "completed",
+  "model": "EmbCos",
+  "dataset": "massspecgym",
+  "split": "formula_seed1",
+  "model_seed": 42,
+  "metrics": {
+    "validation": {
+      "R@1 (val)": 0.4074343144893646,
+      "R@5 (val)": 0.609801709651947,
+      "R@20 (val)": 0.7929602265357971
+    },
+    "test": {
+      "R@1 (test)": 0.3535875380039215,
+      "R@5 (test)": 0.593163013458252,
+      "R@20 (test)": 0.7683132886886597
+    }
+  }
+}

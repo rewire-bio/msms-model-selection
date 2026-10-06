@@ -1,0 +1,33 @@
+{
+  "status": "completed",
+  "model": "DeepSet",
+  "dataset": "massspecgym",
+  "candidate_map": "official_candidates_by_mass",
+  "split": "formula_seed1",
+  "model_seed": 42,
+  "config_name": "default",
+  "config_hash": "73437d1957564d2c05d87fcb0f2d89930726cc12d415f08a35cf4e5f9e199ce1",
+  "git_revision": "c2ef425b68749052a17b9cdd5f5f11709322654e",
+  "checkpoint_dir": "checkpoints/paper_competitors/deepsets_formula_seed1",
+  "num_parameters": 1867510,
+  "elapsed_seconds": 18478.546838760376,
+  "peak_gpu_memory_bytes": 0,
+  "evaluation_sizes": {
+    "validation": 9631,
+    "test": 10648
+  },
+  "metrics": {
+    "validation": {
+      "R@1 (val)": 0.18720796704292297,
+      "R@5 (val)": 0.3145052492618561,
+      "R@20 (val)": 0.480012446641922,
+      "loss (val)": 0.47847071290016174
+    },
+    "test": {
+      "R@1 (test)": 0.13110443949699402,
+      "R@5 (test)": 0.27920734882354736,
+      "R@20 (test)": 0.46938392519950867,
+      "loss (test)": 0.47787904739379883
+    }
+  }
+}
