@@ -1,0 +1,4 @@
+frozen_utc=2026-10-04T22:07:05Z
+aa2b30b5fe8b06e95a0793ef05c5d3ffc769fbc8e954a626fc71ae0b700531b6  protocol-frozen-original.md
+test-fold outcomes inspected before freeze: none
+runs existing at freeze: R01-candidate-fingerprints-20261003T221627Z S01-smoke-dreams-morgan-20261003T222041Z S02-smoke-dreams-morgan-20261004T220037Z S03-smoke-deepsets-20261004T220402Z S04-smoke-embcos-20261004T220402Z data external patches 

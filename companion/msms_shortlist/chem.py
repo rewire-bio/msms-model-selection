@@ -1,8 +1,12 @@
 """Chemistry helpers shared by the benchmark scripts and the own-input CLI.
 
 Identity convention: 2D structure. A molecule is represented by its RDKit
-canonical SMILES without stereochemistry, which is the normalisation used by
-the MSAlign release. Stereoisomers therefore share one identity.
+canonical SMILES with stereochemistry removed; stereoisomers therefore
+share one identity. The historical MSAlign/benchmark normalisation used
+`isomericSmiles=False`, which also discarded isotope labels as a side
+effect; this helper strips only stereochemistry, so isotope labels are
+preserved for this and future callers (isotopically labelled and
+unlabelled forms of the same skeleton remain distinct).
 """
 
 from __future__ import annotations
@@ -31,11 +35,16 @@ _GENERATOR = None
 
 
 def canonical_2d(smiles: str) -> str | None:
-    """RDKit canonical SMILES without stereochemistry, or None if invalid."""
+    """RDKit canonical SMILES without stereochemistry, or None if invalid.
+
+    Only chiral/bond stereo tags are removed; isotope labels are kept, so
+    this must not use ``isomericSmiles=False``, which also strips isotopes.
+    """
     mol = Chem.MolFromSmiles(smiles)
     if mol is None:
         return None
-    return Chem.MolToSmiles(mol, canonical=True, isomericSmiles=False)
+    Chem.RemoveStereochemistry(mol)
+    return Chem.MolToSmiles(mol, canonical=True, isomericSmiles=True)
 
 
 def exact_mass(smiles: str) -> float:

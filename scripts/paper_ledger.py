@@ -9,7 +9,10 @@ from __future__ import annotations
 
 import hashlib
 import json
+import sys
 from pathlib import Path
+
+import evidence_integrity
 
 ROOT = Path(__file__).resolve().parents[1]
 TARNAME = "downloads/msms-shortlist-results.tar.gz"
@@ -18,6 +21,11 @@ AUDIT = json.loads((ROOT / "evidence/migration-audit.json").read_text())
 MEMBERS = {m["path"]: m["sha256"] for a in AUDIT["archives"] if a["path"] == TARNAME for m in a["members"]}
 MANIFEST = {f["path"]: f["sha256"] for f in json.loads((ROOT / "evidence/import-manifest.json").read_text())["files"]}
 PUBLISHED = "article/published-original.md"
+
+try:
+    evidence_integrity.verify_or_fail("paper_ledger")
+except evidence_integrity.IntegrityError as exc:
+    sys.exit(str(exc))
 
 
 def file_sha(path: str) -> str:
@@ -35,7 +43,17 @@ def article(pointer: str) -> dict:
 
 
 def repo(path: str, pointer: str) -> dict:
-    return {"artifact": path, "pointer": pointer, "sha256": MANIFEST.get(path) or file_sha(path)}
+    """Hash the actual current file and cross-check it against the import manifest.
+
+    Never silently falls back to the recorded manifest digest: a changed evidence
+    file must surface as a ledger failure, not a stale expected digest.
+    """
+    actual = file_sha(path)
+    expected = MANIFEST.get(path)
+    if expected is not None and actual != expected:
+        raise evidence_integrity.IntegrityError(
+            f"ledger evidence mismatch: {path} (expected {expected}, actual {actual})")
+    return {"artifact": path, "pointer": pointer, "sha256": actual}
 
 
 A = "analysis/"
@@ -100,12 +118,12 @@ CLAIMS = [
 ]
 
 
-def main() -> None:
+def main(output: Path | None = None) -> None:
     ledger = {"schema_version": 1,
               "status": "historical_imported: every value comes from the 2026-10-03/05 runs (results archive and companion files), the "
                         "published papers or the cited literature; nothing was recomputed or reproduced during migration",
               "claims": [{"id": i, "claim": c, "manuscript": loc, "evidence_class": cls, "evidence": ev} for i, c, loc, cls, ev in CLAIMS]}
-    (ROOT / "evidence/paper-migration/claims-ledger.json").write_text(json.dumps(ledger, indent=2) + "\n")
+    (output or ROOT / "evidence/paper-migration/claims-ledger.json").write_text(json.dumps(ledger, indent=2) + "\n")
     print(f"claims ledger: {len(CLAIMS)} claims")
 
 

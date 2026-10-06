@@ -33,21 +33,28 @@
       "stage": "review_fixes",
       "status": "complete",
       "note": "All 18 findings fixed (review-disposition.md). Final build 26 pages, 0 LaTeX and 0 BibTeX warnings, deterministic rebuild; changed pages re-rendered and inspected."
+    },
+    {
+      "stage": "code_review_fixes",
+      "status": "complete",
+      "note": "GitHub issues #1\u2013#9 addressed in local code and documentation. make verify passed 60 regression tests; extraction checked 14 archive members and generated 16 files with 0 mismatches. Ledger generated 23 evidence-linked claims with input integrity checks. make paper-imported built 27 pages with 0 LaTeX and 0 BibTeX warnings. No scientific experiment or independent reproduction was run.",
+      "visual_qa": "All 27 pages rendered and inspected in contact sheets; pages 1, 7, 12 and 23 also inspected individually. No clipping or overlapping content found."
     }
   ],
   "no_new_experiments": true,
-  "fresh_reproduction": "pending (protocol.md is an unconfigured, unapproved scaffold; not executed)",
+  "fresh_reproduction": "pending (historical protocol indexed; no approved independent reproduction plan and no independent reproduction executed)",
   "blockers": [],
-  "updated_at_utc": "2026-10-06T11:17:34+00:00",
+  "updated_at_utc": "2026-10-06T17:42:35+00:00",
   "paper": {
     "source": "paper/main.tex",
     "pdf": "paper/build/main.pdf",
-    "pages": 26,
-    "pdf_sha256": "bbe155bdb37428691553c63149acd852c04063002424b003fb0b4deb65a82837",
+    "pages": 27,
+    "pdf_sha256": "b1cf799ce382019d0beb0f742d40fcb5d3ef8a7151bc0119a3be8616dd23ecec",
     "build": "make paper-imported"
   },
   "notes": [
     "Archived pre-declared mces_1 secondary population (not in the original article) reported in App. Table 15",
-    "Some original archived receipts contain absolute local paths; preserved unchanged, not reproduced in the manuscript"
+    "Some original archived receipts contain absolute local paths; preserved unchanged, not reproduced in the manuscript",
+    "Historical author and review stages above describe their original builds. clean-source-build.json is a historical receipt tied to its recorded commit; build-receipt.json records the current local build."
   ]
 }

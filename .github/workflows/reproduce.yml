@@ -1,23 +1,15 @@
-name: Reproduce study
-on: [workflow_dispatch]
+name: Verify historical evidence and regressions
+on: [push, pull_request, workflow_dispatch]
 permissions:
   contents: read
 jobs:
-  reproduce:
-    runs-on: ubuntu-24.04
+  verify:
+    # The frozen companion lock uses CPU PyTorch on macOS; Linux installs CUDA dependencies.
+    runs-on: macos-14
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: astral-sh/setup-uv@v6
         with:
           version: "0.8.2"
-      - run: make reproduce
-      - uses: actions/upload-artifact@v4
-        with:
-          name: reproduced-study
-          path: |
-            results/full/
-            paper/build/main.pdf
-            paper/figures/
-            paper/generated/
-          if-no-files-found: error
+      - run: make verify

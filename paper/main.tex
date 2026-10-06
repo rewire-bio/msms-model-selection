@@ -77,8 +77,12 @@ choosing a formula-free ranker and\\[2pt] knowing when to decline\par}
 Every number comes from the runs of 3--5 October 2026 (outputs and receipts archived as
 \texttt{downloads/\allowbreak msms-shortlist-results.tar.gz}), from the published papers it compares against, or
 from the cited literature; values were extracted and formatted from the archive, and nothing was recomputed for
-this manuscript. A fresh, independent reproduction is \textbf{pending}; the repository's reproduction protocol is an
-unapproved, unconfigured scaffold and has not been executed. No result here carries a verified or approved status.
+this manuscript. A fresh, independent reproduction is \textbf{pending}; no reproduction plan has been written or
+approved, and none has been executed. The historical protocol of the original study is archived in
+\texttt{protocol/\allowbreak historical/}. No result here carries a verified or approved status. A later code review
+found that the exploratory fusion's target-removed abstention values depend on the removed target
+(Section~\ref{sec:abst-methods}); they are printed unchanged but should not be read as fusion run on a pool that lacks
+the target. The review fixes are summarised in \texttt{docs/\allowbreak review-fixes.md}.
 Each number carries one of five labels: \lab{published}, \lab{reproduction}, \lab{new measurement},
 \lab{post hoc} or \lab{untested}.
 \end{minipage}}
@@ -232,7 +236,9 @@ The evaluation protocol was frozen on 4 October 2026 at 22:07:05Z (SHA-256 \m{aa
 test-fold outcome of any method was computed or viewed; smoke runs used only training and validation rows. One
 amendment, A1 (about 23:00\,UTC the same day, before any learned-model test score existed), added a descriptive
 window-coverage measure (Section~\ref{sec:precursor}). The frozen original, the amended text and the freeze receipt
-are archived.
+are archived in the results archive and copied to \m{protocol/historical/} in the repository. The freeze was the
+original study's own record. It is not an approval under the repository's research harness, and it is not a protocol
+for an independent reproduction.
 
 \subsection{Data, split and populations}\label{sec:data}
 The data are MassSpecGym as processed by the MSAlign authors (Zenodo 10.5281/zenodo.22830464,
@@ -270,7 +276,10 @@ with 16\,GB of memory: DeepSets with the released \m{model\_zoo} configuration (
 loss); Emb-Cos with the released configuration (16,000 steps, checkpoint by validation Recall@1); and the MSAlign
 alignment with the released \m{massspecgym\_formula} configuration and the molecule representation set to Morgan
 (radius 2, 4,096 bits), 30,000 steps, checkpoint by validation Recall@1 (selected at step 3,296). The fusion weight
-was chosen on validation Recall@5 over $w \in \{0, 0.05, \dots, 1\}$ (Appendix Table~\ref{tab:fusion}). No reference
+was chosen on validation Recall@5 over $w \in \{0, 0.05, \dots, 1\}$ (Appendix Table~\ref{tab:fusion}). For each
+spectrum, the two component scores were z-scored using the mean and standard deviation over its \m{official\_dedup}
+pool, target included. The same transformed scores were then used for every pool variant of that spectrum, including
+\m{absent} (see Section~\ref{sec:abst-methods}). No reference
 spectrum library search was run, because it would require library spectra for every candidate.
 
 \begin{table}[tbp]
@@ -304,6 +313,10 @@ uniform random tie-breaking: for a target with $b$ decoys scoring strictly highe
 so a target tied with three decoys counts as the average over the four possible orders. The released strict rule, in
 which a tied decoy ranks ahead of the target, is reported alongside and used for comparison with published numbers.
 Every test spectrum is in the denominator; a method that fails on a spectrum scores a miss, and there were no failures.
+A later code review found that the archived abstention analysis did not implement this missing-spectrum rule: a
+missing validation score made a fitted threshold undefined, and a missing test rank made nominated-recall estimates
+undefined. The archived test-fold metrics record zero missing or failed spectra, and the defect is not known to have
+affected any reported value.
 
 \subsection{Uncertainty and pre-declared contrasts}\label{sec:stats}
 Intervals are 95\% percentile intervals from 2,000 bootstrap resamples of target molecules (seed 20261004), resampling
@@ -319,6 +332,19 @@ twice, with \m{official\_dedup} (target present) and with \m{absent}. Two thresh
 frozen: one that keeps 90\% of target-present validation queries covered, and the lowest threshold at which at most 10\%
 of target-removed validation queries are nominated. On test, ``covered'' is the share of target-present queries given a
 shortlist and ``false'' the share of target-removed queries still given one.
+
+\paragraph{Caveat for exploratory fusion (found after the original analysis).} The single-method scores do not depend
+on which other candidates are in the pool, so deleting the target after scoring is the same as scoring a pool without
+it. Fusion is different. Its components were z-scored over the target-present \m{official\_dedup} pool, and the target
+was deleted only afterwards to form \m{absent} (Section~\ref{sec:methods-list}). The fused scores of the remaining
+candidates therefore depend on the removed target's raw scores. This applies to the fusion thresholds fitted on
+validation and to the fusion test rows in Tables~\ref{tab:abstention} and~\ref{tab:abstention-all}. Those values are
+kept exactly as archived. They describe deletion after target-present standardisation, not fusion run on a candidate set
+that actually lacks the target, so they are not evidence about fusion's ability to detect an absent target. The corrected
+implementation standardises over the candidates actually present in each pool. This changes future pool-variant
+evaluations, including target-present subsets and expanded pools. Its thresholds and results need fresh calibration
+and evaluation; no corrected numbers are reported here. The historical primary single-method comparison is separate
+from this exploratory fusion analysis.
 
 \subsection{Reproduction check}\label{sec:repro-methods}
 For the three trained models, the released evaluation (strict ties, \m{official\_raw}) on test was compared with the v2
@@ -497,7 +523,9 @@ al.~\citep{jurgens2026}.
 \caption{\lab{new measurement} (stress test, artificial target removal). \textbf{Validation-fitted decline thresholds
 applied once to test}, deduplicated official pools, confidence = top-1 score. ``Covered'' is the share of target-present
 test queries given a shortlist; ``false'' the share of target-removed test queries still given one; 95\%
-molecule-bootstrap intervals. Source: archived \m{analysis/abstention.csv}.}
+molecule-bootstrap intervals. The fusion row is archived unchanged, but its scores were standardised with the target
+present before deletion, so its threshold and false-nomination rate retain information from the removed target and do
+not measure fusion on a pool that lacks it (Section~\ref{sec:abst-methods}). Source: archived \m{analysis/abstention.csv}.}
 \label{tab:abstention}
 \stackedci
 \begin{tabular}{@{}l l l r l@{}}
@@ -598,7 +626,12 @@ fails before ranking: its recorded precursor, 826.4, is 117\,ppm below the ion i
 candidate lies within 10 or 50\,ppm; only the 200\,ppm window readmits 227 of the file's 229 candidates, and the model then
 declines. Two deliberately invalid blocks were refused (missing adduct; charge inconsistent with the adduct). The DreaMS
 weights reproduced the released embeddings (minimum cosine \VCosMin{} over \VSpectra{} spectra), and the exported model
-matched the benchmark harness on the demo spectrum to within $2.2\times10^{-4}$, with the same rank.
+matched the benchmark harness on the demo spectrum to within $2.2\times10^{-4}$, with the same rank. These outputs come from
+the archived CLI. The revised CLI preserves isotope labels when removing stereochemistry, refuses unreadable metadata
+per spectrum, discards invalid peaks and refuses spectra with no usable peaks or non-finite ranking scores
+(\m{companion/README.md}). Missing collision energy remains represented by NaN; infinity is refused. The shared
+chemistry helper also preserves isotope labels in future benchmark pool generation. Archived pools and results remain
+unchanged. None of the demonstration inputs is isotope-labelled.
 
 \begin{figure}[p]
 \centering
@@ -614,7 +647,8 @@ test and the precursor audit). Mass-only runs skip the threshold step and never 
 \noindent\fbox{\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}\small
 \textbf{Not yet reproduced under this repository's harness.} The values above are imported from the 3--5 October 2026 runs.
 The reproduction reported in Section~\ref{sec:repro} is the original study's own re-run of released code, not an independent
-reproduction. The repository's reproduction protocol has not been designed, approved or executed.
+reproduction. The original study's frozen protocol is archived in \m{protocol/historical/}. A protocol for an independent
+reproduction has not been designed, approved or executed.
 \end{minipage}}
 
 %======================================================================
@@ -670,6 +704,18 @@ answers that a search centred on the measured precursor would lose (Section~\ref
 \item \textbf{Shortcut controls.} The alignment models were not tested against generated decoys that resemble library
 compounds~\citep{gupta2026spurious}, nor by ``masking all input MS/MS spectra with a constant value and confirming that
 performance degrades accordingly''~\citep{liu2026wild}.
+\item \textbf{Fusion target-removal values are not target-absent inference.} Fusion was standardised over the
+target-present pool before the target was deleted (Section~\ref{sec:abst-methods}). Its archived target-removed
+thresholds, coverage and false-nomination rates therefore retain information from the removed target. They are printed
+unchanged and are not evidence that fusion can detect an absent target. The corrected implementation requires fresh
+calibration and evaluation before any corrected number can be reported. This does not show that the primary complete-case
+benchmark is invalid: single-method scores do not depend on the rest of the pool, and the primary metrics use
+target-present pools.
+\item \textbf{Code defects found after the analysis.} A later review found defects in the companion CLI (isotope labels
+dropped along with stereochemistry; unreadable metadata or non-finite values could crash a batch or yield a nomination),
+in the training queue's exit status, in the paper validator's digest checks, and in the abstention analysis's handling of
+missing spectra. The archived runs recorded no missing or failed spectra, and none of these defects is known to have
+changed a reported value. The demonstration outputs in Section~\ref{sec:demo} come from the archived CLI.
 \item \textbf{Exploratory and post hoc analyses.} Fusion, the margin confidence, the expanded-pool contrast, the precursor and
 instrument strata and the window-coverage measure are exploratory or post hoc. Only C1--C3 were pre-declared contrasts; the instrument
 strata and the \m{mces\_1} population were pre-declared as descriptive. None of the intervals is adjusted for multiplicity.
@@ -821,7 +867,11 @@ k & Method & 16 & 64 & \DedupMedian{} (official) & \ExpandedMedian{} (expanded) 
 \setlength{\tabcolsep}{3pt}
 \caption{\lab{new measurement} (stress test; margin-confidence rows exploratory). \textbf{All decline-threshold results}: both confidences (top-1 score and the exploratory top-two margin) and both
 rules, with the fitted threshold, its validation false-nomination rate (\%) and test coverage, Recall@5 among covered and false
-nominations (\%, 95\% intervals). Source: archived \m{analysis/abstention.csv}.}
+nominations (\%, 95\% intervals). Fusion rows: archived unchanged; fusion scores were z-scored over the target-present
+pool before the target was deleted, so the fusion thresholds, coverage and false-nomination values retain information
+from the removed target. They are not evidence about fusion on a candidate set that actually lacks the target, and
+corrected values would require fresh calibration and a new run (Section~\ref{sec:abst-methods}). Rows for the other
+methods do not share this defect. Source: archived \m{analysis/abstention.csv}.}
 \label{tab:abstention-all}
 \stackedci
 \begin{tabular}{@{}l l l r r l l l@{}}
