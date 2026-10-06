@@ -1,0 +1,37 @@
+{
+  "source_repository": "rewire-bio/rewire.it",
+  "source_commit": "bcf2f130441abf95fc396b43d0b0e640cf783117",
+  "source_path": "posts/an-msms-shortlist-is-not-an-identification.md",
+  "source_sha256": "77ba1e65c533ea3fe4c76e1f30b2916bd41f2cdd64b2dd3b572582ff8c83473c",
+  "verbatim_snapshot": "article/published-research-version-20261006.md",
+  "readable_snapshot": "article/blog-research-version-20261006.md",
+  "transformations": [
+    "Image links point to a separate copy of the current corrected figures",
+    "Download links resolve to unchanged historical downloads",
+    "Related-blog link made absolute"
+  ],
+  "linked_artifacts": [
+    {
+      "path": "assets/blog-20261006/01-recall-by-method.png",
+      "sha256": "450e6e6073ccc1001edd31c2044fdb1342b47ddbaf6ff3be866c02d0f719461b"
+    },
+    {
+      "path": "assets/blog-20261006/02-pool-size-stress.png",
+      "sha256": "fa3837600c4ebfa4f54d7a6d786c587b22b7a343223006c24a3e07c6a1252679"
+    },
+    {
+      "path": "assets/blog-20261006/04-decline-to-nominate.png",
+      "sha256": "29dd93309e66e0c0fa5e05fdbcbf8e6c328d90c557fed96104212d9bd51e0e0d"
+    },
+    {
+      "path": "../downloads/msms-shortlist-companion-code.tar.gz",
+      "sha256": "b029749849ed5189ead19618fe9670b3e88ca3b36eb7a2cd47e449ff147789de"
+    },
+    {
+      "path": "../downloads/msms-shortlist-results.tar.gz",
+      "sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+    }
+  ],
+  "scientific_results_changed": false,
+  "note": "Historical article/assets are unchanged. Corrected fusion figures are preserved separately."
+}
