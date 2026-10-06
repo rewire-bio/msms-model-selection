@@ -1,0 +1,57 @@
+{
+  "reviews": [
+    {
+      "id": "bf20ce993b9648879706e131fdfab52f",
+      "kind": "methods",
+      "recorded_at": "2026-10-06T18:14:23.752502+00:00",
+      "report": ".research/review-reports/corrected-methods.md",
+      "report_sha256": "26844879664ee6adfa436a3e7b2b2cc98fb4284b3452762371b6d7458965bbc3",
+      "reviewer": "Codex independent methods agent",
+      "target": {
+        "manuscript_hash": "28906a52e9f0cde7da2cbad70ae39637a739a807de985b20c4c729e5029f8d91",
+        "run_id": "2fc267cbade54b009d6a8b24d70724b3"
+      },
+      "verdict": "pass"
+    },
+    {
+      "id": "e69286621eaa4c2389bc518e3a2e69ed",
+      "kind": "paper",
+      "recorded_at": "2026-10-06T18:15:25.490991+00:00",
+      "report": ".research/review-reports/corrected-paper.md",
+      "report_sha256": "f413d3e1db34bb9f956f4874505468de1b1cf036d4b123556e397918c197992e",
+      "reviewer": "Codex independent paper agent",
+      "target": {
+        "artifacts": {
+          "paper/figures/01-decision-path.pdf": "7055e6db8143efe9fe4666d2458cafa21951cecc406266cbe19e45cba968f10c",
+          "paper/figures/corrected/02-pool-size-stress.png": "fa3837600c4ebfa4f54d7a6d786c587b22b7a343223006c24a3e07c6a1252679",
+          "paper/figures/corrected/04-decline-to-nominate.png": "29dd93309e66e0c0fa5e05fdbcbf8e6c328d90c557fed96104212d9bd51e0e0d",
+          "paper/generated/cli_consistency.txt": "29f63aa69abfe585455278c22c9ccba07746ff00dcd2a480e22f7da9f24a204f",
+          "paper/generated/extraction-receipt.json": "06e24bdf22aa10aa47a25248069be833efb2609a3e9a1ddc7c8113b97b5d6fdf",
+          "paper/generated/historical-extraction-receipt.json": "882b98ae0e1296f172b3ab82b41792344ff503d16955e08d6d4d5053619372f5",
+          "paper/generated/macros.tex": "cf0de713459cf7beeb456b1e765a015da48954790d5f86b5f0eb15cdc1274124",
+          "paper/generated/pool_medians.tex": "bb7101c6f2b9c2e9920a7dad4361cb84cc136d6408d6cff02358b267906a3c66",
+          "paper/generated/tab_abstention.tex": "eb9ae6e9498430226cbaa79b8aea510a1f7d79bce203be3a6b45d1bf9fce6830",
+          "paper/generated/tab_abstention_all.tex": "3f31b527ffe6277d939e366bdbf4453d4d762c1702df789f23c9ae76eeddc9c8",
+          "paper/generated/tab_contrasts.tex": "8a71450420c04f32bdcaf4a77b5a1ee4d659619bf275a8043d78a7102435143c",
+          "paper/generated/tab_contrasts_all.tex": "dde18e32cb257d914c33b233f200e8f25f569d0dc8f767031a8081ad4188d87c",
+          "paper/generated/tab_fusion.tex": "1f8cf537dcf86120079a39baa2ce77ae34f36316e431f6d247c1ffddacb411ce",
+          "paper/generated/tab_main.tex": "c0fb2ac420713fc7bc34b800c61189a3389a1d96b2b98c1c96f28bb10e12d1f3",
+          "paper/generated/tab_mces1.tex": "d8393f7984362e354de4826898eeab7aba618e06e66de3f71c880ed2f24b643b",
+          "paper/generated/tab_pools.tex": "ca7d6dbe9595b324df55d576da10a62ccaa64e2a3cb3786b52cab2385fb0bfb2",
+          "paper/generated/tab_poolsizes.tex": "9faa3c7653826615ccc4c3b4c1f1885bb4204fc334ac03db797af74b99be9946",
+          "paper/generated/tab_precursor.tex": "fe52253014907d36cfe97c9fe8baead9b91ebefd6cb12d0999c1fb2954728df7",
+          "paper/generated/tab_repro.tex": "df98d6c4075ac4501fa65e0f4ebe9dbcb30db5506c01c76a8e0f34e224791c4a",
+          "paper/generated/tab_rules.tex": "25a27d1e66e1cf60e184b97e11e70fae86b6c5290d90ccefadc37f5da2ed8de9",
+          "paper/generated/tab_strata_instrument.tex": "35da0e0d85bd902c1a82f193a568a9decde85194e7e9253addc4008a704f534b",
+          "paper/generated/tab_strata_precursor.tex": "3dc95041447586e5dbbb44204f928aaf61a5eaa8298cb1ef59b088167403e2ec",
+          "results/reproduction-paper.pdf": "11c8ac0be311e017054cefb96092abb11493696e6ac95749ac27b2b777bf6cf4",
+          "results/reproduction/results.json": "5c7651d64222d03139e18bb201610b630509ad9b1c3fc3a5400264188992f718"
+        },
+        "manuscript_hash": "28906a52e9f0cde7da2cbad70ae39637a739a807de985b20c4c729e5029f8d91",
+        "reproduction_id": "9dcf6d1ddcef434daa87ac7e3067f8d9",
+        "run_id": "2fc267cbade54b009d6a8b24d70724b3"
+      },
+      "verdict": "pass"
+    }
+  ]
+}

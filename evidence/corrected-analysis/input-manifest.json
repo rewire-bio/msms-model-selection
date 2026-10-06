@@ -1,0 +1,146 @@
+{
+  "schema_version": 1,
+  "root_description": "Historical article workspace runs directory; supply using --input-root",
+  "files": {
+    "pools": {
+      "path": "P01-pools-formula1-valtest-20261004T221108Z/pools.h5",
+      "bytes": 326993286,
+      "sha256": "b2f33d424cf9e25b4c41de39018fa1c0d4ba2621528997636e771528575155f9"
+    },
+    "mass_ranks_val": {
+      "path": "SC01-mass-formula1-20261004T221726Z/ranks-val.csv.gz",
+      "bytes": 358276,
+      "sha256": "d861e85c47549b11b48919a29f6f348aea488fd48abf55eebc46b071900d7e3d"
+    },
+    "mass_scores_val": {
+      "path": "SC01-mass-formula1-20261004T221726Z/scores-val.h5",
+      "bytes": 2369489,
+      "sha256": "2dc0eab10bf5a5c3a1215907959d9dff2a3c4e640c7061d017d3cceb8d69e4d1"
+    },
+    "mass_receipt_val": {
+      "path": "SC01-mass-formula1-20261004T221726Z/scores-val.receipt.json",
+      "bytes": 635,
+      "sha256": "f4d32ec0eaac62302d93d7ea17fb28956dabd7b927219e5cf3934fca6cd1eba1"
+    },
+    "mass_ranks_test": {
+      "path": "SC01-mass-formula1-20261004T221726Z/ranks-test.csv.gz",
+      "bytes": 392512,
+      "sha256": "c2bcdb12c7503d0e414e3e8486c6a429fbdac4bda67843776fbe6353a98d4628"
+    },
+    "mass_scores_test": {
+      "path": "SC01-mass-formula1-20261004T221726Z/scores-test.h5",
+      "bytes": 2636399,
+      "sha256": "9e0fb144edddf527db40cd6506b9ea65224dacedef95ee09b065c7301a3fcbc4"
+    },
+    "mass_receipt_test": {
+      "path": "SC01-mass-formula1-20261004T221726Z/scores-test.receipt.json",
+      "bytes": 638,
+      "sha256": "5cc218b5d25abc44cb5546fcbc68929436ffc4257bb42db65230f2e980794244"
+    },
+    "msalign_ranks_val": {
+      "path": "SC03-msalign-formula1-20261005T060457Z/ranks-val.csv.gz",
+      "bytes": 1179688,
+      "sha256": "7ae2e8f4c95e1cc68f301e9c7a360c8d6d16ba551c0bce6a0022d74a2c54614d"
+    },
+    "msalign_scores_val": {
+      "path": "SC03-msalign-formula1-20261005T060457Z/scores-val.h5",
+      "bytes": 19557885,
+      "sha256": "b7d56b0b0e3cc42589a3df65cd66e84d38825b44580fe2cfc9b8cb6272767840"
+    },
+    "msalign_receipt_val": {
+      "path": "SC03-msalign-formula1-20261005T060457Z/scores-val.receipt.json",
+      "bytes": 861,
+      "sha256": "667051ede34eb7d2067c91a3f56db76451950e5e3e5ed94b237beb63cad83feb"
+    },
+    "msalign_ranks_test": {
+      "path": "SC03-msalign-formula1-20261005T060457Z/ranks-test.csv.gz",
+      "bytes": 1269674,
+      "sha256": "bb9f458f8501bcceda41761798173e2cd6fbc4abf7e1ed51c892f81365ae89b3"
+    },
+    "msalign_scores_test": {
+      "path": "SC03-msalign-formula1-20261005T060457Z/scores-test.h5",
+      "bytes": 22019352,
+      "sha256": "091e11be0581a55d5c3c227ef430afb013af0ea439f33b0d1860ed29b83c0d1d"
+    },
+    "msalign_receipt_test": {
+      "path": "SC03-msalign-formula1-20261005T060457Z/scores-test.receipt.json",
+      "bytes": 866,
+      "sha256": "d6a89060a3cd1d408a857b1ea32a905e2556afcb7ab8b138a3dfaab7602c8835"
+    },
+    "embcos_ranks_val": {
+      "path": "SC04-embcos-formula1-20261005T090736Z/ranks-val.csv.gz",
+      "bytes": 1195707,
+      "sha256": "46cd4cfbd5f95c5866d8146c2d56ff73e3d51211e088a6004bae1c62b8b595c0"
+    },
+    "embcos_receipt_val": {
+      "path": "SC04-embcos-formula1-20261005T090736Z/scores-val.receipt.json",
+      "bytes": 849,
+      "sha256": "91068ddd00c5607f98cc68f59f15ec3a5fefe74efc8429e8df7c7facce2ab799"
+    },
+    "embcos_ranks_test": {
+      "path": "SC04-embcos-formula1-20261005T090736Z/ranks-test.csv.gz",
+      "bytes": 1294006,
+      "sha256": "525673c7ba1ca5458c80bdf8d34ce619993ddaaf9cb4a7991b4ab6e126598217"
+    },
+    "embcos_receipt_test": {
+      "path": "SC04-embcos-formula1-20261005T090736Z/scores-test.receipt.json",
+      "bytes": 854,
+      "sha256": "cba6426eb06e82c3b1126103f3b28d198a27ee21c77e304fd82bf195b41887bf"
+    },
+    "deepsets_ranks_val": {
+      "path": "SC05-deepsets-formula1-20261005T141056Z/ranks-val.csv.gz",
+      "bytes": 1166793,
+      "sha256": "e83d1b3bd64ee90f0176ead125041aad79bb49d653ec1d7972d093e7b8804f6d"
+    },
+    "deepsets_receipt_val": {
+      "path": "SC05-deepsets-formula1-20261005T141056Z/scores-val.receipt.json",
+      "bytes": 857,
+      "sha256": "993b377b404f81fa914c6d732001b5f7121804b5a4af8ce4df41d137383bde51"
+    },
+    "deepsets_ranks_test": {
+      "path": "SC05-deepsets-formula1-20261005T141056Z/ranks-test.csv.gz",
+      "bytes": 1268274,
+      "sha256": "c9da1dc9de962690a52a0f3032f21ac01dc34c39d5413b136e7a34badfa8574b"
+    },
+    "deepsets_receipt_test": {
+      "path": "SC05-deepsets-formula1-20261005T141056Z/scores-test.receipt.json",
+      "bytes": 859,
+      "sha256": "e6b1c7cc5f110628a2d557a714587f7bad9e88ee6856426a5e0873eb149cf4c0"
+    },
+    "metadata": {
+      "path": "data/msalign-data/massspecgym/metadata.csv",
+      "bytes": 18433436,
+      "sha256": "8681d853025816ecf9325d05bd9c6b20808f24898199e34469b62afd4d34ac2c"
+    },
+    "split": {
+      "path": "data/msalign-data/massspecgym/splits/formula_seed1.csv",
+      "bytes": 1356719,
+      "sha256": "fe288020c596c752ff3c6b805db5028643ac5cef9cb66fa45b80e2ef1ac3e072"
+    },
+    "historical_metrics": {
+      "path": "AN03-final-formula1-20261005T141140Z/analysis/metrics.csv",
+      "bytes": 16187,
+      "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104"
+    },
+    "historical_contrasts": {
+      "path": "AN03-final-formula1-20261005T141140Z/analysis/contrasts.csv",
+      "bytes": 8788,
+      "sha256": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a"
+    },
+    "historical_abstention": {
+      "path": "AN03-final-formula1-20261005T141140Z/analysis/abstention.csv",
+      "bytes": 5283,
+      "sha256": "e24df6aedab568b8a31f42169855df63fd598215ee104854de05bb0e0839e1f0"
+    },
+    "historical_risk-coverage-curves": {
+      "path": "AN03-final-formula1-20261005T141140Z/analysis/risk-coverage-curves.json",
+      "bytes": 150170,
+      "sha256": "555e7dd83a7e4cf826bcb3005401ddfa0bbdafec9d62223634b43490834616c0"
+    },
+    "historical_weight": {
+      "path": "SC06-fusion-msalign-mass-formula1-20261005T060621Z/fusion-weight.json",
+      "bytes": 717,
+      "sha256": "49e472a3f5f11472b931dca6186e4a54ade742f74e679b4dc75409703dede4d4"
+    }
+  }
+}

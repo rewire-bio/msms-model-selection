@@ -133,7 +133,7 @@ def main() -> None:
 
     receipt = {
         "schema_version": 1,
-        "kind": "imported-evidence manuscript build; compiling is not scientific verification",
+        "kind": "historical and corrected cached-score manuscript build; compiling is not scientific verification",
         "built_at_utc": dt.datetime.now(dt.timezone.utc).replace(microsecond=0).isoformat(),
         "tools": {
             "pdflatex": first_line([pdflatex, "--version"]),

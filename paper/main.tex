@@ -17,7 +17,7 @@
 \usepackage[colorlinks=true,linkcolor=blue!50!black,citecolor=blue!50!black,urlcolor=blue!50!black]{hyperref}
 \usepackage{bookmark}
 
-\graphicspath{{figures/}{../article/assets/}}
+\graphicspath{{figures/corrected/}{figures/}{../article/assets/}}
 \input{generated/macros.tex}
 \makeatletter\let\inputtab\@@input\makeatother % expandable input for table bodies
 
@@ -44,7 +44,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \fancyhead[L]{\footnotesize An MS/MS shortlist is not an identification}
-\fancyhead[R]{\footnotesize Historical results; independent reproduction pending}
+\fancyhead[R]{\footnotesize Cached-score correction; training reproduction pending}
 \fancyfoot[C]{\footnotesize \thepage}
 \renewcommand{\headrulewidth}{0.3pt}
 
@@ -68,21 +68,19 @@ choosing a formula-free ranker and\\[2pt] knowing when to decline\par}
 {\large Study repository \texttt{rewire-bio/msms-model-selection}\par}
 {\small Author list to be confirmed by the study owner. Drafted by an AI model; see Section~\ref{sec:disclosure}.\par}
 \vspace{0.6em}
-{\small Original analysis: 3--5 October 2026. Manuscript compiled from the archived results: October 2026.\par}
+{\small Original analysis: 3--5 October 2026. Cached-score correction: 6 October 2026.\par}
 \end{center}
 
 \vspace{0.4em}
 \noindent\fbox{\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}
-\small\textbf{Status of this manuscript.} This is a manuscript reporting \emph{existing} computational results.
-Every number comes from the runs of 3--5 October 2026 (outputs and receipts archived as
-\texttt{downloads/\allowbreak msms-shortlist-results.tar.gz}), from the published papers it compares against, or
-from the cited literature; values were extracted and formatted from the archive, and nothing was recomputed for
-this manuscript. A fresh, independent reproduction is \textbf{pending}; no reproduction plan has been written or
-approved, and none has been executed. The historical protocol of the original study is archived in
-\texttt{protocol/\allowbreak historical/}. No result here carries a verified or approved status. A later code review
-found that the exploratory fusion's target-removed abstention values depend on the removed target
-(Section~\ref{sec:abst-methods}); they are printed unchanged but should not be read as fusion run on a pool that lacks
-the target. The review fixes are summarised in \texttt{docs/\allowbreak review-fixes.md}.
+\small\textbf{Status of this manuscript.} The original training and scoring runs took place on 3--5 October 2026.
+A correction on 6 October reanalysed their saved scores and candidate pools with pool-specific fusion normalisation.
+Fusion thresholds were refitted on validation and evaluated on test. The primary comparison, all single-method
+results and the selected fusion weight were unchanged; fusion results for other pools and abstention were updated.
+The original archive and article remain unchanged. The correction protocol, input hashes, comparisons and execution
+receipts are in \m{evidence/corrected-analysis/} and \m{protocol/amendments/}.
+This is a cached-score correction, not an independent reproduction of training. Independent training reproduction remains
+\textbf{pending}. The original protocol is archived in \m{protocol/historical/}.
 Each number carries one of five labels: \lab{published}, \lab{reproduction}, \lab{new measurement},
 \lab{post hoc} or \lab{untested}.
 \end{minipage}}
@@ -104,8 +102,8 @@ signal that the answer is missing. A post hoc audit suggests that about half of 
 21\% of test spectra whose precursor values look recomputed from the annotated structure. Retrained with released
 code and scored by its strict rule, DreaMS + Morgan reached 32.6\% Recall@1, just below the published two-SD band; Emb-Cos fell
 below the band at all three cut-offs and DeepSets far above it. One seed is not a refutation of the published results.
-All values are existing results from one split seed and one training seed per model; independent reproduction is
-pending.
+The comparison uses one split seed and one training seed per model. A cached-score correction updates exploratory
+fusion without changing the primary comparison; independent training reproduction remains pending.
 \end{abstract}
 
 \tableofcontents
@@ -333,18 +331,17 @@ frozen: one that keeps 90\% of target-present validation queries covered, and th
 of target-removed validation queries are nominated. On test, ``covered'' is the share of target-present queries given a
 shortlist and ``false'' the share of target-removed queries still given one.
 
-\paragraph{Caveat for exploratory fusion (found after the original analysis).} The single-method scores do not depend
-on which other candidates are in the pool, so deleting the target after scoring is the same as scoring a pool without
-it. Fusion is different. Its components were z-scored over the target-present \m{official\_dedup} pool, and the target
-was deleted only afterwards to form \m{absent} (Section~\ref{sec:methods-list}). The fused scores of the remaining
-candidates therefore depend on the removed target's raw scores. This applies to the fusion thresholds fitted on
-validation and to the fusion test rows in Tables~\ref{tab:abstention} and~\ref{tab:abstention-all}. Those values are
-kept exactly as archived. They describe deletion after target-present standardisation, not fusion run on a candidate set
-that actually lacks the target, so they are not evidence about fusion's ability to detect an absent target. The corrected
-implementation standardises over the candidates actually present in each pool. This changes future pool-variant
-evaluations, including target-present subsets and expanded pools. Its thresholds and results need fresh calibration
-and evaluation; no corrected numbers are reported here. The historical primary single-method comparison is separate
-from this exploratory fusion analysis.
+\paragraph{Correction to exploratory fusion (6 October 2026).} Single-method scores do not depend on
+which other candidates are in the pool. The original fusion implementation instead z-scored its components over
+\m{official\_dedup} and reused those scores in other pools. Removing the target afterwards retained its influence
+in the decoy scores. The corrected analysis standardises each component over the candidates actually present in
+each evaluated pool; the raw pool uses multiplicity-weighted moments, and the absent pool excludes the target
+before computing moments. The validation weight grid remains unchanged and selects $w=\FusionW$.
+All fusion pool variants were rescored from the saved component scores. Thresholds were refitted using validation
+only and applied once to test. Tables~\ref{tab:abstention} and~\ref{tab:abstention-all} report these corrected results.
+The main official-deduplicated metrics, all nonfusion measurements and all reported paired contrasts were unchanged
+within the predeclared absolute tolerance of $10^{-8}$ in their stored units. No models were retrained and no candidate
+pools were regenerated. This retrospective correction is documented separately from the original frozen protocol.
 
 \subsection{Reproduction check}\label{sec:repro-methods}
 For the three trained models, the released evaluation (strict ties, \m{official\_raw}) on test was compared with the v2
@@ -357,9 +354,8 @@ evaluation (archived \m{released-result.json} receipts of runs T02 and T03) to 0
 All runs used one Apple M4 machine (10 cores, 16\,GB, macOS) without CUDA. Emb-Cos trained in 3.0 hours (16,000 steps) and
 DreaMS + Morgan in \TrainHours{} hours (30,000 steps, selected checkpoint at step 3,296), so the difference in training time
 partly reflects different step budgets. Run receipts were written by each run into its own immutable directory. The
-tables below are formatted from the archived outputs; every archive member used is digest-checked against the migration
-audit, and values that also appear in the original article are cross-checked against it (Appendix~\ref{app:provenance}).
-None of the runs was re-executed for this manuscript.
+tables use the corrected cached-score outputs where available and historical supplementary outputs otherwise.
+Both sources are digest-checked (Appendix~\ref{app:provenance}). Training and model scoring were not repeated.
 
 %======================================================================
 \section{Results}\label{sec:results}
@@ -409,7 +405,7 @@ recommendation.
 \caption{\lab{new measurement}. \textbf{Primary results}: MassSpecGym formula split seed 1, 10,648 test spectra from
 1,421 molecules, deduplicated official pools (median \DedupMedian{} structures), random-tie expectation, Recall@k in \%
 with 95\% molecule-bootstrap intervals (2,000 resamples). Random ordering is the mean of 100 random orderings (equal to the analytic
-expectation at printed precision), shown without an interval. Source: archived \m{analysis/metrics.csv} and \m{analysis/random-repeats.json}.}
+expectation at printed precision), shown without an interval. Source: corrected \m{analysis/metrics.csv} and historical \m{analysis/random-repeats.json}.}
 \label{tab:main}
 \begin{tabular}{@{}l l l l@{}}
 \toprule
@@ -452,7 +448,7 @@ DreaMS + Morgan Recall@5 fell from 94.5\% at 16 structures to 81.4\% at 64, 61.4
 \ExpandedMedian, and its Recall@1 from 69.2\% to 19.1\%. Random ordering fell from 31.2\% to 1.3\%. The order of method
 families held at every size: alignment models (with or without fusion), then DeepSets, mass error and random ordering.
 Within the top family it did not: DreaMS + Morgan led Emb-Cos at 16 structures (94.5\% against 93.8\%) and trailed at
-\ExpandedMedian{} (41.3\% against 45.9\%), where fusion (43.9\%) also fell below Emb-Cos. The expanded-pool paired
+\ExpandedMedian{} (41.3\% against 45.9\%), where corrected fusion (\FusionExpandedRecall{}\%) also fell below Emb-Cos. The expanded-pool paired
 difference, $-4.56$ points [$-7.95$, $-1.19$], was not pre-declared and uses decoys drawn differently from the official
 ones, so it is a reason to test both models at one's own list size, not a ranking. An expected Recall@5 should be quoted
 with its list size.
@@ -463,7 +459,7 @@ with its list size.
 \caption{\lab{new measurement} (stress test). \textbf{Recall@5 against median pool size}, random-tie expectation, target
 always present, 10,648 test spectra. The 16 and 64 pools are seeded subsets of the official pool; the \ExpandedMedian{}
 pool adds same-mass structures from the MassSpecGym 4M set, a different database snapshot. Pool size is on a log scale.
-Higher is better. Original figure \m{article/assets/02-pool-size-stress.png}.}
+Higher is better. Figure regenerated from corrected metrics; fusion uses each pool for normalisation.}
 \label{fig:pools}
 \end{figure}
 
@@ -480,8 +476,8 @@ to any reported number.
 \centering
 \footnotesize
 \caption{\lab{new measurement}. \textbf{Recall@5 / Recall@1 (\%) under four counting conventions} applied to the same test
-scores. The first column is the released evaluation; the last is this study's primary rule. Source: archived
-\m{analysis/metrics.csv}.}
+component scores. Fusion normalisation accounts for candidate multiplicity in raw pools. The first column uses the released
+evaluation rule; the last is this study's primary rule. Source: corrected \m{analysis/metrics.csv}.}
 \label{tab:rules}
 \begin{tabular}{@{}l r r r r@{}}
 \toprule
@@ -523,9 +519,9 @@ al.~\citep{jurgens2026}.
 \caption{\lab{new measurement} (stress test, artificial target removal). \textbf{Validation-fitted decline thresholds
 applied once to test}, deduplicated official pools, confidence = top-1 score. ``Covered'' is the share of target-present
 test queries given a shortlist; ``false'' the share of target-removed test queries still given one; 95\%
-molecule-bootstrap intervals. The fusion row is archived unchanged, but its scores were standardised with the target
-present before deletion, so its threshold and false-nomination rate retain information from the removed target and do
-not measure fusion on a pool that lacks it (Section~\ref{sec:abst-methods}). Source: archived \m{analysis/abstention.csv}.}
+molecule-bootstrap intervals. Fusion uses corrected per-pool normalisation, with the target excluded before
+normalising the absent pool. Source: corrected \m{analysis/abstention.csv}, indexed by
+\m{evidence/corrected-analysis/current.json}.}
 \label{tab:abstention}
 \stackedci
 \begin{tabular}{@{}l l l r l@{}}
@@ -544,7 +540,7 @@ Method & Threshold rule & Covered & R@5 among & False nominations \\
 \caption{\lab{new measurement} (stress test, artificial target removal). \textbf{Coverage of target-present queries against
 false nominations on target-removed queries}, sweeping the top-score threshold on test; markers show the threshold fitted on
 validation for at most 10\% false nominations. The diagonal is no better than chance. Legend values are rounded to whole
-percentages; Table~\ref{tab:abstention} gives one decimal. Original figure \m{article/assets/04-decline-to-nominate.png}.}
+percentages; Table~\ref{tab:abstention} gives one decimal. Regenerated from corrected curves and thresholds.}
 \label{fig:decline}
 \end{figure}
 
@@ -645,10 +641,11 @@ test and the precursor audit). Mass-only runs skip the threshold step and never 
 
 \subsection{Reproduction status}\label{sec:repro-status}
 \noindent\fbox{\begin{minipage}{\dimexpr\linewidth-2\fboxsep-2\fboxrule\relax}\small
-\textbf{Not yet reproduced under this repository's harness.} The values above are imported from the 3--5 October 2026 runs.
-The reproduction reported in Section~\ref{sec:repro} is the original study's own re-run of released code, not an independent
-reproduction. The original study's frozen protocol is archived in \m{protocol/historical/}. A protocol for an independent
-reproduction has not been designed, approved or executed.
+\textbf{Cached-score correction; independent training reproduction pending.} The correction reuses the original
+candidate pools, saved component scores and nonfusion ranks. It recalculates fusion and refits its thresholds, preserving
+all primary comparisons. Its execution and numerical checks are recorded separately in
+\m{evidence/corrected-analysis/}. The reproduction reported in Section~\ref{sec:repro} is the original study's own
+re-run of released code. Neither that comparison nor rerunning the cached correction constitutes independent retraining.
 \end{minipage}}
 
 %======================================================================
@@ -704,18 +701,14 @@ answers that a search centred on the measured precursor would lose (Section~\ref
 \item \textbf{Shortcut controls.} The alignment models were not tested against generated decoys that resemble library
 compounds~\citep{gupta2026spurious}, nor by ``masking all input MS/MS spectra with a constant value and confirming that
 performance degrades accordingly''~\citep{liu2026wild}.
-\item \textbf{Fusion target-removal values are not target-absent inference.} Fusion was standardised over the
-target-present pool before the target was deleted (Section~\ref{sec:abst-methods}). Its archived target-removed
-thresholds, coverage and false-nomination rates therefore retain information from the removed target. They are printed
-unchanged and are not evidence that fusion can detect an absent target. The corrected implementation requires fresh
-calibration and evaluation before any corrected number can be reported. This does not show that the primary complete-case
-benchmark is invalid: single-method scores do not depend on the rest of the pool, and the primary metrics use
-target-present pools.
+\item \textbf{Fusion correction has limited scope.} The historical target-removal values retained information
+from the target during normalisation and are superseded here. Corrected fusion removes the target before normalisation
+and recalibrates on validation. This remains an artificial target-removal stress test, not a deployment guarantee.
+The cached-score correction does not test different training seeds or rebuild the candidate pools.
 \item \textbf{Code defects found after the analysis.} A later review found defects in the companion CLI (isotope labels
 dropped along with stereochemistry; unreadable metadata or non-finite values could crash a batch or yield a nomination),
 in the training queue's exit status, in the paper validator's digest checks, and in the abstention analysis's handling of
-missing spectra. The archived runs recorded no missing or failed spectra, and none of these defects is known to have
-changed a reported value. The demonstration outputs in Section~\ref{sec:demo} come from the archived CLI.
+missing spectra. The archived runs recorded no missing or failed spectra, and those complete-case single-method results were unchanged by reanalysis. The demonstration outputs in Section~\ref{sec:demo} come from the archived CLI.
 \item \textbf{Exploratory and post hoc analyses.} Fusion, the margin confidence, the expanded-pool contrast, the precursor and
 instrument strata and the window-coverage measure are exploratory or post hoc. Only C1--C3 were pre-declared contrasts; the instrument
 strata and the \m{mces\_1} population were pre-declared as descriptive. None of the intervals is adjusted for multiplicity.
@@ -730,10 +723,12 @@ presented''~\citep{charbonnet2022}. Every nominee should be confirmed against an
 \section{Data, code and licence availability}\label{sec:availability}
 The study repository (\texttt{rewire-bio/msms-model-selection}) contains this manuscript and its build (\texttt{make
 paper-imported}); the original article (\texttt{article/original.md} and the byte-identical
-\texttt{article/published-original.md}, also embedded in this PDF as Supplement~S1); the companion code (\texttt{companion/},
-also as \texttt{downloads/msms-shortlist-companion-code.tar.gz}, 0.18\,MB); the trained DreaMS + Morgan model and threshold
-(45\,MB, split for a 25\,MiB file limit; see below); and the results archive (\texttt{downloads/msms-shortlist-results.tar.gz}, about 7\,MB) with
-analysis outputs, per-spectrum predictions and run receipts. The DreaMS TorchScript weights (468\,MB, MIT
+\texttt{article/published-original.md}, also embedded in this PDF as Supplement~S1); the maintained companion code (\texttt{companion/}); its historical snapshot
+(\path{downloads/msms-shortlist-companion-code.tar.gz}, 0.18\,MB, without the later fixes); the trained DreaMS + Morgan model and threshold
+(45\,MB, split for a 25\,MiB file limit; see below); and the historical results archive (\path{downloads/msms-shortlist-results.tar.gz}, about 7\,MB) with
+original analysis outputs, per-spectrum predictions and run receipts. Corrected outputs and their checksums are indexed
+by \m{evidence/corrected-analysis/current.json}. The 401.7\,MB of cached inputs used for correction are hash-identified
+but not distributed in Git; repeating the correction requires those preserved files. The DreaMS TorchScript weights (468\,MB, MIT
 licence~\citep{dreams_card}) are not bundled and are downloaded from Hugging Face \m{roman-bushuiev/DreaMS} at revision
 \m{c81a62766b10}.
 
@@ -755,7 +750,9 @@ This manuscript was drafted by an AI model (Claude Opus, \texttt{claude-opus-5-5
 reviewed by an independent AI reviewer instance of the same model (\texttt{evidence/paper-migration/review.md}, 18 findings),
 and the author's disposition of every finding is in \texttt{evidence/paper-migration/review-disposition.md}; this version
 incorporates those corrections. The original article does not state who ran the analyses or how it was reviewed, and this
-manuscript makes no claim about either. No human scientific review of this manuscript has taken place.
+manuscript makes no claim about either. Codex coordinated the 6 October cached-score correction and updated the manuscript,
+with a separate Codex agent checking methods and numerical outputs. The owner authorised that correction.
+No human scientific review of this manuscript has taken place.
 
 %======================================================================
 \bibliographystyle{unsrtnat}
@@ -825,7 +822,7 @@ The archived consistency check between the CLI and the benchmark harness on the 
 \lstinputlisting{generated/cli_consistency.txt}
 
 \section{Supplementary tables}\label{app:supp}
-All values are formatted from the archived results without recomputation.
+Tables use corrected cached-score results where available; unaffected supplementary analyses remain historical.
 
 \begin{table}[H]
 \centering
@@ -847,7 +844,7 @@ Pool & Spectra & Mean & Min & 25\% & Median & 75\% & Max \\
 \centering
 \footnotesize
 \caption{\lab{new measurement} (stress test). \textbf{Recall@5 and Recall@1 (\%) by pool}, random-tie expectation, target always
-present; random ordering is the mean of 100 random orderings (equal to the analytic expectation at printed precision). Source: archived \m{analysis/metrics.csv} and
+present; random ordering is the mean of 100 random orderings (equal to the analytic expectation at printed precision). Source: corrected \m{analysis/metrics.csv} and historical
 \m{analysis/random-repeats.json}.}
 \label{tab:pools}
 \begin{tabular}{@{}l l r r r r@{}}
@@ -867,11 +864,9 @@ k & Method & 16 & 64 & \DedupMedian{} (official) & \ExpandedMedian{} (expanded) 
 \setlength{\tabcolsep}{3pt}
 \caption{\lab{new measurement} (stress test; margin-confidence rows exploratory). \textbf{All decline-threshold results}: both confidences (top-1 score and the exploratory top-two margin) and both
 rules, with the fitted threshold, its validation false-nomination rate (\%) and test coverage, Recall@5 among covered and false
-nominations (\%, 95\% intervals). Fusion rows: archived unchanged; fusion scores were z-scored over the target-present
-pool before the target was deleted, so the fusion thresholds, coverage and false-nomination values retain information
-from the removed target. They are not evidence about fusion on a candidate set that actually lacks the target, and
-corrected values would require fresh calibration and a new run (Section~\ref{sec:abst-methods}). Rows for the other
-methods do not share this defect. Source: archived \m{analysis/abstention.csv}.}
+nominations (\%, 95\% intervals). Fusion rows use corrected per-pool normalisation and validation-only recalibration;
+the absent target is excluded before computing the component moments. Other methods are unchanged. Source:
+corrected \m{analysis/abstention.csv}, indexed by \m{evidence/corrected-analysis/current.json}.}
 \label{tab:abstention-all}
 \stackedci
 \begin{tabular}{@{}l l l r r l l l@{}}
@@ -907,7 +902,7 @@ Instrument & Spectra / & Mass & DeepSets & DreaMS + & Emb-Cos & Fusion \\
 \centering
 \footnotesize
 \caption{Exploratory. \textbf{Fusion weight selection}: validation Recall@5 (\%) on deduplicated official pools for each mass weight $w$;
-$w = \FusionW$ was chosen. Source: \m{companion/results/fusion-weight.json} (imported companion file).}
+$w = \FusionW$ was chosen. Source: corrected \m{fusion-weight.json}; the complete validation grid is unchanged from the original.}
 \label{tab:fusion}
 \begin{tabular}{@{}r r r r@{}}
 \toprule
@@ -979,17 +974,17 @@ Contrast & Pool & Rule & k & Primary & Difference [95\% CI] \\
 \paragraph{Supplement S1 (original article).} The full original article, \emph{An MS/MS Shortlist Is Not an Identification:
 Choosing a Formula-Free Ranker and Knowing When to Decline} (5 October 2026), is retained unchanged as
 \m{article/published-original.md} (byte-identical to the published source) and is embedded in this PDF as the attachment
-\m{S1-published-original.md}; \m{article/original.md} differs only in local links. Every scientific result it reports appears
-in this manuscript, and \m{content-coverage.md} in \m{evidence/paper-migration/} maps it section by section.
+\m{S1-published-original.md}; \m{article/original.md} differs only in local links. Its fusion pool-variant and abstention results are superseded by the correction in this manuscript, and \m{content-coverage.md} in \m{evidence/paper-migration/} maps it section by section.
 
-\paragraph{Evidence ledger.} \m{evidence/paper-migration/claims-ledger.json} links each substantive claim to the historical
-artifact (archive member, companion file or article text), a pointer inside it and its SHA-256. The results archive was read in
-memory without extraction; its member digests are recorded in \m{evidence/migration-audit.json}. The table generator
-(\m{scripts/paper\_extract.py}) stops the build if any value that also appears in the original article differs from it at the
-printed precision; the recorded cross-check found no difference. Values that the original did not print (most appendix tables,
-including the \m{mces\_1} secondary population) are formatted directly from the digest-checked archive members. A few
-numbers exist only as article text or in protocol notes (for example the repeated-structure counts, the near-duplicate share and
-the clean-archive CLI timings); the ledger marks them as such.
+\paragraph{Evidence ledger.} \m{evidence/paper-migration/claims-ledger.json} links each substantive claim to a
+historical or corrected artifact, a pointer inside it and its SHA-256. The original archive is digest-checked and its
+published values are checked at printed precision before any corrected tables are rendered. A second pass reads the
+corrected metrics, contrasts, abstention results and fusion grid from the separately hashed execution outputs.
+The correction index and run receipt bind those inputs to their saved comparisons and provenance. Figures for pool-size
+stress and abstention are regenerated from the same corrected tables. Unaffected supplementary analyses, training records,
+random-order repeats and the secondary \m{mces\_1} population remain historical. Counts or timings available only in
+article text or protocol notes remain labelled as such. Cached inputs were hashed at correction time; this does not
+independently establish the authenticity of their original acquisition.
 
 \paragraph{Citation note.} Literature claims were verified for the original article (citation status ``verified'') and were not
 re-retrieved during migration. Table~\ref{tab:published} is transcribed from the original article.

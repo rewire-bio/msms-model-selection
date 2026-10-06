@@ -1,0 +1,129 @@
+{
+  "status": "passed",
+  "started_at_utc": "2026-10-06T18:10:49.079785+00:00",
+  "git_revision": "d7a28788ed2b39a18bdaa8d563aa98ffe5514d04",
+  "git_dirty": false,
+  "config_sha256": "56aceab7b3c7319289a0ed34597abd71af7a40c36256f1bc9679aca97cbfb440",
+  "manifest_sha256": "d68e73ad40badf44c2abee1be73628e5f46c3071760635c62f2e904e4ebbe0b2",
+  "protocol_sha256": "afea697d79db82e2b06c5d4a985e85ab69ebe04ad01cd2734b7848d874a38d8a",
+  "python": "3.11.13",
+  "dependencies": {
+    "numpy": "1.25.0",
+    "pandas": "2.2.1",
+    "h5py": "3.11.0"
+  },
+  "commands": [
+    {
+      "argv": [
+        "$PYTHON",
+        "$REPO/companion/scripts/fuse_scores.py",
+        "--pools",
+        "$INPUT_ROOT/P01-pools-formula1-valtest-20261004T221108Z/pools.h5",
+        "--model-val",
+        "$INPUT_ROOT/SC03-msalign-formula1-20261005T060457Z/scores-val.h5",
+        "--model-test",
+        "$INPUT_ROOT/SC03-msalign-formula1-20261005T060457Z/scores-test.h5",
+        "--mass-val",
+        "$INPUT_ROOT/SC01-mass-formula1-20261004T221726Z/scores-val.h5",
+        "--mass-test",
+        "$INPUT_ROOT/SC01-mass-formula1-20261004T221726Z/scores-test.h5",
+        "--out-dir",
+        "$WORK_DIR/fusion"
+      ],
+      "seconds": 11.751836061477661,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "$PYTHON",
+        "$REPO/companion/scripts/rank_stats.py",
+        "--pools",
+        "$INPUT_ROOT/P01-pools-formula1-valtest-20261004T221108Z/pools.h5",
+        "--scores",
+        "$WORK_DIR/fusion/scores-val.h5",
+        "--out",
+        "$WORK_DIR/ranks-fusion-val.csv.gz"
+      ],
+      "seconds": 2.0103919506073,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "$PYTHON",
+        "$REPO/companion/scripts/rank_stats.py",
+        "--pools",
+        "$INPUT_ROOT/P01-pools-formula1-valtest-20261004T221108Z/pools.h5",
+        "--scores",
+        "$WORK_DIR/fusion/scores-test.h5",
+        "--out",
+        "$WORK_DIR/ranks-fusion-test.csv.gz"
+      ],
+      "seconds": 1.9884469509124756,
+      "returncode": 0
+    },
+    {
+      "argv": [
+        "$PYTHON",
+        "$REPO/companion/scripts/analyse.py",
+        "--test",
+        "mass=$INPUT_ROOT/SC01-mass-formula1-20261004T221726Z/ranks-test.csv.gz",
+        "msalign=$INPUT_ROOT/SC03-msalign-formula1-20261005T060457Z/ranks-test.csv.gz",
+        "embcos=$INPUT_ROOT/SC04-embcos-formula1-20261005T090736Z/ranks-test.csv.gz",
+        "deepsets=$INPUT_ROOT/SC05-deepsets-formula1-20261005T141056Z/ranks-test.csv.gz",
+        "fusion=$WORK_DIR/ranks-fusion-test.csv.gz",
+        "--val",
+        "mass=$INPUT_ROOT/SC01-mass-formula1-20261004T221726Z/ranks-val.csv.gz",
+        "msalign=$INPUT_ROOT/SC03-msalign-formula1-20261005T060457Z/ranks-val.csv.gz",
+        "embcos=$INPUT_ROOT/SC04-embcos-formula1-20261005T090736Z/ranks-val.csv.gz",
+        "deepsets=$INPUT_ROOT/SC05-deepsets-formula1-20261005T141056Z/ranks-val.csv.gz",
+        "fusion=$WORK_DIR/ranks-fusion-val.csv.gz",
+        "--data",
+        "$INPUT_ROOT/data/msalign-data/massspecgym",
+        "--split",
+        "formula_seed1",
+        "--out",
+        "$OUTPUT/analysis"
+      ],
+      "seconds": 3.847229242324829,
+      "returncode": 0
+    }
+  ],
+  "source_sha256": {
+    "scripts/reanalyse.py": "6bbab75f5c9c6175225c72e7efeab360b9de1031e140c8f5273609d8296473d4",
+    "companion/scripts/fuse_scores.py": "476608a1be1c41b5c7ac11eeba23ee9aaa6e1f85148608ebb9304a2ec6599a3d",
+    "companion/scripts/rank_stats.py": "643f3c88f60648b655828b38a778443111ede2c2e26dd2005b78880f9f1b7279",
+    "companion/scripts/analyse.py": "b80b35fdf0408537c9923eb0fee904b2786770bccaeeec6597485cd1930a9c01",
+    "companion/msms_shortlist/metrics.py": "ec64da19e572a7050dddfb450bad44666425f1130e623fc3c7f5a13988feb722"
+  },
+  "fusion_weight_and_validation_grid_unchanged": true,
+  "fusion_official_dedup_unchanged": true,
+  "comparisons": {
+    "metrics": {
+      "rows": 180,
+      "changed_rows": 22
+    },
+    "contrasts": {
+      "rows": 90,
+      "changed_rows": 0
+    },
+    "abstention": {
+      "rows": 20,
+      "changed_rows": 4
+    }
+  },
+  "wall_seconds": 20.166486978530884,
+  "artifacts": {
+    "analysis/abstention.csv": "c3f3d195623c51c31c5ed19e5c6843f8a1b26589212cbdedc0529e0a075c0dd8",
+    "analysis/contrasts.csv": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
+    "analysis/metrics.csv": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+    "analysis/pool-sizes.csv": "7ba18122e5a2a77e296f0d037f3bc82ede24286ff0c7924b40862e935d5533b5",
+    "analysis/random-repeats.json": "d6e58d93e93c3c4f8043ea6507ed93652cb27edbb3f4f345cb85955c543c6156",
+    "analysis/risk-coverage-curves.json": "f39d9a1308f044e72aec9871701cf23d72a4da09102b2feae7603753099145b7",
+    "comparison-abstention.csv": "5a165f8a420ffae81e6ce7d7e0fbbb2e0fb2314319ac9e2d30f1b43b7fa8c8da",
+    "comparison-contrasts.csv": "0b14b32778d90ce67bb8df5a2e9f8c67199c29f4bfb69ce4415ab90a07732d4d",
+    "comparison-metrics.csv": "9a5b363ebdb632557984dff24e4936855c3d8cfd5153fcd993647d7765e8e387",
+    "execution.log": "fc9787d4672b412659af332e1d322fb7eafecbf968fae2e3b764559b1ec72f63",
+    "fusion-weight.json": "cdc2386f6c10f9c3f677386119e7b10ab261494f54b15c0cea28d69cd32b4ef6",
+    "results.json": "5c7651d64222d03139e18bb201610b630509ad9b1c3fc3a5400264188992f718"
+  }
+}

@@ -7,45 +7,58 @@
     "command": [
       "uv",
       "run",
+      "--project",
+      "companion",
       "--frozen",
       "python",
-      "scripts/experiment.py",
+      "scripts/reanalyse.py",
       "--config",
       "{config}",
       "--output",
       "{output}"
     ],
     "inputs": [
-      "src",
-      "scripts",
-      "uv.lock",
-      "pyproject.toml",
-      ".python-version",
-      "Makefile",
+      "scripts/reanalyse.py",
+      "companion/scripts/fuse_scores.py",
+      "companion/scripts/rank_stats.py",
+      "companion/scripts/analyse.py",
+      "companion/msms_shortlist/metrics.py",
+      "companion/pyproject.toml",
+      "companion/uv.lock",
+      "configs/corrected-analysis.json",
+      "protocol/amendments/2026-10-06-corrected-analysis.md",
+      "evidence/corrected-analysis/input-manifest.json",
       "data/manifest.json"
     ],
     "outputs": [
-      "results.json"
+      "results.json",
+      "analysis",
+      "comparison-metrics.csv",
+      "comparison-contrasts.csv",
+      "comparison-abstention.csv",
+      "fusion-weight.json",
+      "run-receipt.json",
+      "execution.log"
     ],
     "results_file": "results.json"
   },
   "reproduction": {
     "command": [
       "make",
-      "reproduce"
+      "reproduce-corrected"
     ],
-    "results_file": "results/full/results.json",
-    "paper_file": "paper/build/main.pdf",
-    "abs_tolerance": 1e-10,
-    "rel_tolerance": 1e-08
+    "results_file": "results/reproduction/results.json",
+    "paper_file": "results/reproduction-paper.pdf",
+    "abs_tolerance": 1e-08,
+    "rel_tolerance": 0
   },
   "budgets": {
-    "experiment_seconds": 120,
-    "reproduction_seconds": 600,
+    "experiment_seconds": 900,
+    "reproduction_seconds": 900,
     "worker_seconds": 1800,
     "max_worker_calls": 30,
     "max_attempts": 2,
-    "max_storage_mb": 1000
+    "max_storage_mb": 4096
   },
   "paper": {
     "source": "paper/main.tex",

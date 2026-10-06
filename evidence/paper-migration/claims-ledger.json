@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "status": "historical_imported: every value comes from the 2026-10-03/05 runs (results archive and companion files), the published papers or the cited literature; nothing was recomputed or reproduced during migration",
+  "status": "Cached-score correction of fusion; unchanged historical supplementary evidence. No independent training reproduction.",
   "claims": [
     {
       "id": "PROTOCOL",
@@ -41,10 +41,10 @@
           "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
         },
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/metrics.csv",
           "pointer": "n_spectra, n_molecules, n_missing_or_failed",
-          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         }
       ]
     },
@@ -115,10 +115,10 @@
       "evidence_class": "reproduction",
       "evidence": [
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/metrics.csv",
           "pointer": "pool=official_raw, rule=strict",
-          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         },
         {
           "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/receipts/T02-embcos-formula1-20261005T055415Z/released-result.json",
@@ -155,10 +155,10 @@
       "evidence_class": "new measurement",
       "evidence": [
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/metrics.csv",
           "pointer": "pool=official_dedup, rule=expected",
-          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         },
         {
           "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/random-repeats.json",
@@ -180,10 +180,10 @@
       "evidence_class": "new measurement",
       "evidence": [
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/contrasts.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/contrasts.csv",
           "pointer": "all rows; primary flag",
           "sha256": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         }
       ]
     },
@@ -194,10 +194,10 @@
       "evidence_class": "new measurement (stress test)",
       "evidence": [
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/metrics.csv",
           "pointer": "pool in sub16, sub64, official_dedup, expanded1024; rule=expected",
-          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         },
         {
           "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/random-repeats.json",
@@ -206,9 +206,10 @@
           "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
         },
         {
-          "artifact": "article/assets/02-pool-size-stress.png",
+          "artifact": "paper/figures/corrected/02-pool-size-stress.png",
           "pointer": "figure",
-          "sha256": "e1408a8d45e552ef08108752153b0afd7f22ce5c31d982c4e4b809b5a1c119ac"
+          "sha256": "fa3837600c4ebfa4f54d7a6d786c587b22b7a343223006c24a3e07c6a1252679",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         }
       ]
     },
@@ -219,10 +220,10 @@
       "evidence_class": "new measurement",
       "evidence": [
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/metrics.csv",
           "pointer": "official_raw/official_dedup x strict/expected",
-          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         },
         {
           "artifact": "article/assets/03-tie-and-duplicate-rules.png",
@@ -238,16 +239,16 @@
       "evidence_class": "new measurement (stress test)",
       "evidence": [
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/abstention.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/abstention.csv",
           "pointer": "all rows",
-          "sha256": "e24df6aedab568b8a31f42169855df63fd598215ee104854de05bb0e0839e1f0",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "c3f3d195623c51c31c5ed19e5c6843f8a1b26589212cbdedc0529e0a075c0dd8",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         },
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/risk-coverage-curves.json",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/risk-coverage-curves.json",
           "pointer": "curves",
-          "sha256": "555e7dd83a7e4cf826bcb3005401ddfa0bbdafec9d62223634b43490834616c0",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "f39d9a1308f044e72aec9871701cf23d72a4da09102b2feae7603753099145b7",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         },
         {
           "artifact": "companion/models/thresholds.json",
@@ -255,9 +256,10 @@
           "sha256": "5b1abbe0fafcfda920042dacfe6713601c289c6166bc006b482bdf34ae442a65"
         },
         {
-          "artifact": "article/assets/04-decline-to-nominate.png",
+          "artifact": "paper/figures/corrected/04-decline-to-nominate.png",
           "pointer": "figure",
-          "sha256": "e15e3e810ce4bbb99d91dda5857034f87f4968dd3d8137156bc7701305f4eefc"
+          "sha256": "29dd93309e66e0c0fa5e05fdbcbf8e6c328d90c557fed96104212d9bd51e0e0d",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         }
       ]
     },
@@ -307,9 +309,10 @@
       "evidence_class": "new measurement (exploratory)",
       "evidence": [
         {
-          "artifact": "companion/results/fusion-weight.json",
+          "artifact": "evidence/corrected-analysis/20261006/fusion-weight.json",
           "pointer": "$.validation_recall5_by_w",
-          "sha256": "49e472a3f5f11472b931dca6186e4a54ade742f74e679b4dc75409703dede4d4"
+          "sha256": "cdc2386f6c10f9c3f677386119e7b10ab261494f54b15c0cea28d69cd32b4ef6",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         }
       ]
     },
@@ -445,18 +448,70 @@
       "evidence_class": "interpretation",
       "evidence": [
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/metrics.csv",
           "pointer": "official_dedup expected",
-          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "sha256": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
         },
         {
-          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/contrasts.csv",
+          "artifact": "evidence/corrected-analysis/20261006/analysis/contrasts.csv",
           "pointer": "C2 primary",
           "sha256": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
-          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+          "provenance": "corrected cached-score analysis; see evidence/corrected-analysis/current.json"
+        }
+      ]
+    },
+    {
+      "id": "CORRECTION",
+      "claim": "Per-pool fusion correction; nonfusion results, official-dedup fusion metrics, selected weight and validation grid unchanged.",
+      "manuscript": "status, sec:abst-methods, sec:repro-status",
+      "evidence_class": "retrospective cached-score correction",
+      "evidence": [
+        {
+          "artifact": "evidence/corrected-analysis/20261006/results.json",
+          "pointer": "whole file",
+          "sha256": "5c7651d64222d03139e18bb201610b630509ad9b1c3fc3a5400264188992f718"
+        },
+        {
+          "artifact": "evidence/corrected-analysis/20261006/run-receipt.json",
+          "pointer": "whole file",
+          "sha256": "5c0ab90cca0990e196aed8eaa516126238e2223995339c116202ae3e498b4533"
+        },
+        {
+          "artifact": "evidence/corrected-analysis/20261006/comparison-metrics.csv",
+          "pointer": "whole file",
+          "sha256": "9a5b363ebdb632557984dff24e4936855c3d8cfd5153fcd993647d7765e8e387"
+        },
+        {
+          "artifact": "evidence/corrected-analysis/20261006/comparison-abstention.csv",
+          "pointer": "whole file",
+          "sha256": "5a165f8a420ffae81e6ce7d7e0fbbb2e0fb2314319ac9e2d30f1b43b7fa8c8da"
         }
       ]
     }
-  ]
+  ],
+  "corrected_evidence": {
+    "schema_version": 1,
+    "status": "passed",
+    "scope": "cached-score correction; no retraining or independent training reproduction",
+    "run": "evidence/corrected-analysis/20261006",
+    "run_id": "2fc267cbade54b009d6a8b24d70724b3",
+    "artifacts": {
+      "evidence/corrected-analysis/20261006/analysis/abstention.csv": "c3f3d195623c51c31c5ed19e5c6843f8a1b26589212cbdedc0529e0a075c0dd8",
+      "evidence/corrected-analysis/20261006/analysis/contrasts.csv": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
+      "evidence/corrected-analysis/20261006/analysis/metrics.csv": "472a309b48634618018708bf7553ace45b37232f36436a345c28f26f1974b39c",
+      "evidence/corrected-analysis/20261006/analysis/pool-sizes.csv": "7ba18122e5a2a77e296f0d037f3bc82ede24286ff0c7924b40862e935d5533b5",
+      "evidence/corrected-analysis/20261006/analysis/random-repeats.json": "d6e58d93e93c3c4f8043ea6507ed93652cb27edbb3f4f345cb85955c543c6156",
+      "evidence/corrected-analysis/20261006/analysis/risk-coverage-curves.json": "f39d9a1308f044e72aec9871701cf23d72a4da09102b2feae7603753099145b7",
+      "evidence/corrected-analysis/20261006/comparison-abstention.csv": "5a165f8a420ffae81e6ce7d7e0fbbb2e0fb2314319ac9e2d30f1b43b7fa8c8da",
+      "evidence/corrected-analysis/20261006/comparison-contrasts.csv": "0b14b32778d90ce67bb8df5a2e9f8c67199c29f4bfb69ce4415ab90a07732d4d",
+      "evidence/corrected-analysis/20261006/comparison-metrics.csv": "9a5b363ebdb632557984dff24e4936855c3d8cfd5153fcd993647d7765e8e387",
+      "evidence/corrected-analysis/20261006/execution.log": "fc9787d4672b412659af332e1d322fb7eafecbf968fae2e3b764559b1ec72f63",
+      "evidence/corrected-analysis/20261006/fusion-weight.json": "cdc2386f6c10f9c3f677386119e7b10ab261494f54b15c0cea28d69cd32b4ef6",
+      "evidence/corrected-analysis/20261006/results.json": "5c7651d64222d03139e18bb201610b630509ad9b1c3fc3a5400264188992f718",
+      "evidence/corrected-analysis/20261006/run-receipt.json": "5c0ab90cca0990e196aed8eaa516126238e2223995339c116202ae3e498b4533",
+      "paper/figures/corrected/02-pool-size-stress.png": "fa3837600c4ebfa4f54d7a6d786c587b22b7a343223006c24a3e07c6a1252679",
+      "paper/figures/corrected/04-decline-to-nominate.png": "29dd93309e66e0c0fa5e05fdbcbf8e6c328d90c557fed96104212d9bd51e0e0d"
+    }
+  }
 }

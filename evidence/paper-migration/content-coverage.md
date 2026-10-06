@@ -1,3 +1,5 @@
+> Updated 6 October 2026: this map records coverage of the original article. The maintained paper now supersedes fusion pool-variant and abstention values with the separately hashed cached-score correction in `evidence/corrected-analysis/current.json`. Original article and archive digests are unchanged. The table generator validates the original evidence first, then renders corrected tables.
+
 # Content coverage: original article to manuscript
 
 Original: `article/published-original.md` (byte-identical published copy; SHA-256
