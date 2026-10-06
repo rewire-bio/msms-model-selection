@@ -1,0 +1,12 @@
+{
+  "study": "msms-model-selection",
+  "revision": "faa5b45c52bf6c0b74321ae72805b98d1b23d9bb",
+  "checked_at_utc": "2026-10-06T11:19:36.291629+00:00",
+  "scope": "Paper build only from clean Git archive; no scientific experiment or data/model fetch",
+  "command": "make paper-imported",
+  "exit": 0,
+  "published_pdf_sha256": "bbe155bdb37428691553c63149acd852c04063002424b003fb0b4deb65a82837",
+  "clean_build_pdf_sha256": "bbe155bdb37428691553c63149acd852c04063002424b003fb0b4deb65a82837",
+  "byte_identical": true,
+  "prior_attempt": "Failed on missing companion/results/fusion-weight.json. Repaired Git tracking of12 unchanged original result files, then retried."
+}
