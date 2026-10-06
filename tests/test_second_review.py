@@ -64,3 +64,12 @@ class MGFParsing(unittest.TestCase):
     def test_no_blocks_is_an_error(self):
         with self.assertRaisesRegex(ValueError,'no spectrum blocks'):
             self.parse('# nothing\n')
+
+class ScoringBudget(unittest.TestCase):
+    def test_explicit_target_limit_must_be_positive(self):
+        import argparse
+        from score_pools import positive_target_limit
+        for value in ('0', '-1', '1.5', 'no'):
+            with self.assertRaises(argparse.ArgumentTypeError):
+                positive_target_limit(value)
+        self.assertEqual(positive_target_limit('1'), 1)

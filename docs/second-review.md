@@ -8,9 +8,11 @@ This pass reviewed the maintained scoring, ranking and analysis code; input refu
 - [#13](https://github.com/rewire-bio/msms-model-selection/issues/13): preserve malformed MGF blocks as explicit per-query refusals. Bad peaks, nested blocks, orphan endings and a missing final ending no longer crash or silently truncate a mixed batch. A file with no blocks fails explicitly.
 - [#14](https://github.com/rewire-bio/msms-model-selection/issues/14): current-paper builds require the corrected evidence index and all required hash bindings. Historical validation remains a separate first stage, but missing correction metadata cannot silently restore superseded tables.
 
+- [#16](https://github.com/rewire-bio/msms-model-selection/issues/16): explicitly supplied scoring target caps must be positive integers. Zero can no longer silently turn a bounded smoke run into full-fold scoring.
+
 ## Validation and result impact
 
-All 75 regression tests pass. Historical and corrected evidence validation passes, including the original article cross-check. A software equivalence check on all five saved test-method rank files produced exactly equal before/after metrics for all 150 nonrandom method/pool/rule/k rows, using 20 diagnostic bootstrap draws. This check is a regression test, not a replacement scientific run or a new confidence-interval estimate.
+All 76 regression tests pass. Historical and corrected evidence validation passes, including the original article cross-check. A software equivalence check on all five saved test-method rank files produced exactly equal before/after metrics for all 150 nonrandom method/pool/rule/k rows, using 20 diagnostic bootstrap draws. This check is a regression test, not a replacement scientific run or a new confidence-interval estimate.
 
 The saved benchmark ranks are complete, finite and nonnegative, the evidence index is present, and the archived CLI examples contain valid MGF syntax. No historical or corrected numerical result is changed by these fixes. The paper and published blog therefore retain their corrected values and caveats. The verified cached-score correction remains the archived run at source revision `8b650adabc3f2cd833acb778dd7dd140d0f0e6f6`; independent training reproduction is still pending.
 
