@@ -4,7 +4,7 @@ __pycache__/
 *.pyc
 .research/
 results/
-paper/build/
+paper/build/*
 paper/generated/*.tex
 paper/figures/*.pdf
 paper/figures/*.svg
@@ -13,3 +13,8 @@ blog-handoff/
 # Portable evidence must survive Git ignore rules for generated outputs.
 !evidence/archive/
 !evidence/archive/**
+
+# Imported-evidence manuscript: keep generated sources, converted figures and the publishable PDF.
+!paper/build/main.pdf
+!paper/generated/*.tex
+!paper/figures/*.pdf

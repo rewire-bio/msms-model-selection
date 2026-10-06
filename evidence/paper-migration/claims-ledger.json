@@ -1,0 +1,462 @@
+{
+  "schema_version": 1,
+  "status": "historical_imported: every value comes from the 2026-10-03/05 runs (results archive and companion files), the published papers or the cited literature; nothing was recomputed or reproduced during migration",
+  "claims": [
+    {
+      "id": "PROTOCOL",
+      "claim": "Protocol frozen 2026-10-04T22:07:05Z before any test outcome; amendment A1 (window coverage)",
+      "manuscript": "sec:protocol",
+      "evidence_class": "registration record",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/protocol-freeze-receipt.txt",
+          "pointer": "whole file",
+          "sha256": "a9f54a1105e2bf6fb3e0fa571f02d05257636145355f3cd08ac810ca9058c20d",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/protocol.md",
+          "pointer": "section 12",
+          "sha256": "56f0201795eb28b7299fb77908d4ddbbed8b42e873fa7656a4c9d4b0bd4fd3a2",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/protocol-frozen-original.md",
+          "pointer": "whole file",
+          "sha256": "aa2b30b5fe8b06e95a0793ef05c5d3ffc769fbc8e954a626fc71ae0b700531b6",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    },
+    {
+      "id": "POPULATION",
+      "claim": "Split formula_seed1: train 210,825/26,087, validation 9,631/1,428, test 10,648/1,421; no exclusions or failures",
+      "manuscript": "sec:data, tab:main",
+      "evidence_class": "new measurement",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/protocol.md",
+          "pointer": "section 2",
+          "sha256": "56f0201795eb28b7299fb77908d4ddbbed8b42e873fa7656a4c9d4b0bd4fd3a2",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "pointer": "n_spectra, n_molecules, n_missing_or_failed",
+          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    },
+    {
+      "id": "POOLS",
+      "claim": "Pool definitions; dedup median 252; expanded median 449 (IQR 296-691); 5.1% reach the cap",
+      "manuscript": "sec:pools, tab:poolsizes",
+      "evidence_class": "new measurement",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/protocol.md",
+          "pointer": "section 3",
+          "sha256": "56f0201795eb28b7299fb77908d4ddbbed8b42e873fa7656a4c9d4b0bd4fd3a2",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/pool-sizes.csv",
+          "pointer": "all rows",
+          "sha256": "7ba18122e5a2a77e296f0d037f3bc82ede24286ff0c7924b40862e935d5533b5",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "pool-size section (5.1% at cap)",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        }
+      ]
+    },
+    {
+      "id": "REPEATS-ISOMERS",
+      "claim": "85.4% of 28,936 official lists contain a repeated 2D structure (mean 6.9, max 121); 32.6% of validation decoys share the target's exact mass",
+      "manuscript": "sec:pools, sec:task",
+      "evidence_class": "data audit (protocol notes and article text)",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/access-and-feasibility.md",
+          "pointer": "repeated-structure and isomer audit",
+          "sha256": "6de9fb1534314c1d7c4c4f88fd6d5fdb0dae2298c49f90b17f610054f1c87dbc",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "task section",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        }
+      ]
+    },
+    {
+      "id": "NEAR-DUP",
+      "claim": "34.7% of test rows match more than one MassSpecGym record (structure, adduct, precursor, top-10 peaks)",
+      "manuscript": "sec:data, sec:limitations",
+      "evidence_class": "data audit (article text only)",
+      "evidence": [
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "'What this comparison does not show', near-duplicate records",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        }
+      ]
+    },
+    {
+      "id": "REPRO",
+      "claim": "Released evaluation (strict, official_raw): DreaMS+Morgan 32.6/56.8/76.7, Emb-Cos 35.4/59.3/76.8, DeepSets 13.1/27.9/46.9; harness equals released evaluation",
+      "manuscript": "tab:repro, sec:repro",
+      "evidence_class": "reproduction",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "pointer": "pool=official_raw, rule=strict",
+          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/receipts/T02-embcos-formula1-20261005T055415Z/released-result.json",
+          "pointer": "$.metrics.test",
+          "sha256": "0bfceaea9609ed5f9fe935e45b4f85e1d87ad17996016aa9e3fc43b8fda6b8eb",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/receipts/T03-deepsets-formula1-20261005T085424Z/released-result.json",
+          "pointer": "$.metrics.test",
+          "sha256": "2d5a2fc0873fcd65f0231dd54b513a409bde2699d71a7646800bdcfcac663966",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    },
+    {
+      "id": "PUBLISHED",
+      "claim": "MSAlign v2 and v1 published values, v2 two-SD bands",
+      "manuscript": "tab:published, tab:repro, sec:published",
+      "evidence_class": "published (transcribed from article)",
+      "evidence": [
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "Table 2 and the paragraphs after it",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        }
+      ]
+    },
+    {
+      "id": "MAIN",
+      "claim": "Primary Recall@1/5/20 on official_dedup with random-tie expectation and molecule-bootstrap intervals",
+      "manuscript": "tab:main, fig:recall",
+      "evidence_class": "new measurement",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "pointer": "pool=official_dedup, rule=expected",
+          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/random-repeats.json",
+          "pointer": "$.official_dedup",
+          "sha256": "d6e58d93e93c3c4f8043ea6507ed93652cb27edbb3f4f345cb85955c543c6156",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "article/assets/01-recall-by-method.png",
+          "pointer": "figure",
+          "sha256": "450e6e6073ccc1001edd31c2044fdb1342b47ddbaf6ff3be866c02d0f719461b"
+        }
+      ]
+    },
+    {
+      "id": "CONTRASTS",
+      "claim": "C1 +48.0 [+42.2, +53.6]; C2 -1.85 [-5.19, +1.35]; C3 +18.0 [+13.4, +22.5]; expanded-pool C2 -4.56 [-7.95, -1.19] (not pre-declared)",
+      "manuscript": "tab:contrasts, tab:contrasts-all, sec:poolsize",
+      "evidence_class": "new measurement",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/contrasts.csv",
+          "pointer": "all rows; primary flag",
+          "sha256": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    },
+    {
+      "id": "POOLSIZE",
+      "claim": "Recall@5 and Recall@1 by pool (16, 64, 252, 449)",
+      "manuscript": "fig:pools, tab:pools",
+      "evidence_class": "new measurement (stress test)",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "pointer": "pool in sub16, sub64, official_dedup, expanded1024; rule=expected",
+          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/random-repeats.json",
+          "pointer": "all pools",
+          "sha256": "d6e58d93e93c3c4f8043ea6507ed93652cb27edbb3f4f345cb85955c543c6156",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "article/assets/02-pool-size-stress.png",
+          "pointer": "figure",
+          "sha256": "e1408a8d45e552ef08108752153b0afd7f22ce5c31d982c4e4b809b5a1c119ac"
+        }
+      ]
+    },
+    {
+      "id": "RULES",
+      "claim": "Tie and duplicate conventions: mass error 6.3 -> 13.3 (R@5), 0.8 -> 3.7 (R@1); DreaMS+Morgan 56.8 -> 61.4",
+      "manuscript": "tab:rules, fig:rules",
+      "evidence_class": "new measurement",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "pointer": "official_raw/official_dedup x strict/expected",
+          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "article/assets/03-tie-and-duplicate-rules.png",
+          "pointer": "figure",
+          "sha256": "ab5a3bff312fb98379b7cff87ec4115d0cc3e19f4527224f109ba897cdc2be9e"
+        }
+      ]
+    },
+    {
+      "id": "ABSTENTION",
+      "claim": "Decline thresholds (fitted on validation) on test: coverage, Recall@5 among covered, false nominations; threshold 0.599",
+      "manuscript": "tab:abstention, tab:abstention-all, fig:decline",
+      "evidence_class": "new measurement (stress test)",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/abstention.csv",
+          "pointer": "all rows",
+          "sha256": "e24df6aedab568b8a31f42169855df63fd598215ee104854de05bb0e0839e1f0",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/risk-coverage-curves.json",
+          "pointer": "curves",
+          "sha256": "555e7dd83a7e4cf826bcb3005401ddfa0bbdafec9d62223634b43490834616c0",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "companion/models/thresholds.json",
+          "pointer": "threshold",
+          "sha256": "5b1abbe0fafcfda920042dacfe6713601c289c6166bc006b482bdf34ae442a65"
+        },
+        {
+          "artifact": "article/assets/04-decline-to-nominate.png",
+          "pointer": "figure",
+          "sha256": "e15e3e810ce4bbb99d91dda5857034f87f4968dd3d8137156bc7701305f4eefc"
+        }
+      ]
+    },
+    {
+      "id": "PRECURSOR",
+      "claim": "Precursor audit: training 19.0% within 0.01 ppm; test 6.94% > 10 ppm and 16.1% > 5 ppm (amendment A1); Fig. 7 caption values",
+      "manuscript": "sec:precursor, fig:precursor, tab:precursor",
+      "evidence_class": "new measurement (data audit)",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/receipts/A02-precursor-error-audit-20261004T224918Z/summary.json",
+          "pointer": "train, val",
+          "sha256": "c000e91ed48aad811a0f425ec1ec9a6733d60fae44549bb95d54210751a2ebcd",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/protocol.md",
+          "pointer": "amendment A1",
+          "sha256": "56f0201795eb28b7299fb77908d4ddbbed8b42e873fa7656a4c9d4b0bd4fd3a2",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "article/assets/05-precursor-mass-error.png",
+          "pointer": "figure",
+          "sha256": "04f5622477110865e1036dd5ea2c4e58341f2ebd4f42674538ce21eb5f125279"
+        }
+      ]
+    },
+    {
+      "id": "STRATA",
+      "claim": "Post hoc Recall@5 by precursor stratum and instrument",
+      "manuscript": "tab:strata, tab:strata-instrument, sec:limitations",
+      "evidence_class": "post hoc",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/strata-post-hoc.csv",
+          "pointer": "all rows",
+          "sha256": "e6614435454b845d949285a43372ba52875eda57f3e567fa613287d1ad42f113",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    },
+    {
+      "id": "FUSION",
+      "claim": "Fusion weight 0.55 chosen on validation Recall@5",
+      "manuscript": "tab:fusion, tab:methods",
+      "evidence_class": "new measurement (exploratory)",
+      "evidence": [
+        {
+          "artifact": "companion/results/fusion-weight.json",
+          "pointer": "$.validation_recall5_by_w",
+          "sha256": "49e472a3f5f11472b931dca6186e4a54ade742f74e679b4dc75409703dede4d4"
+        }
+      ]
+    },
+    {
+      "id": "MCES1",
+      "claim": "Pre-declared secondary population mces_1 (17,556 spectra, 2,997 molecules), cheap baselines only; archived but not in the article",
+      "manuscript": "tab:mces1",
+      "evidence_class": "new measurement (descriptive)",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis-mces1/metrics.csv",
+          "pointer": "all rows",
+          "sha256": "9d83e8c91fbf4fbe95130122c5b47e5dc88bd63d9840a30a336e4964b630f8e5",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/protocol/protocol.md",
+          "pointer": "section 2",
+          "sha256": "56f0201795eb28b7299fb77908d4ddbbed8b42e873fa7656a4c9d4b0bd4fd3a2",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    },
+    {
+      "id": "TRAINING",
+      "claim": "Training: DreaMS+Morgan 30,000 steps, selected step 3,296, 7.75 h; Emb-Cos 16,000 steps, 3.0 h; seed 42",
+      "manuscript": "sec:methods-list, sec:provenance",
+      "evidence_class": "execution record",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/receipts/T01-msalign-dreams-morgan-formula1-20261004T220904Z/train-receipt.json",
+          "pointer": "$.wall_seconds, $.effective_config",
+          "sha256": "e9ab16c86acf67861942e3f46021130219afc2fa9a28df89a74b53ee02fde027",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "training-time paragraph (Emb-Cos 3.0 h)",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        }
+      ]
+    },
+    {
+      "id": "DEMO",
+      "claim": "Companion demonstration outputs (MassSpecGymID0226249, MassSpecGymID0395778, invalid metadata); CLI-harness consistency",
+      "manuscript": "sec:demo, app:demo",
+      "evidence_class": "execution record",
+      "evidence": [
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "'Running the shortlist on your own spectra' console blocks",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/receipts/X02-cli-demo-20261005T060708Z/consistency-check.txt",
+          "pointer": "whole file",
+          "sha256": "29f63aa69abfe585455278c22c9ccba07746ff00dcd2a480e22f7da9f24a204f",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/receipts/V01-dreams-torchscript-equivalence-20261004T221550Z/result.json",
+          "pointer": "$.cosine_min",
+          "sha256": "970fcaaa519f2fd349f51d2f25054e425f060756ba30c4f0c5813841c754b763",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    },
+    {
+      "id": "CLI-TIMING",
+      "claim": "Clean-archive uv sync 1.5 s, first CLI run 35 s, model run 5.3 s",
+      "manuscript": "app:repro",
+      "evidence_class": "execution record (article text only)",
+      "evidence": [
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "companion section, timing paragraph",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        }
+      ]
+    },
+    {
+      "id": "FIGURES-LIT",
+      "claim": "MSAlign and Juergens figures (CC BY 4.0)",
+      "manuscript": "fig:msalign, fig:jurgens",
+      "evidence_class": "published",
+      "evidence": [
+        {
+          "artifact": "article/assets/01-msalign-v2-recipe-model-zoo-late-fusion.png",
+          "pointer": "figure",
+          "sha256": "5eefb4668e687963f80dca79630bc7894600d429d08978699f33e5f30785687a"
+        },
+        {
+          "artifact": "article/assets/13-jurgens-selective-prediction-overview.png",
+          "pointer": "figure",
+          "sha256": "fbcd0d4a26adf9f7c6c494d261720e74992245bc1b19083e0f33dfb5f57af4be"
+        }
+      ]
+    },
+    {
+      "id": "DECISION-PATH",
+      "claim": "Companion decision path",
+      "manuscript": "fig:path",
+      "evidence_class": "figure",
+      "evidence": [
+        {
+          "artifact": "article/assets/01-decision-path.svg",
+          "pointer": "figure",
+          "sha256": "c29d7aa50931542376d6455fef05589e1c21f15c2c1cbb18e5390122ba6cbae0"
+        }
+      ]
+    },
+    {
+      "id": "LITERATURE",
+      "claim": "Literature statements (MassSpecGym pools, Kind & Fiehn, DreaMS, audit of 17 of 26 papers, tie conventions, COSMIC, MS2Query, conformal, MSI, Schymanski, Charbonnet)",
+      "manuscript": "sec:background, sec:limitations",
+      "evidence_class": "literature (not re-retrieved)",
+      "evidence": [
+        {
+          "artifact": "article/published-original.md",
+          "pointer": "body text and References",
+          "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc",
+          "note": "byte-identical copy of the published article; link-adjusted copy at article/original.md"
+        }
+      ]
+    },
+    {
+      "id": "INTERPRETATION",
+      "claim": "Recommendation: alignment model for a five-structure shortlist; DreaMS+Morgan as shipped, Emb-Cos if training one's own; decline as triage",
+      "manuscript": "abstract, sec:guidance",
+      "evidence_class": "interpretation",
+      "evidence": [
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/metrics.csv",
+          "pointer": "official_dedup expected",
+          "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        },
+        {
+          "artifact": "downloads/msms-shortlist-results.tar.gz!msms-shortlist-results/analysis/contrasts.csv",
+          "pointer": "C2 primary",
+          "sha256": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a",
+          "container_sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+        }
+      ]
+    }
+  ]
+}

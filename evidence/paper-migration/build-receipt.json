@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "kind": "imported-evidence manuscript build; compiling is not scientific verification",
+  "built_at_utc": "2026-10-06T11:17:25+00:00",
+  "tools": {
+    "pdflatex": "pdfTeX 3.141592653-2.6-1.40.29 (TeX Live 2026)",
+    "bibtex": "BibTeX 0.99e (TeX Live 2026)",
+    "rsvg-convert": "rsvg-convert version 2.62.3",
+    "python": "3.14.7",
+    "tex_distribution": "TeX Live 2026 (local install under /Library/TeX/texbin)"
+  },
+  "environment": {
+    "SOURCE_DATE_EPOCH": "1791244800",
+    "FORCE_SOURCE_DATE": "1",
+    "TZ": "UTC"
+  },
+  "commands": [
+    {
+      "cwd": ".",
+      "command": "python3.14 scripts/paper_extract.py",
+      "exit": 0
+    },
+    {
+      "cwd": ".",
+      "command": "python3.14 scripts/paper_ledger.py",
+      "exit": 0
+    },
+    {
+      "cwd": ".",
+      "command": "rsvg-convert -f pdf -o paper/figures/01-decision-path.pdf article/assets/01-decision-path.svg",
+      "exit": 0
+    },
+    {
+      "cwd": "paper",
+      "command": "pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory=build main.tex",
+      "exit": 0
+    },
+    {
+      "cwd": "paper/build",
+      "command": "bibtex main",
+      "exit": 0
+    },
+    {
+      "cwd": "paper",
+      "command": "pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory=build main.tex",
+      "exit": 0
+    },
+    {
+      "cwd": "paper",
+      "command": "pdflatex -interaction=nonstopmode -halt-on-error -file-line-error -output-directory=build main.tex",
+      "exit": 0
+    }
+  ],
+  "figures_converted": {
+    "paper/figures/01-decision-path.pdf": {
+      "from": "article/assets/01-decision-path.svg",
+      "source_sha256": "c29d7aa50931542376d6455fef05589e1c21f15c2c1cbb18e5390122ba6cbae0"
+    }
+  },
+  "outputs": {
+    "paper/build/main.pdf": {
+      "sha256": "bbe155bdb37428691553c63149acd852c04063002424b003fb0b4deb65a82837",
+      "bytes": 1693510,
+      "pages": 26
+    }
+  },
+  "warnings": {
+    "latex": [],
+    "bibtex": [],
+    "counts": {
+      "latex": 0,
+      "bibtex": 0
+    }
+  }
+}

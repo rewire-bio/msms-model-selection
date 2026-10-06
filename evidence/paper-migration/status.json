@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "study": "msms-model-selection",
+  "task": "historical-evidence manuscript migration (LaTeX paper from imported original results)",
+  "author_session": {
+    "agent": "paper-author",
+    "model": "claude-opus-5-5",
+    "session_id": "5b2a6d85-2616-43fe-bdde-40dd448ad762"
+  },
+  "stage": "complete",
+  "stages": [
+    {
+      "stage": "evidence_read",
+      "status": "complete",
+      "note": "Read article (both copies), companion README and REPRODUCE.md, import manifest, migration audit, archived protocol (frozen original + amendment A1), analysis outputs and receipts read in memory from downloads/msms-shortlist-results.tar.gz."
+    },
+    {
+      "stage": "extraction",
+      "status": "complete",
+      "note": "scripts/paper_extract.py: 14 archive members read in memory and digest-checked; 16 generated files; 0 mismatches against article values"
+    },
+    {
+      "stage": "draft_built",
+      "status": "complete",
+      "note": "paper/main.tex, references.bib (23 entries), ledger (23 claims), coverage map; make paper-imported builds paper/build/main.pdf (25 pages), 0 BibTeX warnings, 1 mild underfull line; all pages rendered with pdftoppm at 45 dpi and inspected by the author, page 8 at 70 dpi."
+    },
+    {
+      "stage": "independent_review",
+      "status": "complete",
+      "note": "One independent Claude Opus reviewer instance (single child); review.md: 0 blocking, 3 major, 9 minor, 6 nits; reviewer viewed all 25 draft pages at 50 dpi plus crops"
+    },
+    {
+      "stage": "review_fixes",
+      "status": "complete",
+      "note": "All 18 findings fixed (review-disposition.md). Final build 26 pages, 0 LaTeX and 0 BibTeX warnings, deterministic rebuild; changed pages re-rendered and inspected."
+    }
+  ],
+  "no_new_experiments": true,
+  "fresh_reproduction": "pending (protocol.md is an unconfigured, unapproved scaffold; not executed)",
+  "blockers": [],
+  "updated_at_utc": "2026-10-06T11:17:34+00:00",
+  "paper": {
+    "source": "paper/main.tex",
+    "pdf": "paper/build/main.pdf",
+    "pages": 26,
+    "pdf_sha256": "bbe155bdb37428691553c63149acd852c04063002424b003fb0b4deb65a82837",
+    "build": "make paper-imported"
+  },
+  "notes": [
+    "Archived pre-declared mces_1 secondary population (not in the original article) reported in App. Table 15",
+    "Some original archived receipts contain absolute local paths; preserved unchanged, not reproduced in the manuscript"
+  ]
+}

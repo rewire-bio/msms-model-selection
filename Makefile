@@ -1,4 +1,4 @@
-.PHONY: smoke reproduce analysis paper test data
+.PHONY: smoke reproduce analysis paper paper-imported test data
 
 data:
 	uv run --frozen python scripts/data.py --fetch
@@ -18,3 +18,8 @@ analysis:
 
 paper:
 	uv run --frozen python scripts/build_paper.py
+
+# Imported-evidence manuscript: formats archived historical results and compiles with local TeX Live.
+# No experiment, data fetch or uv environment creation. Compiling is not scientific verification.
+paper-imported:
+	python3 scripts/build_paper.py
