@@ -1,0 +1,63 @@
+{
+  "workers": [
+    {
+      "configuration_sha256": "86bf8862b25b3e7b4c4931dc1b89bfe8da1fee3468b9327b93261da0e22804b3",
+      "requested_model": "opus",
+      "resolved_models": [
+        "claude-opus-5-5"
+      ],
+      "runtime_version": "2.1.283 (Claude Code)",
+      "skills": [
+        {
+          "name": "research-integrity",
+          "sha256": "6ce3667a93c4aa544c73a9acc1712184b18c03decfe4a9e4b83409a5b6ff159c"
+        }
+      ],
+      "state": {
+        "artifact_sha256": {
+          "README.md": "9afbfda58bb6c754cc6d0a9a26a3a040015b61f119e47ea22f8948901aabace5",
+          "companion/README.md": "560d68dd13b597b537a9c53f4e521daa037038bf9a9b111fa44d448be4aed79d",
+          "docs/review-fixes.md": "2ef01f54985b52665afc53a27b7146d67dde10f24c20830bf51da34c8c38e4de",
+          "paper/main.tex": "6c54acc5959a246fbac5c46bef75a0936905f0380fcf15a64ee394753706b41f",
+          "protocol.md": "7320916ec646d4f734a8127954f07ea854306d35c4beea740b8561df85fe1587"
+        },
+        "artifacts": [
+          "protocol.md",
+          "README.md",
+          "paper/main.tex",
+          "docs/review-fixes.md",
+          "companion/README.md"
+        ],
+        "attempt": 1,
+        "blockers": [],
+        "changed_files": [
+          "README.md",
+          "companion/README.md",
+          "docs/review-fixes.md",
+          "paper/main.tex",
+          "protocol.md"
+        ],
+        "exit_code": 0,
+        "finished_at": 1791307715.3439791,
+        "job_id": "3cd8d411-6bfa-4101-b9cc-ea29e4d59bbb",
+        "owner_pid": 69415,
+        "pid": 69421,
+        "previous_job": null,
+        "revision": "87a96d572a459c830d4df3191812cf97fe62de79",
+        "role": "research-designer",
+        "session_id": "65d0e828-646e-4cf5-adf3-9f0998898e68",
+        "started_at": 1791307485.536704,
+        "status": "completed",
+        "validation": [
+          "Read issues #1\u2013#9 from /tmp/msms-review.o8bPRm and both historical protocols. Took the archive digests for the frozen original (aa2b30b5\u202631b6, 10,076 B), the amended protocol (archive member protocol/protocol.md, 56f02017\u2026d3a2, 11,023 B) and the freeze receipt (a9f54a11\u2026c20d, 419 B) from evidence/migration-audit.json lines 971\u2013985. I did not compute the digests of the coordinator's copies in protocol/historical/; that is still to do.",
+          "Text search: every data row in companion/results/metrics.csv (180 rows) and mces1-cheap-baselines-metrics.csv (48 rows) has n_missing_or_failed = 0. This is the basis for the statement that issue #8 is not known to have affected the historical results.",
+          "Text search of companion/examples: no isotope-prefixed atoms in any SMILES, no NaN or infinite peak values, and no zero or negative intensities. mna.mgf has COLLISION_ENERGY=nan. This is flagged in companion/README.md as a compatibility point for the CLI fix.",
+          "Read paper/generated/tab_abstention.tex and tab_abstention_all.tex: fusion rows are in both tables, so both captions now carry the fusion caveat. No generated table or numeric value was edited.",
+          "Grep found \\label definitions for every \\ref target added to main.tex (sec:abst-methods, sec:methods-list, sec:demo, tab:abstention, tab:abstention-all). main.tex was not compiled: no Bash tool was available, and compiling was outside the task.",
+          "No code was edited, nothing was run, and no tests were executed. docs/review-fixes.md lists every code fix as pending integration and makes no claim that tests pass."
+        ],
+        "worktree": "/Users/timrichardson/Documents/projects/personal/blog/msms-model-selection/.research/workers/3cd8d411-6bfa-4101-b9cc-ea29e4d59bbb/worktree"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+uv run --project companion --frozen python scripts/reproduce_corrected.py
+Using CPython 3.11.13
+Creating virtual environment at: companion/.venv
+   Building msms-shortlist @ file:///Users/timrichardson/Documents/projects/personal/blog/msms-model-selection/.research/reproductions/9dcf6d1ddcef434daa87ac7e3067f8d9/checkout/companion
+      Built msms-shortlist @ file:///Users/timrichardson/Documents/projects/personal/blog/msms-model-selection/.research/reproductions/9dcf6d1ddcef434daa87ac7e3067f8d9/checkout/companion
+Installed 61 packages in 954ms
+{
+  "status": "passed",
+  "wall_seconds": 22.18960475921631,
+  "comparisons": {
+    "metrics": {
+      "rows": 180,
+      "changed_rows": 22
+    },
+    "contrasts": {
+      "rows": 90,
+      "changed_rows": 0
+    },
+    "abstention": {
+      "rows": 20,
+      "changed_rows": 4
+    }
+  }
+}
+Regenerated corrected pool-size and abstention figures
+extracted 14 archive members; 16 generated files; 0 mismatches
+extracted 11 archive members; 16 generated files; 0 mismatches
+claims ledger: 23 claims
+paper/build/main.pdf: 27 pages; 0 LaTeX warnings, 0 BibTeX warnings

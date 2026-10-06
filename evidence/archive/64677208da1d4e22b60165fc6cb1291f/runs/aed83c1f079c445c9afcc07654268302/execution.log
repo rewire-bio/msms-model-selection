@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "wall_seconds": 24.446415901184082,
+  "comparisons": {
+    "metrics": {
+      "rows": 180,
+      "changed_rows": 22
+    },
+    "contrasts": {
+      "rows": 90,
+      "changed_rows": 0
+    },
+    "abstention": {
+      "rows": 20,
+      "changed_rows": 4
+    }
+  }
+}
