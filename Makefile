@@ -4,7 +4,7 @@
 PYTHON = uv run --project companion --frozen python
 
 data:
-	$(PYTHON) scripts/data.py --fetch
+	$(PYTHON) scripts/reanalyse.py --output results/input-validation --validate-only
 
 test:
 	$(PYTHON) -m unittest discover -s tests -v
@@ -21,3 +21,7 @@ analysis:
 
 paper paper-imported:
 	python3 scripts/build_paper.py
+
+.PHONY: corrected-analysis
+corrected-analysis:
+	$(PYTHON) scripts/reanalyse.py --config configs/corrected-analysis.json --output results/corrected-analysis

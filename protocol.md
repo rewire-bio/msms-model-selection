@@ -21,3 +21,7 @@ The protocol was frozen on 4 October 2026 at 22:07:05Z, before test-fold scoring
 The historical commands are in [companion/REPRODUCE.md](companion/REPRODUCE.md). A future reproduction plan must specify outputs, numeric tolerances, realistic compute and storage budgets, stopping rules, and treatment of corrected analyses. Generic scaffold settings in `study.json` do not define those requirements.
 
 `make verify` checks software and evidence integrity. `make paper-imported` compiles archived results. Neither independently reproduces the study. Scientific `smoke` and `reproduce` targets remain gated pending an approved, implemented plan. Future plan amendments belong in `protocol/amendments/`.
+
+## Authorized cached-score correction
+
+The user explicitly requested the corrected analysis after the cached-score scope and 15–30 minute estimate. The [2026-10-06 amendment](protocol/amendments/2026-10-06-corrected-analysis.md) freezes its methods, tolerance and 900-second-per-attempt / two-attempt / 4096 MB limits. `configs/corrected-analysis.json` is a full cached-score correction, not a full training reproduction. This supersedes the gating statements above only for that narrow correction. Original training reproduction remains unavailable. Cached inputs are local preserved artifacts with frozen checksums; the data manifest source identifies their producing repository rather than falsely claiming a public raw-file download.
