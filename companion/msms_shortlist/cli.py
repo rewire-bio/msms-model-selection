@@ -43,15 +43,22 @@ def sha256(path: Path | None) -> str | None:
 
 
 def read_mgf(path: Path) -> list[dict]:
+    """Preserve malformed records for per-query refusal instead of losing a batch."""
     spectra, cur = [], None
-    for raw in Path(path).read_text().splitlines():
+    for number, raw in enumerate(Path(path).read_text().splitlines(), 1):
         line = raw.strip()
         if not line or line.startswith("#"):
             continue
         if line == "BEGIN IONS":
+            if cur is not None:
+                cur['parse_error'] = f'missing END IONS before line {number}'
+                spectra.append(cur)
             cur = {"params": {}, "peaks": []}
         elif line == "END IONS":
-            spectra.append(cur)
+            if cur is None:
+                spectra.append({'params': {}, 'peaks': [], 'parse_error': f'END IONS without BEGIN at line {number}'})
+            else:
+                spectra.append(cur)
             cur = None
         elif cur is not None:
             if "=" in line and not line[0].isdigit():
@@ -59,7 +66,15 @@ def read_mgf(path: Path) -> list[dict]:
                 cur["params"][key.strip().upper()] = value.strip()
             else:
                 parts = line.split()
-                cur["peaks"].append((float(parts[0]), float(parts[1])))
+                try:
+                    cur["peaks"].append((float(parts[0]), float(parts[1])))
+                except (ValueError, IndexError):
+                    cur['parse_error'] = f'unreadable peak at line {number}'
+    if cur is not None:
+        cur['parse_error'] = 'missing END IONS at end of file'
+        spectra.append(cur)
+    if not spectra:
+        raise ValueError('MGF contains no spectrum blocks')
     return spectra
 
 
@@ -186,8 +201,11 @@ class AlignmentModel:
 
 def rank_one(spectrum, candidates, args, model, thresholds) -> tuple[pd.DataFrame, dict]:
     qid = spectrum["params"].get("TITLE", spectrum["params"].get("SCANS", "query"))
-    meta, reason = validate(spectrum["params"])
     summary = {"query_id": qid}
+    if spectrum.get('parse_error'):
+        summary.update(decision='refused', reason=spectrum['parse_error'])
+        return pd.DataFrame(), summary
+    meta, reason = validate(spectrum["params"])
     if meta is None:
         summary.update(decision="refused", reason=reason)
         return pd.DataFrame(), summary
@@ -255,7 +273,11 @@ def main(argv=None):
             ap.error(f"--thresholds tau must be a finite number, got {tau!r}")
     candidates, cand_report = prepare_candidates(args.candidates)
     tables, summaries = [], []
-    for spectrum in read_mgf(args.spectra):
+    try:
+        spectra = read_mgf(args.spectra)
+    except ValueError as exc:
+        ap.error(str(exc))
+    for spectrum in spectra:
         table, summary = rank_one(spectrum, candidates, args, model, thresholds)
         tables.append(table)
         summaries.append(summary)

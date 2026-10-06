@@ -136,6 +136,16 @@ class EmbCosScorer:
         return (self.model.encode_ms(ms) @ self.model.encode_mol(cand).T).float().cpu().numpy()
 
 
+def positive_target_limit(text):
+    try:
+        value = int(text)
+    except ValueError as exc:
+        raise argparse.ArgumentTypeError('target limit must be a positive integer') from exc
+    if value < 1:
+        raise argparse.ArgumentTypeError('target limit must be a positive integer')
+    return value
+
+
 def main():
     ap = argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--method", required=True, choices=("mass", "msalign", "deepsets", "embcos"))
@@ -145,7 +155,7 @@ def main():
     ap.add_argument("--split", required=True)
     ap.add_argument("--fold", required=True)
     ap.add_argument("--device", default="cpu")
-    ap.add_argument("--limit-targets", type=int, help="smoke runs only")
+    ap.add_argument("--limit-targets", type=positive_target_limit, help="smoke runs only")
     ap.add_argument("--out", type=Path, required=True)
     args = ap.parse_args()
     if args.out.exists():

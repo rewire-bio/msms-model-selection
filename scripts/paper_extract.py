@@ -385,8 +385,8 @@ def main(corrected: bool = False) -> None:
 
 
 if __name__ == "__main__":
-    main()
     import corrected_evidence
-    if corrected_evidence.INDEX.exists():
-        (GEN / "historical-extraction-receipt.json").write_text((GEN / "extraction-receipt.json").read_text())
-        main(corrected=True)
+    corrected_evidence.load()  # fail before overwriting any generated output
+    main()
+    (GEN / "historical-extraction-receipt.json").write_text((GEN / "extraction-receipt.json").read_text())
+    main(corrected=True)

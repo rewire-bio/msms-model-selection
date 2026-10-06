@@ -37,6 +37,21 @@ def load(spec: list[str]) -> dict[str, pd.DataFrame]:
     return out
 
 
+def pool_reference(methods: dict, rows: np.ndarray) -> pd.DataFrame:
+    """Recover pool metadata independently of method order or scoring failures."""
+    columns = ['row', 'target_id', 'pool', 'n_pool', 'n_pool_weighted']
+    combined = pd.concat([frame[columns] for frame in methods.values()], ignore_index=True)
+    combined = combined[combined.row.isin(rows)]
+    keys = ['row', 'pool']
+    unique = combined.drop_duplicates()
+    if unique.duplicated(keys).any():
+        raise ValueError('Methods disagree on candidate-pool metadata')
+    for pool in unique.pool.unique():
+        if set(unique.loc[unique.pool == pool, 'row']) != set(rows):
+            raise ValueError(f'Incomplete pool metadata for {pool}; cannot construct a random baseline')
+    return unique.sort_values(keys).reset_index(drop=True)
+
+
 def random_rows(ref: pd.DataFrame) -> pd.DataFrame:
     """Random ordering: every decoy tied with the target gives the exact expectation."""
     df = ref[["row", "target_id", "pool", "n_pool", "n_pool_weighted"]].copy()
@@ -58,21 +73,29 @@ def random_repeats(ref: pd.DataFrame, pool: str, n_seeds: int = 100) -> dict:
             for k, v in res.items()}
 
 
+def valid_ranks(sub: pd.DataFrame) -> np.ndarray:
+    b, t = sub['b'].to_numpy(dtype=float), sub['t'].to_numpy(dtype=float)
+    return np.isfinite(b) & np.isfinite(t) & (b >= 0) & (t >= 0)
+
+
 def per_spectrum(df: pd.DataFrame, pool: str, rows: np.ndarray, k: int, rule: str) -> np.ndarray:
     sub = df[df.pool == pool].set_index("row").reindex(rows)
     fn = recall_expected if rule == "expected" else recall_strict
     vals = fn(sub["b"].to_numpy(), sub["t"].to_numpy(), k)
-    return np.where(np.isnan(vals), 0.0, vals)  # missing spectrum = miss
+    return np.where(valid_ranks(sub) & np.isfinite(vals), vals, 0.0)  # failed spectrum = miss
 
 
 def metrics_table(methods: dict, rows: np.ndarray, groups: np.ndarray) -> tuple[pd.DataFrame, dict]:
     records, boot_store = [], {}
+    available = {pool for pool in POOLS if any((df.pool == pool).any() for df in methods.values())}
+    if not available:
+        raise ValueError('No candidate-pool rows available; cannot infer evaluation pools')
     for pool in POOLS:
+        if pool not in available:
+            continue
         for rule in ("expected", "strict"):
             values = {}
             for name, df in methods.items():
-                if not (df.pool == pool).any():
-                    continue
                 for k in KS:
                     values[(name, k)] = per_spectrum(df, pool, rows, k, rule)
             if not values:
@@ -82,7 +105,7 @@ def metrics_table(methods: dict, rows: np.ndarray, groups: np.ndarray) -> tuple[
             boot_store[(pool, rule)] = (keyed, boots)
             for (name, k), v in values.items():
                 s = summarise(v.mean(), boots[f"{name}|{k}"])
-                n_missing = int(methods[name].query("pool == @pool").set_index("row").reindex(rows)["b"].isna().sum())
+                n_missing = int((~valid_ranks(methods[name].query("pool == @pool").set_index("row").reindex(rows))).sum())
                 records.append({"pool": pool, "rule": rule, "method": name, "k": k,
                                 **{x: 100 * y for x, y in s.items()},
                                 "n_spectra": int(len(rows)), "n_missing_or_failed": n_missing,
@@ -137,7 +160,7 @@ def abstention(val: dict, test: dict, rows_val, rows_test, groups_test) -> tuple
             ca = av["top1"] if conf == "top1" else av["top1"] - av["top2"]
             cp, ca = cp.to_numpy(), ca.to_numpy()
             # Failed predictions decline; all declared rows remain in denominators.
-            cp = np.where(np.isfinite(cp) & np.isfinite(pv["b"]) & np.isfinite(pv["t"]), cp, np.nan)
+            cp = np.where(np.isfinite(cp) & valid_ranks(pv), cp, np.nan)
             finite_p, finite_a = cp[np.isfinite(cp)], ca[np.isfinite(ca)]
             # Choose the largest observed threshold reaching 90% of the full fold,
             # or maximum attainable coverage when failures make 90% impossible.
@@ -162,7 +185,7 @@ def abstention(val: dict, test: dict, rows_val, rows_test, groups_test) -> tuple
                     frame[column] = frame[column].astype(float)
             ctp = (pt["top1"] if conf == "top1" else pt["top1"] - pt["top2"]).to_numpy()
             cta = (at["top1"] if conf == "top1" else at["top1"] - at["top2"]).to_numpy()
-            valid_rank = np.isfinite(pt["b"].to_numpy()) & np.isfinite(pt["t"].to_numpy())
+            valid_rank = valid_ranks(pt)
             ctp = np.where(valid_rank, ctp, np.nan)
             hit5 = recall_expected(pt["b"].to_numpy(), pt["t"].to_numpy(), 5)
             hit5 = np.where(valid_rank & np.isfinite(hit5), hit5, 0.0)
@@ -225,7 +248,7 @@ def main():
     groups_test = meta["unique_smiles_idx"].to_numpy()[rows_test]
 
     test, val = load(args.test), load(args.val)
-    ref = next(iter(test.values()))
+    ref = pool_reference(test, rows_test)
     test["random"] = random_rows(ref)
     table, boots = metrics_table(test, rows_test, groups_test)
     table.to_csv(args.out / "metrics.csv", index=False)

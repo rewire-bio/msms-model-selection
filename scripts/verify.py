@@ -27,9 +27,9 @@ def main():
         paper_extract.GEN = output / 'generated'
         paper_extract.main()
         import corrected_evidence
-        if corrected_evidence.INDEX.exists():
-            (paper_extract.GEN / 'historical-extraction-receipt.json').write_text((paper_extract.GEN / 'extraction-receipt.json').read_text())
-            paper_extract.main(corrected=True)
+        corrected_evidence.load()
+        (paper_extract.GEN / 'historical-extraction-receipt.json').write_text((paper_extract.GEN / 'extraction-receipt.json').read_text())
+        paper_extract.main(corrected=True)
         paper_ledger.main(output / 'claims-ledger.json')
     print('Historical and corrected saved evidence and extraction verified; experiments were not reproduced.')
 

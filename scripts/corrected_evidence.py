@@ -8,7 +8,22 @@ ROOT = Path(__file__).resolve().parents[1]
 INDEX = ROOT / 'evidence/corrected-analysis/current.json'
 
 def load():
+    if not INDEX.is_file():
+        raise ValueError('Corrected evidence index is required for the current manuscript')
     info = json.loads(INDEX.read_text())
+    run = ROOT / info['run']
+    if not run.resolve().is_relative_to(ROOT.resolve()):
+        raise ValueError('Corrected run path escapes repository')
+    required = [str((run / name).relative_to(ROOT)) for name in (
+        'results.json', 'run-receipt.json', 'fusion-weight.json',
+        'analysis/metrics.csv', 'analysis/contrasts.csv', 'analysis/abstention.csv',
+        'analysis/risk-coverage-curves.json', 'comparison-metrics.csv',
+        'comparison-contrasts.csv', 'comparison-abstention.csv')]
+    required += ['paper/figures/corrected/02-pool-size-stress.png',
+                 'paper/figures/corrected/04-decline-to-nominate.png']
+    missing = set(required) - set(info['artifacts'])
+    if missing:
+        raise ValueError('Required corrected evidence is not hash-bound: ' + ', '.join(sorted(missing)))
     if info['status'] != 'passed':
         raise ValueError('Corrected analysis has not passed')
     for name, expected in info['artifacts'].items():
