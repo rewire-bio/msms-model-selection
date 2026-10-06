@@ -109,51 +109,94 @@ def contrasts(boot_store) -> pd.DataFrame:
 
 def abstention(val: dict, test: dict, rows_val, rows_test, groups_test) -> tuple[pd.DataFrame, dict]:
     """Thresholds from validation (protocol section 7), applied once to test."""
+    if len(rows_val) == 0 or len(rows_test) == 0:
+        raise ValueError("abstention requires nonempty validation and test folds")
     records, curves = [], {}
     for name in test:
         if name not in val or name == "random":
             continue
         thr = {}
         v = val[name]
+        fusion_mode = None
+        if "fusion_normalization" in v.columns or "fusion_normalization" in test[name].columns:
+            modes = []
+            for frame in (v, test[name]):
+                modes.append(set(frame.get("fusion_normalization", pd.Series(["unspecified"])).dropna())
+                             if len(frame) else set())
+            combined_modes = modes[0] | modes[1]
+            if len(combined_modes) > 1 or "unspecified" in combined_modes:
+                raise ValueError(f"{name}: validation/test fusion normalization mismatch or missing provenance")
+            fusion_mode = next(iter(combined_modes), "unavailable_no_predictions")
         pv = v[v.pool == "official_dedup"].set_index("row").reindex(rows_val)
         av = v[v.pool == "absent"].set_index("row").reindex(rows_val)
+        for frame in (pv, av):
+            for column in ("top1", "top2", "b", "t"):
+                frame[column] = frame[column].astype(float)
         for conf in ("top1", "margin"):
             cp = pv["top1"] if conf == "top1" else pv["top1"] - pv["top2"]
             ca = av["top1"] if conf == "top1" else av["top1"] - av["top2"]
             cp, ca = cp.to_numpy(), ca.to_numpy()
-            tau_cov90 = float(np.nanquantile(cp, 0.10))
-            cand = np.unique(np.concatenate([cp, ca]))
-            fnr = np.array([(ca >= c).mean() for c in cand])
+            # Failed predictions decline; all declared rows remain in denominators.
+            cp = np.where(np.isfinite(cp) & np.isfinite(pv["b"]) & np.isfinite(pv["t"]), cp, np.nan)
+            finite_p, finite_a = cp[np.isfinite(cp)], ca[np.isfinite(ca)]
+            # Choose the largest observed threshold reaching 90% of the full fold,
+            # or maximum attainable coverage when failures make 90% impossible.
+            if len(finite_p) == len(cp):
+                tau_cov90 = float(np.quantile(cp, 0.10))  # preserve complete-run method
+            elif len(finite_p):
+                required = min(int(np.ceil(0.9 * len(cp))), len(finite_p))
+                tau_cov90 = float(np.sort(finite_p)[-required])
+            else:
+                tau_cov90 = float("inf")
+            cand = np.unique(np.concatenate([finite_p, finite_a]))
+            fnr = np.array([((np.isfinite(ca)) & (ca >= c)).mean() for c in cand])
             ok = cand[fnr <= 0.10]
-            tau_fn10 = float(ok.min()) if len(ok) else float("inf")
+            # No absent calibration observations cannot justify nominations.
+            tau_fn10 = float(ok.min()) if len(ok) and len(finite_a) else float("inf")
             thr[conf] = {"tau_cov90": tau_cov90, "tau_fn10": tau_fn10}
             t = test[name]
             pt = t[t.pool == "official_dedup"].set_index("row").reindex(rows_test)
             at = t[t.pool == "absent"].set_index("row").reindex(rows_test)
+            for frame in (pt, at):
+                for column in ("top1", "top2", "b", "t"):
+                    frame[column] = frame[column].astype(float)
             ctp = (pt["top1"] if conf == "top1" else pt["top1"] - pt["top2"]).to_numpy()
             cta = (at["top1"] if conf == "top1" else at["top1"] - at["top2"]).to_numpy()
+            valid_rank = np.isfinite(pt["b"].to_numpy()) & np.isfinite(pt["t"].to_numpy())
+            ctp = np.where(valid_rank, ctp, np.nan)
             hit5 = recall_expected(pt["b"].to_numpy(), pt["t"].to_numpy(), 5)
+            hit5 = np.where(valid_rank & np.isfinite(hit5), hit5, 0.0)
             for tname, tau in thr[conf].items():
-                nom_p = (ctp >= tau).astype(float)
-                nom_a = (cta >= tau).astype(float)
+                nom_p = (np.isfinite(ctp) & (ctp >= tau)).astype(float)
+                nom_a = (np.isfinite(cta) & (cta >= tau)).astype(float)
                 vals = {"coverage_present": nom_p, "false_nomination_absent": nom_a,
                         "hit5_and_nominated": nom_p * hit5}
                 boots = grouped_bootstrap(vals, groups_test, N_BOOT, SEED)
                 cov = nom_p.mean()
+                # A no-nomination estimate/replicate uses zero by convention;
+                # recall5_defined distinguishes it from an observed zero recall.
                 rec = (nom_p * hit5).sum() / max(nom_p.sum(), 1)
                 rec_boot = boots["hit5_and_nominated"] / np.maximum(boots["coverage_present"], 1e-12)
                 records.append({"method": name, "confidence": conf, "threshold": tname, "tau": tau,
                                 "coverage_present": summarise(cov, boots["coverage_present"]),
                                 "recall5_among_nominated": summarise(rec, rec_boot),
                                 "false_nomination_absent": summarise(nom_a.mean(), boots["false_nomination_absent"]),
-                                "val_coverage_present": float((cp >= tau).mean()),
-                                "val_false_nomination_absent": float((ca >= tau).mean())})
+                                **({"fusion_normalization": fusion_mode} if fusion_mode is not None else {}),
+                                "n_validation": len(rows_val), "n_test": len(rows_test),
+                                "n_valid_calibration_present": len(finite_p),
+                                "n_valid_calibration_absent": len(finite_a),
+                                "n_nominated_present": int(nom_p.sum()),
+                                "recall5_defined": bool(nom_p.sum()),
+                                "val_coverage_present": float((np.isfinite(cp) & (cp >= tau)).mean()),
+                                "val_false_nomination_absent": float((np.isfinite(ca) & (ca >= tau)).mean())})
             # descriptive risk-coverage curve on test
-            grid = np.unique(np.quantile(np.concatenate([ctp, cta]), np.linspace(0, 1, 101)))
+            finite_test = np.concatenate([ctp[np.isfinite(ctp)], cta[np.isfinite(cta)]])
+            grid = (np.unique(np.quantile(finite_test, np.linspace(0, 1, 101)))
+                    if len(finite_test) else np.array([]))
             curves[f"{name}|{conf}"] = [
-                {"tau": float(c), "coverage_present": float((ctp >= c).mean()),
-                 "recall5_among_nominated": float(((ctp >= c) * hit5).sum() / max((ctp >= c).sum(), 1)),
-                 "false_nomination_absent": float((cta >= c).mean())} for c in grid]
+                {"tau": float(c), "coverage_present": float((np.isfinite(ctp) & (ctp >= c)).mean()),
+                 "recall5_among_nominated": float(((np.isfinite(ctp) & (ctp >= c)) * hit5).sum() / max((np.isfinite(ctp) & (ctp >= c)).sum(), 1)),
+                 "false_nomination_absent": float((np.isfinite(cta) & (cta >= c)).mean())} for c in grid]
     flat = []
     for r in records:
         row = {k: v for k, v in r.items() if not isinstance(v, dict)}

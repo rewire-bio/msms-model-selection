@@ -17,6 +17,8 @@ import sys
 import tarfile
 from pathlib import Path
 
+import evidence_integrity
+
 ROOT = Path(__file__).resolve().parents[1]
 TARPATH = "downloads/msms-shortlist-results.tar.gz"
 PREFIX = "msms-shortlist-results/"
@@ -85,6 +87,10 @@ def sg(x: float, nd: int = 1) -> str:
 
 
 def main() -> None:
+    try:
+        evidence_integrity.verify_or_fail("paper_extract")
+    except evidence_integrity.IntegrityError as exc:
+        sys.exit(str(exc))
     GEN.mkdir(parents=True, exist_ok=True)
     manifest = {f["path"]: f["sha256"] for f in json.loads((ROOT / "evidence/import-manifest.json").read_text())["files"]}
     audit = json.loads((ROOT / "evidence/migration-audit.json").read_text())

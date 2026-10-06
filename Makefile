@@ -1,25 +1,23 @@
-.PHONY: smoke reproduce analysis paper paper-imported test data
+.PHONY: verify smoke reproduce analysis paper paper-imported test data
+
+# Use the companion lockfile for the scientific Python dependencies needed by tests.
+PYTHON = uv run --project companion --frozen python
 
 data:
-	uv run --frozen python scripts/data.py --fetch
+	$(PYTHON) scripts/data.py --fetch
 
 test:
-	uv run --frozen python -m unittest discover -s tests -v
+	$(PYTHON) -m unittest discover -s tests -v
 
-smoke: data test
-	uv run --frozen python scripts/experiment.py --config configs/smoke.json --output results/smoke
+verify: test
+	$(PYTHON) scripts/verify.py
 
-reproduce: data test
-	uv run --frozen python scripts/experiment.py --config configs/full.json --output results/full
-	$(MAKE) analysis paper
+smoke reproduce:
+	@echo "Scientific reproduction unavailable: complete the MS/MS harness migration and approve its protocol first. Run make verify for historical evidence and regression checks." >&2
+	@exit 2
 
 analysis:
-	uv run --frozen python scripts/analyse.py --results results/full/results.json
+	$(PYTHON) scripts/analyse.py --results results/full/results.json
 
-paper:
-	uv run --frozen python scripts/build_paper.py
-
-# Imported-evidence manuscript: formats archived historical results and compiles with local TeX Live.
-# No experiment, data fetch or uv environment creation. Compiling is not scientific verification.
-paper-imported:
+paper paper-imported:
 	python3 scripts/build_paper.py

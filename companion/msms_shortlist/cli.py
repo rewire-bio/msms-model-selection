@@ -63,6 +63,27 @@ def read_mgf(path: Path) -> list[dict]:
     return spectra
 
 
+def positive_finite_ppm(text: str) -> float:
+    value = float(text)
+    if not np.isfinite(value) or value <= 0:
+        raise argparse.ArgumentTypeError(f"--ppm must be a finite positive number, got {text!r}")
+    return value
+
+
+def shortlist_size(text: str) -> int:
+    value = int(text)
+    if value < 1:
+        raise argparse.ArgumentTypeError(f"--shortlist must be >= 1, got {text!r}")
+    return value
+
+
+def finite_peaks(peaks: list[tuple[float, float]]) -> np.ndarray:
+    """Peaks with finite m/z and finite, positive intensity; others dropped."""
+    arr = np.array(peaks, dtype=np.float64).reshape(-1, 2)
+    usable = np.isfinite(arr[:, 0]) & np.isfinite(arr[:, 1]) & (arr[:, 1] > 0)
+    return arr[usable]
+
+
 def parse_charge(text: str | None) -> int | None:
     if text is None or text == "":
         return None
@@ -82,16 +103,28 @@ def validate(params: dict) -> tuple[dict | None, str | None]:
         return None, "missing ADDUCT; the neutral mass cannot be derived"
     if adduct not in ADDUCTS:
         return None, f"unsupported adduct {adduct}"
-    charge = parse_charge(params.get("CHARGE"))
+    try:
+        charge = parse_charge(params.get("CHARGE"))
+    except ValueError:
+        return None, f"unreadable CHARGE {params.get('CHARGE')!r}"
     if charge is None:
         return None, "missing CHARGE"
     try:
         mass = neutral_mass(prec, adduct, charge)
     except ValueError as exc:
         return None, str(exc)
-    energy = params.get("COLLISION_ENERGY")
+    energy_text = params.get("COLLISION_ENERGY")
+    if energy_text in (None, ""):
+        energy = float("nan")
+    else:
+        try:
+            energy = float(energy_text)
+        except ValueError:
+            return None, f"unreadable COLLISION_ENERGY {energy_text!r}"
+        if np.isinf(energy):
+            return None, f"non-finite COLLISION_ENERGY {energy_text!r}"
     return {"precursor_mz": prec, "adduct": adduct, "charge": charge, "neutral_mass": mass,
-            "collision_energy": float(energy) if energy not in (None, "") else float("nan")}, None
+            "collision_energy": energy}, None
 
 
 def prepare_candidates(path: Path) -> tuple[pd.DataFrame, dict]:
@@ -126,8 +159,9 @@ class AlignmentModel:
         self.unknown = int(bundle["input_dimensions"]["unknown_adduct_index"])
 
     def embed_spectrum(self, peaks: list[tuple[float, float]], precursor_mz: float):
-        arr = np.array(peaks, dtype=np.float64).reshape(-1, 2)
-        arr = arr[arr[:, 1] > 0]
+        arr = finite_peaks(peaks)
+        if len(arr) == 0:
+            raise ValueError("no usable peaks (finite m/z and finite positive intensity required)")
         arr = arr[np.argsort(arr[:, 1])[::-1][:N_PEAKS]]          # strongest 100 peaks
         padded = np.zeros((N_PEAKS, 2))
         padded[: len(arr)] = arr
@@ -160,6 +194,9 @@ def rank_one(spectrum, candidates, args, model, thresholds) -> tuple[pd.DataFram
     if len(spectrum["peaks"]) < 1:
         summary.update(decision="refused", reason="empty peak list")
         return pd.DataFrame(), summary
+    if len(finite_peaks(spectrum["peaks"])) == 0:
+        summary.update(decision="refused", reason="no usable peaks (finite m/z and finite positive intensity required)")
+        return pd.DataFrame(), summary
     pool = candidates.copy()
     pool["ppm_error"] = ppm_error(meta["neutral_mass"], pool["exact_mass"].to_numpy())
     pool = pool[np.abs(pool["ppm_error"]) <= args.ppm].copy()
@@ -175,6 +212,9 @@ def rank_one(spectrum, candidates, args, model, thresholds) -> tuple[pd.DataFram
             summary["warning"] = f"model was not trained on {meta['adduct']}"
     else:
         key = "score_mass"
+    if not np.isfinite(pool[key].to_numpy()).all():
+        summary.update(decision="refused", reason=f"non-finite {key} values from ranking")
+        return pd.DataFrame(), summary
     pool = pool.sort_values(key, ascending=False, kind="stable").reset_index(drop=True)
     pool.insert(0, "rank", np.arange(1, len(pool) + 1))
     s = pool[key].to_numpy()
@@ -202,13 +242,17 @@ def main(argv=None):
     ap.add_argument("--model", type=Path)
     ap.add_argument("--dreams", type=Path)
     ap.add_argument("--thresholds", type=Path, help="JSON with key 'tau' fitted on validation")
-    ap.add_argument("--ppm", type=float, default=10.0)
-    ap.add_argument("--shortlist", type=int, default=5)
+    ap.add_argument("--ppm", type=positive_finite_ppm, default=10.0)
+    ap.add_argument("--shortlist", type=shortlist_size, default=5)
     args = ap.parse_args(argv)
     if (args.model is None) != (args.dreams is None):
         ap.error("--model and --dreams must be given together")
     model = AlignmentModel(args.model, args.dreams) if args.model else None
     thresholds = json.loads(args.thresholds.read_text()) if args.thresholds else None
+    if thresholds is not None:
+        tau = thresholds.get("tau")
+        if tau is None or not np.isfinite(tau):
+            ap.error(f"--thresholds tau must be a finite number, got {tau!r}")
     candidates, cand_report = prepare_candidates(args.candidates)
     tables, summaries = [], []
     for spectrum in read_mgf(args.spectra):
