@@ -1,0 +1,45 @@
+{
+  "tool": "msms_shortlist",
+  "version": "0.1.0",
+  "spectra_file": "/Users/timrichardson/Documents/projects/personal/blog/rewire.it/workbench/outputs/blog-post-msms-model-selection-20261003-230223/companion/examples/mna.mgf",
+  "spectra_sha256": "211400a95dd239ffab95091062e5bf5304f88b5d1cc402bac976a7003a5790d1",
+  "candidates_file": "/Users/timrichardson/Documents/projects/personal/blog/rewire.it/workbench/outputs/blog-post-msms-model-selection-20261003-230223/companion/examples/mna-candidates.csv",
+  "candidates_sha256": "6645fed7cccbd76382af02b9a3f6e5c69386ab88f0963b0cdf0a9e447a38b0c3",
+  "candidate_report": {
+    "n_input": 229,
+    "n_invalid_smiles": 0,
+    "n_duplicate_2d_merged": 0,
+    "n_distinct_2d": 229
+  },
+  "model": "/Users/timrichardson/Documents/projects/personal/blog/rewire.it/workbench/outputs/blog-post-msms-model-selection-20261003-230223/companion/models/dreams_morgan_formula_seed1_fp16.pt",
+  "model_sha256": "ea8b83390611da6a8235ca3cbdf6ca8bb3edb57d1fb474c57dcd893d79007579",
+  "dreams": "/Users/timrichardson/Documents/projects/personal/blog/rewire.it/workbench/outputs/blog-post-msms-model-selection-20261003-230223/companion/weights/DreaMS_embedding_model_torchscript.pt",
+  "dreams_sha256": "df69866990b194b27d5497e440f87f6ceca568ee512e7c22cb1f278721376f0c",
+  "thresholds": {
+    "tau": 0.5994018912315369,
+    "confidence": "top-1 cosine",
+    "fitted_on": "formula_seed1 validation, target-present vs target-removed official_dedup pools",
+    "rule": "lowest threshold with at most 10% of target-removed validation queries nominated",
+    "validation_coverage_present": 0.1931263627868341,
+    "validation_false_nomination_absent": 0.0999896168622157,
+    "test_coverage_present": 0.2127160030052592,
+    "test_false_nomination_absent": 0.1316679188580015,
+    "note": "Applies only to this model, MassSpecGym-like spectra and pools of about 250 same-mass candidates. Not a probability."
+  },
+  "ppm_window": 50.0,
+  "shortlist": 5,
+  "queries": [
+    {
+      "query_id": "MassSpecGymID0395778",
+      "precursor_mz": 826.4,
+      "adduct": "[M+Na]+",
+      "charge": 1,
+      "neutral_mass": 803.4107793,
+      "collision_energy": NaN,
+      "n_candidates_in_window": 0,
+      "decision": "no candidate within window",
+      "reason": "no structure within 50.0 ppm"
+    }
+  ],
+  "note": "Shortlist for confirmation; scores are not probabilities; 2D identity (no stereochemistry)."
+}

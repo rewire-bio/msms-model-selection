@@ -1,0 +1,61 @@
+direction: down
+
+start: {
+  label: "One MS/MS spectrum + a frozen candidate file\n(SMILES), and five structures you can confirm"
+  shape: oval
+}
+
+meta: {
+  label: "Precursor m/z, adduct and charge\npresent and consistent?"
+  shape: diamond
+}
+
+refuse: {
+  label: "Refuse to rank.\nThe neutral mass cannot be derived\n(e.g. missing adduct, charge -1 with [M+H]+)"
+  style.fill: "#f2d7d7"
+}
+
+window: {
+  label: "Any candidate within the ppm window\naround the implied neutral mass?"
+  shape: diamond
+}
+
+nowindow: {
+  label: "No candidate within window.\nCheck the precursor value first: 6.94% of test spectra\nsit more than 10 ppm from their annotated structure.\nWiden --ppm knowingly; the pool grows with it"
+  style.fill: "#fdebd3"
+}
+
+rank: {
+  label: "Rank with a trained alignment model\n\nR@5 on ~250-structure pools (test, formula split seed 1):\nEmb-Cos 63.2 | DreaMS + Morgan 61.4 | DeepSets 31.3\nmass error 13.3 | random 2.1"
+  style.fill: "#dce8fb"
+}
+
+size: {
+  label: "Expect fewer hits as the list grows:\nDreaMS + Morgan R@5 94.5 at 16 structures,\n61.4 at 252, 41.3 at 449 (median sizes)"
+  style.fill: "#e8e8e8"
+}
+
+threshold: {
+  label: "Top score at or above the threshold\nfitted on validation (at most 10%\nfalse nominations; tau 0.599)?"
+  shape: diamond
+}
+
+nominate: {
+  label: "Nominate five for confirmation\nwith standards or orthogonal evidence.\nA shortlist, not an identification"
+  style.fill: "#d6f3ee"
+}
+
+decline: {
+  label: "Decline to nominate.\nOn test this threshold covered 21.3% of\ntarget-present queries, with 13.2% false nominations\nin the target-removed stress test"
+  style.fill: "#fdebd3"
+}
+
+start -> meta
+meta -> refuse: "no"
+meta -> window: "yes"
+window -> nowindow: "no"
+window -> rank: "yes"
+rank -> size: "and"
+rank -> threshold
+threshold -> nominate: "yes"
+threshold -> decline: "no"

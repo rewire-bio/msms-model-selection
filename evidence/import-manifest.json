@@ -1,0 +1,404 @@
+{
+  "source_revision": "a2ba98c1463162cc91a6376fcdfc71e0023f0703",
+  "source_repository": "rewire-bio/rewire.it",
+  "issue": 335,
+  "files": [
+    {
+      "source_path": "code/msms-shortlist-companion/README.md",
+      "path": "companion/README.md",
+      "sha256": "da87663c79004a8bca3dccd8edb82f4620883ca72b18000e442c5f8a53722ec5"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/REPRODUCE.md",
+      "path": "companion/REPRODUCE.md",
+      "sha256": "6dbd015f6bf4f2396addc284b97bec2c52bea0b56a4a50e6e8102c97a3f080fb"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/examples/demo-inputs.json",
+      "path": "companion/examples/demo-inputs.json",
+      "sha256": "9b8b7a97f5ad33871761e8b87fefa6f384083091e0738e76e0a3efc9ca149268"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/examples/invalid-metadata.mgf",
+      "path": "companion/examples/invalid-metadata.mgf",
+      "sha256": "1e17f2abd604e8ec3b442b4f500c9984a07e7eaffa3d3e39c3f78b82de5ba4d6"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/examples/mh-candidates-target-removed.csv",
+      "path": "companion/examples/mh-candidates-target-removed.csv",
+      "sha256": "e60add5c7038a744d600dfbb6ce079a7232226099b1598de9263066952b2bcd0"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/examples/mh-candidates.csv",
+      "path": "companion/examples/mh-candidates.csv",
+      "sha256": "6fb29e4c2002c0df1fa11c4ad28fc09b79810b94fb758385bc36ce955369315f"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/examples/mh.mgf",
+      "path": "companion/examples/mh.mgf",
+      "sha256": "5ba3e828d879e3b9e678bd27a0402073c05d25abfa2ab42f95ccfcd218540f39"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/examples/mna-candidates.csv",
+      "path": "companion/examples/mna-candidates.csv",
+      "sha256": "6645fed7cccbd76382af02b9a3f6e5c69386ab88f0963b0cdf0a9e447a38b0c3"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/examples/mna.mgf",
+      "path": "companion/examples/mna.mgf",
+      "sha256": "211400a95dd239ffab95091062e5bf5304f88b5d1cc402bac976a7003a5790d1"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/models/thresholds.json",
+      "path": "companion/models/thresholds.json",
+      "sha256": "5b1abbe0fafcfda920042dacfe6713601c289c6166bc006b482bdf34ae442a65"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/msms_shortlist/__init__.py",
+      "path": "companion/msms_shortlist/__init__.py",
+      "sha256": "5ebc54219a1bdb093d689f7a0ada58f7cb04f32cd5dc946b5d6ce3da64267788"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/msms_shortlist/chem.py",
+      "path": "companion/msms_shortlist/chem.py",
+      "sha256": "cc20cb95342b02785e90c60be8980b6b1c35b746ed47b73030ed2129562d3cae"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/msms_shortlist/cli.py",
+      "path": "companion/msms_shortlist/cli.py",
+      "sha256": "d5804ef9bbd56790715281a5234700d2a439a9853f700c986638a1fd6153384d"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/msms_shortlist/metrics.py",
+      "path": "companion/msms_shortlist/metrics.py",
+      "sha256": "ec64da19e572a7050dddfb450bad44666425f1130e623fc3c7f5a13988feb722"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/msms_shortlist/towers.py",
+      "path": "companion/msms_shortlist/towers.py",
+      "sha256": "4d1228f4fe3dc60e0ad12f088e6ab5c9417bbed629a92b1b5672b78c47ea4ba8"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/build_notebook.py",
+      "path": "companion/notebook/build_notebook.py",
+      "sha256": "e1f530fb7373dc64ba08adda0f25bf5e4c1d407c3f404b00e852b8a197b17e97"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/msms_shortlist_walkthrough.ipynb",
+      "path": "companion/notebook/msms_shortlist_walkthrough.ipynb",
+      "sha256": "0f48c06915155c9f9cac8215c4a28fc9fa0af4876acd8d336f8f1e1422dbfb69"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/invalid.csv",
+      "path": "companion/notebook/outputs/invalid.csv",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/invalid.provenance.json",
+      "path": "companion/notebook/outputs/invalid.provenance.json",
+      "sha256": "385943b11e42462f28d0e2907a695da2da1a4020e9529bc2273dd157faf345fe"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mh-absent-model.csv",
+      "path": "companion/notebook/outputs/mh-absent-model.csv",
+      "sha256": "27eda1b8e59d14a63ae345a8e499fdcd8674ae289602486a03b03d6408b26bd1"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mh-absent-model.provenance.json",
+      "path": "companion/notebook/outputs/mh-absent-model.provenance.json",
+      "sha256": "a2923a45a9305069b191b459b353ce6694a73d32847fed4424d135988f13f521"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mh-mass.csv",
+      "path": "companion/notebook/outputs/mh-mass.csv",
+      "sha256": "7a99be65204c7e52b24d53c490cc96326d6133a54a575f3b7e1fba022b3d5a07"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mh-mass.provenance.json",
+      "path": "companion/notebook/outputs/mh-mass.provenance.json",
+      "sha256": "6ad296d5f28afb5a481a9cec9015fcd86c0f10a0931ff9412ff0b0a5054eca2a"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mh-model.csv",
+      "path": "companion/notebook/outputs/mh-model.csv",
+      "sha256": "25abf7133d4e73dfaa24115938584516b9d34e7dfe2800a8294e0e89c9a9e28d"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mh-model.provenance.json",
+      "path": "companion/notebook/outputs/mh-model.provenance.json",
+      "sha256": "e5fd5d88911a6acbb20a0871a1039683df8e54aec82ea80e146362a19ad863e3"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mna-10ppm.csv",
+      "path": "companion/notebook/outputs/mna-10ppm.csv",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mna-10ppm.provenance.json",
+      "path": "companion/notebook/outputs/mna-10ppm.provenance.json",
+      "sha256": "84a49b145c4d5168519c22067b14d69a2e302b169aa36943867440bb866afd4c"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mna-200ppm.csv",
+      "path": "companion/notebook/outputs/mna-200ppm.csv",
+      "sha256": "f8bca3c212a04d93a36af4aa9319414035649428fa24d7c0373b50c740ed374d"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mna-200ppm.provenance.json",
+      "path": "companion/notebook/outputs/mna-200ppm.provenance.json",
+      "sha256": "d04c103675559eabd8ffc6eae443ddf9f9b7ddaacb033699af046ab38891f89e"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mna-50ppm.csv",
+      "path": "companion/notebook/outputs/mna-50ppm.csv",
+      "sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/notebook/outputs/mna-50ppm.provenance.json",
+      "path": "companion/notebook/outputs/mna-50ppm.provenance.json",
+      "sha256": "84f07ebe15856a43df4fb4c2f8e869fd5ac0f147c1ad30d48fdaff589d145492"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/patches/msalign-c2ef425-lzf-fingerprint-cache.diff",
+      "path": "companion/patches/msalign-c2ef425-lzf-fingerprint-cache.diff",
+      "sha256": "94ab4cf2317c09181cf4018687e1050530de387e4ae746cb91a4140bfc58e870"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/pyproject.toml",
+      "path": "companion/pyproject.toml",
+      "sha256": "a9aa3b6c791259adf74dabc07496c157f914dd407b07073c2bc5ebb916967bb9"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/T01-train-receipt.json",
+      "path": "companion/results/T01-train-receipt.json",
+      "sha256": "e9ab16c86acf67861942e3f46021130219afc2fa9a28df89a74b53ee02fde027"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/T02-released-result.json",
+      "path": "companion/results/T02-released-result.json",
+      "sha256": "0bfceaea9609ed5f9fe935e45b4f85e1d87ad17996016aa9e3fc43b8fda6b8eb"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/T03-released-result.json",
+      "path": "companion/results/T03-released-result.json",
+      "sha256": "2d5a2fc0873fcd65f0231dd54b513a409bde2699d71a7646800bdcfcac663966"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/abstention.csv",
+      "path": "companion/results/abstention.csv",
+      "sha256": "e24df6aedab568b8a31f42169855df63fd598215ee104854de05bb0e0839e1f0"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/contrasts.csv",
+      "path": "companion/results/contrasts.csv",
+      "sha256": "cd83a417c18fdb03e7a063c07fcd146f512b25403aa89b4937880324430e661a"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/fusion-weight.json",
+      "path": "companion/results/fusion-weight.json",
+      "sha256": "49e472a3f5f11472b931dca6186e4a54ade742f74e679b4dc75409703dede4d4"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/mces1-cheap-baselines-metrics.csv",
+      "path": "companion/results/mces1-cheap-baselines-metrics.csv",
+      "sha256": "9d83e8c91fbf4fbe95130122c5b47e5dc88bd63d9840a30a336e4964b630f8e5"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/metrics.csv",
+      "path": "companion/results/metrics.csv",
+      "sha256": "a802e988f1c6ffc90a8d1a75fe5c1488009ed70daf68e673b2946c8af6a7b104"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/pool-sizes.csv",
+      "path": "companion/results/pool-sizes.csv",
+      "sha256": "7ba18122e5a2a77e296f0d037f3bc82ede24286ff0c7924b40862e935d5533b5"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/random-repeats.json",
+      "path": "companion/results/random-repeats.json",
+      "sha256": "d6e58d93e93c3c4f8043ea6507ed93652cb27edbb3f4f345cb85955c543c6156"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/risk-coverage-curves.json",
+      "path": "companion/results/risk-coverage-curves.json",
+      "sha256": "555e7dd83a7e4cf826bcb3005401ddfa0bbdafec9d62223634b43490834616c0"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/results/strata-post-hoc.csv",
+      "path": "companion/results/strata-post-hoc.csv",
+      "sha256": "e6614435454b845d949285a43372ba52875eda57f3e567fa613287d1ad42f113"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/analyse.py",
+      "path": "companion/scripts/analyse.py",
+      "sha256": "c5738c9852674c0ae914480ed9e22598f8a99cbf0d3952fdaea31dfc61fdad95"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/build_pools.py",
+      "path": "companion/scripts/build_pools.py",
+      "sha256": "8323ae830c8013a22d4a713fe1d336d0e4684b53564391d9c4982cf7868c5a1a"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/disk_guard.sh",
+      "path": "companion/scripts/disk_guard.sh",
+      "sha256": "f43082e18d7c645b286c8c284552136a0fb5c4c34988017457ed3e7da14927f1"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/export_predictions.py",
+      "path": "companion/scripts/export_predictions.py",
+      "sha256": "37badf491cbb2a9aa587574e07d32432537230538347310ea5d21d1ec8d75745"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/fuse_scores.py",
+      "path": "companion/scripts/fuse_scores.py",
+      "sha256": "530c1fc019819a803808a643d5ec7f5bfb895e7a9f9d19d0bffecdac6cb4d591"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/instrument_map.py",
+      "path": "companion/scripts/instrument_map.py",
+      "sha256": "b3f4f92ca67fc58a0cfaba947ad1089120fb95ca6bd5dbcb0c5fd336f8175a72"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/make_charts.py",
+      "path": "companion/scripts/make_charts.py",
+      "sha256": "df889acad5bae719b0e49718bb47d0de3b9e7712ecf113342e1d94c4cd8d95e4"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/make_demo_inputs.py",
+      "path": "companion/scripts/make_demo_inputs.py",
+      "sha256": "03a63c1a15f118393827011210b89184e5ed787630d298cff19c80de4cf8b61c"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/msms-shortlist-dreams-morgan-model.parts.sha256",
+      "path": "companion/scripts/msms-shortlist-dreams-morgan-model.parts.sha256",
+      "sha256": "814bbdfb337d8c47304e0997c8c2acbcfb942e7d440ab2998a11fd9482417091"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/queue_training.sh",
+      "path": "companion/scripts/queue_training.sh",
+      "sha256": "eb2412e841ee2f0b192cda021504655d52dd463a9fee5f8a2745c35ea36a576a"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/rank_stats.py",
+      "path": "companion/scripts/rank_stats.py",
+      "sha256": "4e551bccd1f417621acfe7393e10363f98c8e3a5763471bb39227c9cd3371709"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/reassemble-model.sh",
+      "path": "companion/scripts/reassemble-model.sh",
+      "sha256": "69fda0b555c40b1f0444db0313f03453167cfa28e88c61a023db3daaa4fa896d"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/score_pools.py",
+      "path": "companion/scripts/score_pools.py",
+      "sha256": "76838380486b7df69191fa5e3d1e34623ac4777a64407de572421bac75509419"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/strata.py",
+      "path": "companion/scripts/strata.py",
+      "sha256": "d45fba389a0c06c730370c6426e715192d66bf744c0d268b86eb3c7b7c7d7595"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/scripts/train_msalign_variant.py",
+      "path": "companion/scripts/train_msalign_variant.py",
+      "sha256": "51a17156f1e9fc175605ccf932d9c723c504eb280ab177bb49a49e4594093024"
+    },
+    {
+      "source_path": "code/msms-shortlist-companion/uv.lock",
+      "path": "companion/uv.lock",
+      "sha256": "cb51f4bdedf318a085c8390f171ec9611f414a00dc2da9c248b6accca9a9587e"
+    },
+    {
+      "source_path": "posts/an-msms-shortlist-is-not-an-identification.md",
+      "path": "article/original.md",
+      "sha256": "21355078f6c7ff3cc9a9e0ff0f9768fb7b767eb450fbafe456bc7548456fc8bc"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/SHA256SUMS.txt",
+      "path": "downloads/SHA256SUMS.txt",
+      "sha256": "c5c175fa2eb448090d18bdc1032af35c450f33c13a33b14d403611de94005d4c"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/msms-shortlist-companion-code.tar.gz",
+      "path": "downloads/msms-shortlist-companion-code.tar.gz",
+      "sha256": "b029749849ed5189ead19618fe9670b3e88ca3b36eb7a2cd47e449ff147789de"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/msms-shortlist-dreams-morgan-model.parts.sha256",
+      "path": "downloads/msms-shortlist-dreams-morgan-model.parts.sha256",
+      "sha256": "814bbdfb337d8c47304e0997c8c2acbcfb942e7d440ab2998a11fd9482417091"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/msms-shortlist-dreams-morgan-model.tar.gz.part01",
+      "path": "downloads/msms-shortlist-dreams-morgan-model.tar.gz.part01",
+      "sha256": "fdd6e193c88fc260e8143c5096781a0cefef33a5824f0a2115054fc8d3c4552c"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/msms-shortlist-dreams-morgan-model.tar.gz.part02",
+      "path": "downloads/msms-shortlist-dreams-morgan-model.tar.gz.part02",
+      "sha256": "b5bb749392ac86ea68fd022d303ebb2bccaba2518e5812644835c3e7b50148da"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/msms-shortlist-dreams-morgan-model.tar.gz.part03",
+      "path": "downloads/msms-shortlist-dreams-morgan-model.tar.gz.part03",
+      "sha256": "0bd59d5db3ea054db41bc4284a0a083f3d718aa7eace506f2ba79a661431cf70"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/msms-shortlist-results.tar.gz",
+      "path": "downloads/msms-shortlist-results.tar.gz",
+      "sha256": "45c3a962ddafd81e0bef39cbf216a53328be760acaf8f868d1fba5e58b8e5bf6"
+    },
+    {
+      "source_path": "public/downloads/an-msms-shortlist-is-not-an-identification/reassemble-model.sh",
+      "path": "downloads/reassemble-model.sh",
+      "sha256": "69fda0b555c40b1f0444db0313f03453167cfa28e88c61a023db3daaa4fa896d"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/01-decision-path.d2",
+      "path": "article/assets/01-decision-path.d2",
+      "sha256": "921c5f51f34abb6335ad916aa9985439d77ba50a86514054b1ecb38b8f873c0e"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/01-decision-path.svg",
+      "path": "article/assets/01-decision-path.svg",
+      "sha256": "c29d7aa50931542376d6455fef05589e1c21f15c2c1cbb18e5390122ba6cbae0"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/01-msalign-v2-recipe-model-zoo-late-fusion.png",
+      "path": "article/assets/01-msalign-v2-recipe-model-zoo-late-fusion.png",
+      "sha256": "5eefb4668e687963f80dca79630bc7894600d429d08978699f33e5f30785687a"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/01-recall-by-method.png",
+      "path": "article/assets/01-recall-by-method.png",
+      "sha256": "450e6e6073ccc1001edd31c2044fdb1342b47ddbaf6ff3be866c02d0f719461b"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/02-pool-size-stress.png",
+      "path": "article/assets/02-pool-size-stress.png",
+      "sha256": "e1408a8d45e552ef08108752153b0afd7f22ce5c31d982c4e4b809b5a1c119ac"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/03-tie-and-duplicate-rules.png",
+      "path": "article/assets/03-tie-and-duplicate-rules.png",
+      "sha256": "ab5a3bff312fb98379b7cff87ec4115d0cc3e19f4527224f109ba897cdc2be9e"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/04-decline-to-nominate.png",
+      "path": "article/assets/04-decline-to-nominate.png",
+      "sha256": "e15e3e810ce4bbb99d91dda5857034f87f4968dd3d8137156bc7701305f4eefc"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/05-precursor-mass-error.png",
+      "path": "article/assets/05-precursor-mass-error.png",
+      "sha256": "04f5622477110865e1036dd5ea2c4e58341f2ebd4f42674538ce21eb5f125279"
+    },
+    {
+      "source_path": "public/images/an-msms-shortlist-is-not-an-identification/13-jurgens-selective-prediction-overview.png",
+      "path": "article/assets/13-jurgens-selective-prediction-overview.png",
+      "sha256": "fbcd0d4a26adf9f7c6c494d261720e74992245bc1b19083e0f33dfb5f57af4be"
+    }
+  ],
+  "article_path_changes_only": true,
+  "status": "Historical evidence imported; not a new experiment or independent reproduction"
+}

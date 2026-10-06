@@ -1,0 +1,9 @@
+[project]
+name = "computational-study"
+version = "0.1.0"
+description = "Standalone reproducible computational study"
+requires-python = "==3.11.13"
+dependencies = []
+
+[tool.uv]
+package = false

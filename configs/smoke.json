@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "mode": "smoke",
+  "study_kind": "unconfigured",
+  "seed": 20261001,
+  "n": 1000
+}

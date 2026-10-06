@@ -1,0 +1,11 @@
+{
+  "tau": 0.5994018912315369,
+  "confidence": "top-1 cosine",
+  "fitted_on": "formula_seed1 validation, target-present vs target-removed official_dedup pools",
+  "rule": "lowest threshold with at most 10% of target-removed validation queries nominated",
+  "validation_coverage_present": 0.1931263627868341,
+  "validation_false_nomination_absent": 0.0999896168622157,
+  "test_coverage_present": 0.2127160030052592,
+  "test_false_nomination_absent": 0.1316679188580015,
+  "note": "Applies only to this model, MassSpecGym-like spectra and pools of about 250 same-mass candidates. Not a probability."
+}

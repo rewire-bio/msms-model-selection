@@ -1,0 +1,31 @@
+{
+  "mh": {
+    "metadata_row": 27,
+    "massspecgym_identifier": "MassSpecGymID0226249",
+    "identifier_matches": 1,
+    "instrument_type": "Orbitrap",
+    "adduct": "[M+H]+",
+    "precursor_mz": 330.98991,
+    "collision_energy": 60.0,
+    "n_candidates": 254,
+    "true_structure_id": "cand000",
+    "true_smiles_2d": "Brc1ccc(Nc2nc(-c3ccccc3)cs2)cc1"
+  },
+  "absent": {
+    "based_on": "mh",
+    "n_candidates": 253,
+    "note": "true structure removed: a controlled stress test, not natural absence"
+  },
+  "mna": {
+    "metadata_row": 371,
+    "massspecgym_identifier": "MassSpecGymID0395778",
+    "identifier_matches": 1,
+    "instrument_type": "QTOF",
+    "adduct": "[M+Na]+",
+    "precursor_mz": 826.4,
+    "collision_energy": NaN,
+    "n_candidates": 229,
+    "true_structure_id": "cand000",
+    "true_smiles_2d": "C#CCCCC1OC(=O)C(C(C)O)NC(=O)C(C(C)C)N(C)C(=O)C2CCCN2C(=O)C(C(C)CC)OC(=O)C(C(C)C)N(C)C(=O)C(C(C)C)NC(=O)C1(C)C"
+  }
+}

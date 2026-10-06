@@ -1,0 +1,23 @@
+name: Reproduce study
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  reproduce:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.8.2"
+      - run: make reproduce
+      - uses: actions/upload-artifact@v4
+        with:
+          name: reproduced-study
+          path: |
+            results/full/
+            paper/build/main.pdf
+            paper/figures/
+            paper/generated/
+          if-no-files-found: error

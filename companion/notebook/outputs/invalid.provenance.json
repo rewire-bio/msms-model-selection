@@ -1,0 +1,34 @@
+{
+  "tool": "msms_shortlist",
+  "version": "0.1.0",
+  "spectra_file": "/Users/timrichardson/Documents/projects/personal/blog/rewire.it/workbench/outputs/blog-post-msms-model-selection-20261003-230223/companion/examples/invalid-metadata.mgf",
+  "spectra_sha256": "1e17f2abd604e8ec3b442b4f500c9984a07e7eaffa3d3e39c3f78b82de5ba4d6",
+  "candidates_file": "/Users/timrichardson/Documents/projects/personal/blog/rewire.it/workbench/outputs/blog-post-msms-model-selection-20261003-230223/companion/examples/mh-candidates.csv",
+  "candidates_sha256": "6fb29e4c2002c0df1fa11c4ad28fc09b79810b94fb758385bc36ce955369315f",
+  "candidate_report": {
+    "n_input": 254,
+    "n_invalid_smiles": 0,
+    "n_duplicate_2d_merged": 0,
+    "n_distinct_2d": 254
+  },
+  "model": null,
+  "model_sha256": null,
+  "dreams": null,
+  "dreams_sha256": null,
+  "thresholds": null,
+  "ppm_window": 10.0,
+  "shortlist": 5,
+  "queries": [
+    {
+      "query_id": "no_adduct_example",
+      "decision": "refused",
+      "reason": "missing ADDUCT; the neutral mass cannot be derived"
+    },
+    {
+      "query_id": "wrong_charge_example",
+      "decision": "refused",
+      "reason": "charge -1 is inconsistent with adduct [M+H]+"
+    }
+  ],
+  "note": "Shortlist for confirmation; scores are not probabilities; 2D identity (no stereochemistry)."
+}

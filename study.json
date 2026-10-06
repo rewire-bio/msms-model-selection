@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "title": "Formula-free MS/MS molecular shortlisting",
+  "question": "Which model and baseline should be used for formula-free ms/ms molecular shortlisting, within the original measured scope?",
+  "validation_fixture": false,
+  "experiment": {
+    "command": [
+      "uv",
+      "run",
+      "--frozen",
+      "python",
+      "scripts/experiment.py",
+      "--config",
+      "{config}",
+      "--output",
+      "{output}"
+    ],
+    "inputs": [
+      "src",
+      "scripts",
+      "uv.lock",
+      "pyproject.toml",
+      ".python-version",
+      "Makefile",
+      "data/manifest.json"
+    ],
+    "outputs": [
+      "results.json"
+    ],
+    "results_file": "results.json"
+  },
+  "reproduction": {
+    "command": [
+      "make",
+      "reproduce"
+    ],
+    "results_file": "results/full/results.json",
+    "paper_file": "paper/build/main.pdf",
+    "abs_tolerance": 1e-10,
+    "rel_tolerance": 1e-08
+  },
+  "budgets": {
+    "experiment_seconds": 120,
+    "reproduction_seconds": 600,
+    "worker_seconds": 1800,
+    "max_worker_calls": 30,
+    "max_attempts": 2,
+    "max_storage_mb": 1000
+  },
+  "paper": {
+    "source": "paper/main.tex",
+    "pdf": "paper/build/main.pdf"
+  }
+}
