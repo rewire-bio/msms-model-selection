@@ -2,6 +2,7 @@
 
 Standalone study repository, migrated from the model-selection article series.
 
+- [Latest detailed article with corrected fusion results](article/blog-research-version-20261006.md) — preserved before the shorter blog replacement
 - [Original detailed article](article/original.md)
 - [Executable companion](companion/README.md)
 - [Protocol status and index](protocol.md), including the [frozen historical protocol](protocol/historical/protocol-frozen-original.md), the [protocol with amendment A1](protocol/historical/protocol-with-amendments.md) and the [freeze receipt](protocol/historical/protocol-freeze-receipt.txt)
